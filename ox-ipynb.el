@@ -115,71 +115,71 @@
 	      (if a (org-ipynb-export-to-html t s v b)
 		(org-open-file (org-ipynb-export-to-html nil s v b)))))))
   :options-alist
-  '((:html-doctype "HTML_DOCTYPE" nil org-ipynb-doctype)
-    (:html-container "HTML_CONTAINER" nil org-ipynb-container-element)
+  '((:ipynb-doctype "HTML_DOCTYPE" nil org-ipynb-doctype)
+    (:ipynb-container "HTML_CONTAINER" nil org-ipynb-container-element)
     (:description "DESCRIPTION" nil nil newline)
     (:keywords "KEYWORDS" nil nil space)
-    (:html-html5-fancy nil "html5-fancy" org-ipynb-html5-fancy)
-    (:html-link-use-abs-url nil "html-link-use-abs-url" org-ipynb-link-use-abs-url)
-    (:html-link-home "HTML_LINK_HOME" nil org-ipynb-link-home)
-    (:html-link-up "HTML_LINK_UP" nil org-ipynb-link-up)
-    (:html-mathjax "HTML_MATHJAX" nil "" space)
-    (:html-postamble nil "html-postamble" org-ipynb-postamble)
-    (:html-preamble nil "html-preamble" org-ipynb-preamble)
-    (:html-head "HTML_HEAD" nil org-ipynb-head newline)
-    (:html-head-extra "HTML_HEAD_EXTRA" nil org-ipynb-head-extra newline)
+    (:ipynb-html5-fancy nil "html5-fancy" org-ipynb-html5-fancy)
+    (:ipynb-link-use-abs-url nil "ipynb-link-use-abs-url" org-ipynb-link-use-abs-url)
+    (:ipynb-link-home "HTML_LINK_HOME" nil org-ipynb-link-home)
+    (:ipynb-link-up "HTML_LINK_UP" nil org-ipynb-link-up)
+    (:ipynb-mathjax "HTML_MATHJAX" nil "" space)
+    (:ipynb-postamble nil "ipynb-postamble" org-ipynb-postamble)
+    (:ipynb-preamble nil "ipynb-preamble" org-ipynb-preamble)
+    (:ipynb-head "HTML_HEAD" nil org-ipynb-head newline)
+    (:ipynb-head-extra "HTML_HEAD_EXTRA" nil org-ipynb-head-extra newline)
     (:subtitle "SUBTITLE" nil nil parse)
-    (:html-head-include-default-style
-     nil "html-style" org-ipynb-head-include-default-style)
-    (:html-head-include-scripts nil "html-scripts" org-ipynb-head-include-scripts)
-    (:html-allow-name-attribute-in-anchors
+    (:ipynb-head-include-default-style
+     nil "ipynb-style" org-ipynb-head-include-default-style)
+    (:ipynb-head-include-scripts nil "ipynb-scripts" org-ipynb-head-include-scripts)
+    (:ipynb-allow-name-attribute-in-anchors
      nil nil org-ipynb-allow-name-attribute-in-anchors)
-    (:html-divs nil nil org-ipynb-divs)
-    (:html-checkbox-type nil nil org-ipynb-checkbox-type)
-    (:html-extension nil nil org-ipynb-extension)
-    (:html-footnote-format nil nil org-ipynb-footnote-format)
-    (:html-footnote-separator nil nil org-ipynb-footnote-separator)
-    (:html-footnotes-section nil nil org-ipynb-footnotes-section)
-    (:html-format-drawer-function nil nil org-ipynb-format-drawer-function)
-    (:html-format-headline-function nil nil org-ipynb-format-headline-function)
-    (:html-format-inlinetask-function
+    (:ipynb-divs nil nil org-ipynb-divs)
+    (:ipynb-checkbox-type nil nil org-ipynb-checkbox-type)
+    (:ipynb-extension nil nil org-ipynb-extension)
+    (:ipynb-footnote-format nil nil org-ipynb-footnote-format)
+    (:ipynb-footnote-separator nil nil org-ipynb-footnote-separator)
+    (:ipynb-footnotes-section nil nil org-ipynb-footnotes-section)
+    (:ipynb-format-drawer-function nil nil org-ipynb-format-drawer-function)
+    (:ipynb-format-headline-function nil nil org-ipynb-format-headline-function)
+    (:ipynb-format-inlinetask-function
      nil nil org-ipynb-format-inlinetask-function)
-    (:html-home/up-format nil nil org-ipynb-home/up-format)
-    (:html-indent nil nil org-ipynb-indent)
-    (:html-infojs-options nil nil org-ipynb-infojs-options)
-    (:html-infojs-template nil nil org-ipynb-infojs-template)
-    (:html-inline-image-rules nil nil org-ipynb-inline-image-rules)
-    (:html-link-org-files-as-html nil nil org-ipynb-link-org-files-as-html)
-    (:html-mathjax-options nil nil org-ipynb-mathjax-options)
-    (:html-mathjax-template nil nil org-ipynb-mathjax-template)
-    (:html-metadata-timestamp-format nil nil org-ipynb-metadata-timestamp-format)
-    (:html-postamble-format nil nil org-ipynb-postamble-format)
-    (:html-preamble-format nil nil org-ipynb-preamble-format)
-    (:html-self-link-headlines nil nil org-ipynb-self-link-headlines)
-    (:html-table-align-individual-fields
+    (:ipynb-home/up-format nil nil org-ipynb-home/up-format)
+    (:ipynb-indent nil nil org-ipynb-indent)
+    (:ipynb-infojs-options nil nil org-ipynb-infojs-options)
+    (:ipynb-infojs-template nil nil org-ipynb-infojs-template)
+    (:ipynb-inline-image-rules nil nil org-ipynb-inline-image-rules)
+    (:ipynb-link-org-files-as-html nil nil org-ipynb-link-org-files-as-html)
+    (:ipynb-mathjax-options nil nil org-ipynb-mathjax-options)
+    (:ipynb-mathjax-template nil nil org-ipynb-mathjax-template)
+    (:ipynb-metadata-timestamp-format nil nil org-ipynb-metadata-timestamp-format)
+    (:ipynb-postamble-format nil nil org-ipynb-postamble-format)
+    (:ipynb-preamble-format nil nil org-ipynb-preamble-format)
+    (:ipynb-self-link-headlines nil nil org-ipynb-self-link-headlines)
+    (:ipynb-table-align-individual-fields
      nil nil org-ipynb-table-align-individual-fields)
-    (:html-table-caption-above nil nil org-ipynb-table-caption-above)
-    (:html-table-data-tags nil nil org-ipynb-table-data-tags)
-    (:html-table-header-tags nil nil org-ipynb-table-header-tags)
-    (:html-table-use-header-tags-for-first-column
+    (:ipynb-table-caption-above nil nil org-ipynb-table-caption-above)
+    (:ipynb-table-data-tags nil nil org-ipynb-table-data-tags)
+    (:ipynb-table-header-tags nil nil org-ipynb-table-header-tags)
+    (:ipynb-table-use-header-tags-for-first-column
      nil nil org-ipynb-table-use-header-tags-for-first-column)
-    (:html-tag-class-prefix nil nil org-ipynb-tag-class-prefix)
-    (:html-text-markup-alist nil nil org-ipynb-text-markup-alist)
-    (:html-todo-kwd-class-prefix nil nil org-ipynb-todo-kwd-class-prefix)
-    (:html-toplevel-hlevel nil nil org-ipynb-toplevel-hlevel)
-    (:html-use-infojs nil nil org-ipynb-use-infojs)
-    (:html-validation-link nil nil org-ipynb-validation-link)
-    (:html-viewport nil nil org-ipynb-viewport)
-    (:html-inline-images nil nil org-ipynb-inline-images)
-    (:html-table-attributes nil nil org-ipynb-table-default-attributes)
-    (:html-table-row-open-tag nil nil org-ipynb-table-row-open-tag)
-    (:html-table-row-close-tag nil nil org-ipynb-table-row-close-tag)
-    (:html-xml-declaration nil nil org-ipynb-xml-declaration)
-    (:html-wrap-src-lines nil nil org-ipynb-wrap-src-lines)
-    (:html-klipsify-src nil nil org-ipynb-klipsify-src)
-    (:html-klipse-css nil nil org-ipynb-klipse-css)
-    (:html-klipse-js nil nil org-ipynb-klipse-js)
-    (:html-klipse-selection-script nil nil org-ipynb-klipse-selection-script)
+    (:ipynb-tag-class-prefix nil nil org-ipynb-tag-class-prefix)
+    (:ipynb-text-markup-alist nil nil org-ipynb-text-markup-alist)
+    (:ipynb-todo-kwd-class-prefix nil nil org-ipynb-todo-kwd-class-prefix)
+    (:ipynb-toplevel-hlevel nil nil org-ipynb-toplevel-hlevel)
+    (:ipynb-use-infojs nil nil org-ipynb-use-infojs)
+    (:ipynb-validation-link nil nil org-ipynb-validation-link)
+    (:ipynb-viewport nil nil org-ipynb-viewport)
+    (:ipynb-inline-images nil nil org-ipynb-inline-images)
+    (:ipynb-table-attributes nil nil org-ipynb-table-default-attributes)
+    (:ipynb-table-row-open-tag nil nil org-ipynb-table-row-open-tag)
+    (:ipynb-table-row-close-tag nil nil org-ipynb-table-row-close-tag)
+    (:ipynb-xml-declaration nil nil org-ipynb-xml-declaration)
+    (:ipynb-wrap-src-lines nil nil org-ipynb-wrap-src-lines)
+    (:ipynb-klipsify-src nil nil org-ipynb-klipsify-src)
+    (:ipynb-klipse-css nil nil org-ipynb-klipse-css)
+    (:ipynb-klipse-js nil nil org-ipynb-klipse-js)
+    (:ipynb-klipse-selection-script nil nil org-ipynb-klipse-selection-script)
     (:infojs-opt "INFOJS_OPT" nil nil)
     ;; Redefine regular options.
     (:creator "CREATOR" nil org-ipynb-creator-string)
@@ -204,20 +204,20 @@
     ("html4-frameset" . "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\"
 \"http://www.w3.org/TR/html4/frameset.dtd\">")
 
-    ("xhtml-strict" . "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"
+    ("xipynb-strict" . "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"
 \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">")
-    ("xhtml-transitional" . "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"
+    ("xipynb-transitional" . "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"
 \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">")
-    ("xhtml-frameset" . "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\"
+    ("xipynb-frameset" . "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\"
 \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">")
-    ("xhtml-11" . "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"
+    ("xipynb-11" . "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"
 \"http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd\">")
 
     ("html5" . "<!DOCTYPE html>")
     ("xhtml5" . "<!DOCTYPE html>"))
   "An alist mapping (x)html flavors to specific doctypes.")
 
-(defconst org-html-html5-elements
+(defconst org-ipynb-html5-elements
   '("article" "aside" "audio" "canvas" "details" "figcaption"
     "figure" "footer" "header" "menu" "meter" "nav" "output"
     "progress" "section" "summary" "video")
@@ -226,14 +226,14 @@
 For blocks that should contain headlines, use the HTML_CONTAINER
 property on the headline itself.")
 
-(defconst org-html-special-string-regexps
+(defconst org-ipynb-special-string-regexps
   '(("\\\\-" . "&#x00ad;")		; shy
     ("---\\([^-]\\)" . "&#x2014;\\1")	; mdash
     ("--\\([^-]\\)" . "&#x2013;\\1")	; ndash
     ("\\.\\.\\." . "&#x2026;"))		; hellip
   "Regular expressions for special string conversion.")
 
-(defconst org-html-scripts
+(defconst org-ipynb-scripts
   "<script type=\"text/javascript\">
 /*
 @licstart  The following is the entire license notice for the
@@ -282,7 +282,7 @@ for the JavaScript code in this tag.
 </script>"
   "Basic JavaScript that is needed by HTML files produced by Org mode.")
 
-(defconst org-html-style-default
+(defconst org-ipynb-style-default
   "<style type=\"text/css\">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -468,9 +468,9 @@ for the JavaScript code in this tag.
   /*]]>*/-->
 </style>"
   "The default style specification for exported HTML files.
-You can use `org-html-head' and `org-html-head-extra' to add to
+You can use `org-ipynb-head' and `org-ipynb-head-extra' to add to
 this style.  If you don't want to include this default style,
-customize `org-html-head-include-default-style'.")
+customize `org-ipynb-head-include-default-style'.")
 
 
 ;;; User Configuration Variables
@@ -482,7 +482,7 @@ customize `org-html-head-include-default-style'.")
 
 ;;;; Handle infojs
 
-(defvar org-html-infojs-opts-table
+(defvar org-ipynb-infojs-opts-table
   '((path PATH "https://orgmode.org/org-info.js")
     (view VIEW "info")
     (toc TOC :with-toc)
@@ -492,17 +492,17 @@ customize `org-html-head-include-default-style'.")
     (mouse MOUSE_HINT "underline")
     (buttons VIEW_BUTTONS "0")
     (ltoc LOCAL_TOC "1")
-    (up LINK_UP :html-link-up)
-    (home LINK_HOME :html-link-home))
+    (up LINK_UP :ipynb-link-up)
+    (home LINK_HOME :ipynb-link-home))
   "JavaScript options, long form for script, default values.")
 
-(defcustom org-html-use-infojs 'when-configured
+(defcustom org-ipynb-use-infojs 'when-configured
   "Non-nil when Sebastian Rose's Java Script org-info.js should be active.
 This option can be nil or t to never or always use the script.
 It can also be the symbol `when-configured', meaning that the
 script will be linked into the export file if and only if there
 is a \"#+INFOJS_OPT:\" line in the buffer.  See also the variable
-`org-html-infojs-options'."
+`org-ipynb-infojs-options'."
   :group 'org-export-html
   :version "24.4"
   :package-version '(Org . "8.0")
@@ -511,10 +511,10 @@ is a \"#+INFOJS_OPT:\" line in the buffer.  See also the variable
 	  (const :tag "When configured in buffer" when-configured)
 	  (const :tag "Always" t)))
 
-(defcustom org-html-infojs-options
-  (mapcar (lambda (x) (cons (car x) (nth 2 x))) org-html-infojs-opts-table)
+(defcustom org-ipynb-infojs-options
+  (mapcar (lambda (x) (cons (car x) (nth 2 x))) org-ipynb-infojs-opts-table)
   "Options settings for the INFOJS JavaScript.
-Each of the options must have an entry in `org-html-infojs-opts-table'.
+Each of the options must have an entry in `org-ipynb-infojs-opts-table'.
 The value can either be a string that will be passed to the script, or
 a property.  This property is then assumed to be a property that is defined
 by the Export/Publishing setup of Org.
@@ -531,9 +531,9 @@ means to use the maximum value consistent with other options."
 		   '(choice
 		     (symbol :tag "Publishing/Export property")
 		     (string :tag "Value"))))
-	   org-html-infojs-opts-table)))
+	   org-ipynb-infojs-opts-table)))
 
-(defcustom org-html-infojs-template
+(defcustom org-ipynb-infojs-template
   "<script type=\"text/javascript\" src=\"%SCRIPT_PATH\">
 /**
  *
@@ -604,31 +604,31 @@ Option settings will replace the %MANAGER-OPTIONS cookie."
   :package-version '(Org . "8.0")
   :type 'string)
 
-(defun org-html-infojs-install-script (exp-plist _backend)
+(defun org-ipynb-infojs-install-script (exp-plist _backend)
   "Install script in export options when appropriate.
 EXP-PLIST is a plist containing export options.  BACKEND is the
 export back-end currently used."
   (unless (or (memq 'body-only (plist-get exp-plist :export-options))
-	      (not (plist-get exp-plist :html-use-infojs))
-	      (and (eq (plist-get exp-plist :html-use-infojs) 'when-configured)
+	      (not (plist-get exp-plist :ipynb-use-infojs))
+	      (and (eq (plist-get exp-plist :ipynb-use-infojs) 'when-configured)
 		   (let ((opt (plist-get exp-plist :infojs-opt)))
 		     (or (not opt)
 			 (string= "" opt)
 			 (string-match "\\<view:nil\\>" opt)))))
-    (let* ((template (plist-get exp-plist :html-infojs-template))
+    (let* ((template (plist-get exp-plist :ipynb-infojs-template))
 	   (ptoc (plist-get exp-plist :with-toc))
 	   (hlevels (plist-get exp-plist :headline-levels))
 	   (sdepth hlevels)
 	   (tdepth (if (integerp ptoc) (min ptoc hlevels) hlevels))
 	   (options (plist-get exp-plist :infojs-opt))
-	   (infojs-opt (plist-get exp-plist :html-infojs-options))
-	   (table org-html-infojs-opts-table)
+	   (infojs-opt (plist-get exp-plist :ipynb-infojs-options))
+	   (table org-ipynb-infojs-opts-table)
 	   style)
       (dolist (entry table)
 	(let* ((opt (car entry))
 	       (var (nth 1 entry))
 	       ;; Compute default values for script option OPT from
-	       ;; `org-html-infojs-options' variable.
+	       ;; `org-ipynb-infojs-options' variable.
 	       (default
 		 (let ((default (cdr (assq opt infojs-opt))))
 		   (if (and (symbolp default) (not (memq default '(t nil))))
@@ -676,8 +676,8 @@ export back-end currently used."
 	     (setq style (replace-match style t t template))
 	     (setq exp-plist
 		   (plist-put
-		    exp-plist :html-head-extra
-		    (concat (or (plist-get exp-plist :html-head-extra) "")
+		    exp-plist :ipynb-head-extra
+		    (concat (or (plist-get exp-plist :ipynb-head-extra) "")
 			    "\n"
 			    style)))))
       ;; This script absolutely needs the table of contents, so we
@@ -689,7 +689,7 @@ export back-end currently used."
 
 ;;;; Bold, etc.
 
-(defcustom org-html-text-markup-alist
+(defcustom org-ipynb-text-markup-alist
   '((bold . "<b>%s</b>")
     (code . "<code>%s</code>")
     (italic . "<i>%s</i>")
@@ -711,7 +711,7 @@ returned as-is."
 		:value-type (string :tag "Format string"))
   :options '(bold code italic strike-through underline verbatim))
 
-(defcustom org-html-indent nil
+(defcustom org-ipynb-indent nil
   "Non-nil means to indent the generated HTML.
 Warning: non-nil may break indentation of source code blocks."
   :group 'org-export-html
@@ -721,7 +721,7 @@ Warning: non-nil may break indentation of source code blocks."
 
 ;;;; Drawers
 
-(defcustom org-html-format-drawer-function (lambda (_name contents) contents)
+(defcustom org-ipynb-format-drawer-function (lambda (_name contents) contents)
   "Function called to format a drawer in HTML code.
 
 The function must accept two parameters:
@@ -741,7 +741,7 @@ The default value simply returns the value of CONTENTS."
 
 ;;;; Footnotes
 
-(defcustom org-html-footnotes-section "<div id=\"footnotes\">
+(defcustom org-ipynb-footnotes-section "<div id=\"footnotes\">
 <h2 class=\"footnotes\">%s: </h2>
 <div id=\"text-footnotes\">
 %s
@@ -754,20 +754,20 @@ by the footnotes themselves."
   :group 'org-export-html
   :type 'string)
 
-(defcustom org-html-footnote-format "<sup>%s</sup>"
+(defcustom org-ipynb-footnote-format "<sup>%s</sup>"
   "The format for the footnote reference.
 %s will be replaced by the footnote reference itself."
   :group 'org-export-html
   :type 'string)
 
-(defcustom org-html-footnote-separator "<sup>, </sup>"
+(defcustom org-ipynb-footnote-separator "<sup>, </sup>"
   "Text used to separate footnotes."
   :group 'org-export-html
   :type 'string)
 
 ;;;; Headline
 
-(defcustom org-html-toplevel-hlevel 2
+(defcustom org-ipynb-toplevel-hlevel 2
   "The <H> level for level 1 headings in HTML export.
 This is also important for the classes that will be wrapped around headlines
 and outline structure.  If this variable is 1, the top-level headlines will
@@ -778,8 +778,8 @@ document title."
   :group 'org-export-html
   :type 'integer)
 
-(defcustom org-html-format-headline-function
-  'org-html-format-headline-default-function
+(defcustom org-ipynb-format-headline-function
+  'org-ipynb-format-headline-default-function
   "Function to format headline text.
 
 This function will be called with six arguments:
@@ -796,9 +796,9 @@ The function result will be used in the section format string."
   :package-version '(Org . "8.3")
   :type 'function)
 
-;;;; HTML-specific
+;;;; IPYNB-specific
 
-(defcustom org-html-allow-name-attribute-in-anchors nil
+(defcustom org-ipynb-allow-name-attribute-in-anchors nil
   "When nil, do not set \"name\" attribute in anchors.
 By default, when appropriate, anchors are formatted with \"id\"
 but without \"name\" attribute."
@@ -807,7 +807,7 @@ but without \"name\" attribute."
   :package-version '(Org . "8.0")
   :type 'boolean)
 
-(defcustom org-html-self-link-headlines nil
+(defcustom org-ipynb-self-link-headlines nil
   "When non-nil, the headlines contain a hyperlink to themselves."
   :group 'org-export-html
   :package-version '(Org . "9.3")
@@ -816,8 +816,8 @@ but without \"name\" attribute."
 
 ;;;; Inlinetasks
 
-(defcustom org-html-format-inlinetask-function
-  'org-html-format-inlinetask-default-function
+(defcustom org-ipynb-format-inlinetask-function
+  'org-ipynb-format-inlinetask-default-function
   "Function called to format an inlinetask in HTML code.
 
 The function must accept seven parameters:
@@ -837,7 +837,7 @@ The function should return the string to be exported."
 
 ;;;; LaTeX
 
-(defcustom org-html-with-latex org-export-with-latex
+(defcustom org-ipynb-with-latex org-export-with-latex
   "Non-nil means process LaTeX math snippets.
 
 When set, the exporter will process LaTeX environments and
@@ -863,7 +863,7 @@ e.g. \"tex:mathjax\".  Allowed values are:
 
 ;;;; Links :: Generic
 
-(defcustom org-html-link-org-files-as-html t
+(defcustom org-ipynb-link-org-files-as-html t
   "Non-nil means make file links to `file.org' point to `file.html'.
 When `org-mode' is exporting an `org-mode' file to HTML, links to
 non-html files are directly put into a href tag in HTML.
@@ -877,7 +877,7 @@ When nil, the links still point to the plain \".org\" file."
 
 ;;;; Links :: Inline images
 
-(defcustom org-html-inline-images t
+(defcustom org-ipynb-inline-images t
   "Non-nil means inline images into exported HTML pages.
 This is done using an <img> tag.  When nil, an anchor with href is used to
 link to the image."
@@ -886,7 +886,7 @@ link to the image."
   :package-version '(Org . "8.1")
   :type 'boolean)
 
-(defcustom org-html-inline-image-rules
+(defcustom org-ipynb-inline-image-rules
   '(("file" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\)\\'")
     ("attachment" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\)\\'")
     ("http" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\)\\'")
@@ -903,15 +903,15 @@ link's path."
 
 ;;;; Plain Text
 
-(defvar org-html-protect-char-alist
+(defvar org-ipynb-protect-char-alist
   '(("&" . "&amp;")
     ("<" . "&lt;")
     (">" . "&gt;"))
-  "Alist of characters to be converted by `org-html-encode-plain-text'.")
+  "Alist of characters to be converted by `org-ipynb-encode-plain-text'.")
 
 ;;;; Src Block
 
-(defcustom org-html-htmlize-output-type 'inline-css
+(defcustom org-ipynb-htmlize-output-type 'inline-css
   "Output type to be used by htmlize when formatting code snippets.
 Choices are `css' to export the CSS selectors only,`inline-css'
 to export the CSS attribute values inline in the HTML or `nil' to
@@ -927,18 +927,18 @@ a style file to define the look of these classes.
 To get a start for your css file, start Emacs session and make sure that
 all the faces you are interested in are defined, for example by loading files
 in all modes you want.  Then, use the command
-`\\[org-html-htmlize-generate-css]' to extract class definitions."
+`\\[org-ipynb-htmlize-generate-css]' to extract class definitions."
   :group 'org-export-html
   :type '(choice (const css) (const inline-css) (const nil)))
 
-(defcustom org-html-htmlize-font-prefix "org-"
+(defcustom org-ipynb-htmlize-font-prefix "org-"
   "The prefix for CSS class names for htmlize font specifications."
   :group 'org-export-html
   :type 'string)
 
-(defcustom org-html-wrap-src-lines nil
+(defcustom org-ipynb-wrap-src-lines nil
   "If non-nil, wrap individual lines of source blocks in \"code\" elements.
-In this case, add line number in attribute \"data-ox-html-linenr\" when line
+In this case, add line number in attribute \"data-ox-ipynb-linenr\" when line
 numbers are enabled."
   :group 'org-export-html
   :package-version '(Org . "9.3")
@@ -947,7 +947,7 @@ numbers are enabled."
 
 ;;;; Table
 
-(defcustom org-html-table-default-attributes
+(defcustom org-ipynb-table-default-attributes
   '(:border "2" :cellspacing "0" :cellpadding "6" :rules "groups" :frame "hsides")
   "Default attributes and values which will be used in table tags.
 This is a plist where attributes are symbols, starting with
@@ -960,26 +960,26 @@ When exporting to HTML5, these values will be disregarded."
   :type '(plist :key-type (symbol :tag "Property")
 		:value-type (string :tag "Value")))
 
-(defcustom org-html-table-header-tags '("<th scope=\"%s\"%s>" . "</th>")
+(defcustom org-ipynb-table-header-tags '("<th scope=\"%s\"%s>" . "</th>")
   "The opening and ending tags for table header fields.
 This is customizable so that alignment options can be specified.
 The first %s will be filled with the scope of the field, either row or col.
 The second %s will be replaced by a style entry to align the field.
-See also the variable `org-html-table-use-header-tags-for-first-column'.
-See also the variable `org-html-table-align-individual-fields'."
+See also the variable `org-ipynb-table-use-header-tags-for-first-column'.
+See also the variable `org-ipynb-table-align-individual-fields'."
   :group 'org-export-html
   :type '(cons (string :tag "Opening tag") (string :tag "Closing tag")))
 
-(defcustom org-html-table-data-tags '("<td%s>" . "</td>")
+(defcustom org-ipynb-table-data-tags '("<td%s>" . "</td>")
   "The opening and ending tags for table data fields.
 This is customizable so that alignment options can be specified.
 The first %s will be filled with the scope of the field, either row or col.
 The second %s will be replaced by a style entry to align the field.
-See also the variable `org-html-table-align-individual-fields'."
+See also the variable `org-ipynb-table-align-individual-fields'."
   :group 'org-export-html
   :type '(cons (string :tag "Opening tag") (string :tag "Closing tag")))
 
-(defcustom org-html-table-row-open-tag "<tr>"
+(defcustom org-ipynb-table-row-open-tag "<tr>"
   "The opening tag for table rows.
 This is customizable so that alignment options can be specified.
 Instead of strings, these can be a Lisp function that will be
@@ -996,7 +996,7 @@ The function will be called with these arguments:
 
 For example:
 
-  (setq org-html-table-row-open-tag
+  (setq org-ipynb-table-row-open-tag
         (lambda (number group-number start-group? end-group-p top? bottom?)
            (cond (top? \"<tr class=\\\"tr-top\\\">\")
                  (bottom? \"<tr class=\\\"tr-bottom\\\">\")
@@ -1012,19 +1012,19 @@ and the bottom row, and otherwise alternate between \"tr-odd\" and
 		 (string :tag "Specify")
 		 (function)))
 
-(defcustom org-html-table-row-close-tag "</tr>"
+(defcustom org-ipynb-table-row-close-tag "</tr>"
   "The closing tag for table rows.
 This is customizable so that alignment options can be specified.
 Instead of strings, this can be a Lisp function that will be
 evaluated for each row in order to construct the table row tags.
 
-See documentation of `org-html-table-row-open-tag'."
+See documentation of `org-ipynb-table-row-open-tag'."
   :group 'org-export-html
   :type '(choice :tag "Closing tag"
 		 (string :tag "Specify")
 		 (function)))
 
-(defcustom org-html-table-align-individual-fields t
+(defcustom org-ipynb-table-align-individual-fields t
   "Non-nil means attach style attributes for alignment to each table field.
 When nil, alignment will only be specified in the column tags, but this
 is ignored by some browsers (like Firefox, Safari).  Opera does it right
@@ -1032,13 +1032,13 @@ though."
   :group 'org-export-html
   :type 'boolean)
 
-(defcustom org-html-table-use-header-tags-for-first-column nil
+(defcustom org-ipynb-table-use-header-tags-for-first-column nil
   "Non-nil means format column one in tables with header tags.
 When nil, also column one will use data tags."
   :group 'org-export-html
   :type 'boolean)
 
-(defcustom org-html-table-caption-above t
+(defcustom org-ipynb-table-caption-above t
   "When non-nil, place caption string at the beginning of the table.
 Otherwise, place it near the end."
   :group 'org-export-html
@@ -1046,7 +1046,7 @@ Otherwise, place it near the end."
 
 ;;;; Tags
 
-(defcustom org-html-tag-class-prefix ""
+(defcustom org-ipynb-tag-class-prefix ""
   "Prefix to class names for TODO keywords.
 Each tag gets a class given by the tag itself, with this prefix.
 The default prefix is empty because it is nice to just use the keyword
@@ -1057,12 +1057,12 @@ CSS classes, then this prefix can be very useful."
 
 ;;;; Template :: Generic
 
-(defcustom org-html-extension "html"
+(defcustom org-ipynb-extension "html"
   "The extension for exported HTML files."
   :group 'org-export-html
   :type 'string)
 
-(defcustom org-html-xml-declaration
+(defcustom org-ipynb-xml-declaration
   '(("html" . "<?xml version=\"1.0\" encoding=\"%s\"?>")
     ("php" . "<?php echo \"<?xml version=\\\"1.0\\\" encoding=\\\"%s\\\" ?>\"; ?>"))
   "The extension for exported HTML files.
@@ -1078,7 +1078,7 @@ This declaration only applies when exporting to XHTML."
 		  (cons (string :tag "Extension")
 			(string :tag "Declaration")))))
 
-(defcustom org-html-coding-system 'utf-8
+(defcustom org-ipynb-coding-system 'utf-8
   "Coding system for HTML export.
 Use utf-8 as the default value."
   :group 'org-export-html
@@ -1086,19 +1086,19 @@ Use utf-8 as the default value."
   :package-version '(Org . "8.0")
   :type 'coding-system)
 
-(defcustom org-html-doctype "xhtml-strict"
+(defcustom org-ipynb-doctype "xipynb-strict"
   "Document type definition to use for exported HTML files.
 Can be set with the in-buffer HTML_DOCTYPE property or for
-publishing, with :html-doctype."
+publishing, with :ipynb-doctype."
   :group 'org-export-html
   :version "24.4"
   :package-version '(Org . "8.0")
   :type (append
 	 '(choice)
-	 (mapcar (lambda (x) `(const ,(car x))) org-html-doctype-alist)
+	 (mapcar (lambda (x) `(const ,(car x))) org-ipynb-doctype-alist)
 	 '((string :tag "Custom doctype" ))))
 
-(defcustom org-html-html5-fancy nil
+(defcustom org-ipynb-html5-fancy nil
   "Non-nil means using new HTML5 elements.
 This variable is ignored for anything other than HTML5 export.
 
@@ -1112,10 +1112,10 @@ versions 8 and below."
   :package-version '(Org . "8.0")
   :type 'boolean)
 
-(defcustom org-html-container-element "div"
+(defcustom org-ipynb-container-element "div"
   "HTML element to use for wrapping top level sections.
 Can be set with the in-buffer HTML_CONTAINER property or for
-publishing, with :html-container.
+publishing, with :ipynb-container.
 
 Note that changing the default will prevent you from using
 org-info.js for your website."
@@ -1124,7 +1124,7 @@ org-info.js for your website."
   :package-version '(Org . "8.0")
   :type 'string)
 
-(defcustom org-html-divs
+(defcustom org-ipynb-divs
   '((preamble  "div" "preamble")
     (content   "div" "content")
     (postamble "div" "postamble"))
@@ -1148,7 +1148,7 @@ org-info.js for your website."
 	       (list :tag "Postamble" (const :format "" postamble)
 		     (string :tag "     id") (string :tag "element"))))
 
-(defconst org-html-checkbox-types
+(defconst org-ipynb-checkbox-types
   '((unicode .
      ((on . "&#x2611;") (off . "&#x2610;") (trans . "&#x2610;")))
     (ascii .
@@ -1171,9 +1171,9 @@ The choices are:
 Note that only the ascii characters implement tri-state
 checkboxes. The other two use the `off' checkbox for `trans'.")
 
-(defcustom org-html-checkbox-type 'ascii
+(defcustom org-ipynb-checkbox-type 'ascii
   "The type of checkboxes to use for HTML export.
-See `org-html-checkbox-types' for the values used for each
+See `org-ipynb-checkbox-types' for the values used for each
 option."
   :group 'org-export-html
   :version "24.4"
@@ -1183,7 +1183,7 @@ option."
 	  (const :tag "Unicode characters" unicode)
 	  (const :tag "HTML checkboxes" html)))
 
-(defcustom org-html-metadata-timestamp-format "%Y-%m-%d %a %H:%M"
+(defcustom org-ipynb-metadata-timestamp-format "%Y-%m-%d %a %H:%M"
   "Format used for timestamps in preamble, postamble and metadata.
 See `format-time-string' for more information on its components."
   :group 'org-export-html
@@ -1193,7 +1193,7 @@ See `format-time-string' for more information on its components."
 
 ;;;; Template :: Mathjax
 
-(defcustom org-html-mathjax-options
+(defcustom org-ipynb-mathjax-options
   '((path "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML" )
     (scale "100")
     (align "center")
@@ -1209,9 +1209,9 @@ See `format-time-string' for more information on its components."
 Alist of the following elements.  All values are strings.
 
 path          The path to MathJax.
-scale         Scaling with HTML-CSS, MathML and SVG output engines.
+scale         Scaling with IPYNB-CSS, MathML and SVG output engines.
 align         How to align display math: left, center, or right.
-font          The font to use with HTML-CSS and SVG output.  As of MathJax 2.5
+font          The font to use with IPYNB-CSS and SVG output.  As of MathJax 2.5
               the following values are understood: \"TeX\", \"STIX-Web\",
               \"Asana-Math\", \"Neo-Euler\", \"Gyre-Pagella\",
               \"Gyre-Termes\", and \"Latin-Modern\".
@@ -1271,13 +1271,13 @@ For further information about MathJax options, see the MathJax documentation:
 		     (choice (const "left")
 			     (const "right")))))
 
-(defcustom org-html-mathjax-template
+(defcustom org-ipynb-mathjax-template
   "<script type=\"text/x-mathjax-config\">
     MathJax.Hub.Config({
         displayAlign: \"%ALIGN\",
         displayIndent: \"%INDENT\",
 
-        \"HTML-CSS\": { scale: %SCALE,
+        \"IPYNB-CSS\": { scale: %SCALE,
                         linebreaks: { automatic: \"%LINEBREAKS\" },
                         webFont: \"%FONT\"
                        },
@@ -1294,26 +1294,26 @@ For further information about MathJax options, see the MathJax documentation:
 </script>
 <script type=\"text/javascript\"
         src=\"%PATH\"></script>"
-  "The MathJax template.  See also `org-html-mathjax-options'."
+  "The MathJax template.  See also `org-ipynb-mathjax-options'."
   :group 'org-export-html
   :type 'string)
 
 ;;;; Template :: Postamble
 
-(defcustom org-html-postamble 'auto
+(defcustom org-ipynb-postamble 'auto
   "Non-nil means insert a postamble in HTML export.
 
 When set to `auto', check against the
 `org-export-with-author/email/creator/date' variables to set the
 content of the postamble.  When set to a string, use this string
 as the postamble.  When t, insert a string as defined by the
-formatting string in `org-html-postamble-format'.
+formatting string in `org-ipynb-postamble-format'.
 
 When set to a function, apply this function and insert the
 returned string.  The function takes the property list of export
 options as its only argument.
 
-Setting :html-postamble in publishing projects will take
+Setting :ipynb-postamble in publishing projects will take
 precedence over this variable."
   :group 'org-export-html
   :type '(choice (const :tag "No postamble" nil)
@@ -1322,7 +1322,7 @@ precedence over this variable."
 		 (string :tag "Custom formatting string")
 		 (function :tag "Function (must return a string)")))
 
-(defcustom org-html-postamble-format
+(defcustom org-ipynb-postamble-format
   '(("en" "<p class=\"author\">Author: %a (%e)</p>
 <p class=\"date\">Date: %d</p>
 <p class=\"creator\">%c</p>
@@ -1340,8 +1340,8 @@ postamble itself.  This format string can contain these elements:
   %a stands for the author's name.
   %e stands for the author's email.
   %d stands for the date.
-  %c will be replaced by `org-html-creator-string'.
-  %v will be replaced by `org-html-validation-link'.
+  %c will be replaced by `org-ipynb-creator-string'.
+  %v will be replaced by `org-ipynb-validation-link'.
   %T will be replaced by the export time.
   %C will be replaced by the last modification time.
 
@@ -1352,13 +1352,13 @@ like that: \"%%\"."
 	  (list (string :tag "Language")
 		(string :tag "Format string"))))
 
-(defcustom org-html-validation-link
+(defcustom org-ipynb-validation-link
   "<a href=\"http://validator.w3.org/check?uri=referer\">Validate</a>"
   "Link to HTML validation service."
   :group 'org-export-html
   :type 'string)
 
-(defcustom org-html-creator-string
+(defcustom org-ipynb-creator-string
   (format "<a href=\"https://www.gnu.org/software/emacs/\">Emacs</a> %s (<a href=\"https://orgmode.org\">Org</a> mode %s)"
 	  emacs-version
 	  (if (fboundp 'org-version) (org-version) "unknown version"))
@@ -1371,19 +1371,19 @@ This option can also be set on with the CREATOR keyword."
 
 ;;;; Template :: Preamble
 
-(defcustom org-html-preamble t
+(defcustom org-ipynb-preamble t
   "Non-nil means insert a preamble in HTML export.
 
 When t, insert a string as defined by the formatting string in
-`org-html-preamble-format'.  When set to a string, use this
-formatting string instead (see `org-html-postamble-format' for an
+`org-ipynb-preamble-format'.  When set to a string, use this
+formatting string instead (see `org-ipynb-postamble-format' for an
 example of such a formatting string).
 
 When set to a function, apply this function and insert the
 returned string.  The function takes the property list of export
 options as its only argument.
 
-Setting :html-preamble in publishing projects will take
+Setting :ipynb-preamble in publishing projects will take
 precedence over this variable."
   :group 'org-export-html
   :type '(choice (const :tag "No preamble" nil)
@@ -1391,7 +1391,7 @@ precedence over this variable."
 		 (string :tag "Custom formatting string")
 		 (function :tag "Function (must return a string)")))
 
-(defcustom org-html-preamble-format '(("en" ""))
+(defcustom org-ipynb-preamble-format '(("en" ""))
   "Alist of languages and format strings for the HTML preamble.
 
 The first element of each list is the language code, as used for
@@ -1405,39 +1405,39 @@ preamble itself.  This format string can contain these elements:
   %a stands for the author's name.
   %e stands for the author's email.
   %d stands for the date.
-  %c will be replaced by `org-html-creator-string'.
-  %v will be replaced by `org-html-validation-link'.
+  %c will be replaced by `org-ipynb-creator-string'.
+  %v will be replaced by `org-ipynb-validation-link'.
   %T will be replaced by the export time.
   %C will be replaced by the last modification time.
 
 If you need to use a \"%\" character, you need to escape it
 like that: \"%%\".
 
-See the default value of `org-html-postamble-format' for an
+See the default value of `org-ipynb-postamble-format' for an
 example."
   :group 'org-export-html
   :type '(repeat
 	  (list (string :tag "Language")
 		(string :tag "Format string"))))
 
-(defcustom org-html-link-up ""
+(defcustom org-ipynb-link-up ""
   "Where should the \"UP\" link of exported HTML pages lead?"
   :group 'org-export-html
   :type '(string :tag "File or URL"))
 
-(defcustom org-html-link-home ""
+(defcustom org-ipynb-link-home ""
   "Where should the \"HOME\" link of exported HTML pages lead?"
   :group 'org-export-html
   :type '(string :tag "File or URL"))
 
-(defcustom org-html-link-use-abs-url nil
+(defcustom org-ipynb-link-use-abs-url nil
   "Should we prepend relative links with HTML_LINK_HOME?"
   :group 'org-export-html
   :version "24.4"
   :package-version '(Org . "8.1")
   :type 'boolean)
 
-(defcustom org-html-home/up-format
+(defcustom org-ipynb-home/up-format
   "<div id=\"org-div-home-and-up\">
  <a accesskey=\"h\" href=\"%s\"> UP </a>
  |
@@ -1445,17 +1445,17 @@ example."
 </div>"
   "Snippet used to insert the HOME and UP links.
 This is a format string, the first %s will receive the UP link,
-the second the HOME link.  If both `org-html-link-up' and
-`org-html-link-home' are empty, the entire snippet will be
+the second the HOME link.  If both `org-ipynb-link-up' and
+`org-ipynb-link-home' are empty, the entire snippet will be
 ignored."
   :group 'org-export-html
   :type 'string)
 
 ;;;; Template :: Scripts
 
-(defcustom org-html-head-include-scripts t
+(defcustom org-ipynb-head-include-scripts t
   "Non-nil means include the JavaScript snippets in exported HTML files.
-The actual script is defined in `org-html-scripts' and should
+The actual script is defined in `org-ipynb-scripts' and should
 not be modified."
   :group 'org-export-html
   :version "24.4"
@@ -1464,19 +1464,19 @@ not be modified."
 
 ;;;; Template :: Styles
 
-(defcustom org-html-head-include-default-style t
+(defcustom org-ipynb-head-include-default-style t
   "Non-nil means include the default style in exported HTML files.
-The actual style is defined in `org-html-style-default' and
-should not be modified.  Use `org-html-head' to use your own
+The actual style is defined in `org-ipynb-style-default' and
+should not be modified.  Use `org-ipynb-head' to use your own
 style information."
   :group 'org-export-html
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'boolean)
 ;;;###autoload
-(put 'org-html-head-include-default-style 'safe-local-variable 'booleanp)
+(put 'org-ipynb-head-include-default-style 'safe-local-variable 'booleanp)
 
-(defcustom org-html-head ""
+(defcustom org-ipynb-head ""
   "Org-wide head definitions for exported HTML files.
 
 This variable can contain the full HTML structure to provide a
@@ -1505,29 +1505,29 @@ As the value of this option simply gets inserted into the HTML
 header.
 
 You can set this on a per-file basis using #+HTML_HEAD:,
-or for publication projects using the :html-head property."
+or for publication projects using the :ipynb-head property."
   :group 'org-export-html
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'string)
 ;;;###autoload
-(put 'org-html-head 'safe-local-variable 'stringp)
+(put 'org-ipynb-head 'safe-local-variable 'stringp)
 
-(defcustom org-html-head-extra ""
+(defcustom org-ipynb-head-extra ""
   "More head information to add in the HTML output.
 
 You can set this on a per-file basis using #+HTML_HEAD_EXTRA:,
-or for publication projects using the :html-head-extra property."
+or for publication projects using the :ipynb-head-extra property."
   :group 'org-export-html
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'string)
 ;;;###autoload
-(put 'org-html-head-extra 'safe-local-variable 'stringp)
+(put 'org-ipynb-head-extra 'safe-local-variable 'stringp)
 
 ;;;; Template :: Viewport
 
-(defcustom org-html-viewport '((width "device-width")
+(defcustom org-ipynb-viewport '((width "device-width")
 			       (initial-scale "1")
 			       (minimum-scale "")
 			       (maximum-scale "")
@@ -1575,26 +1575,26 @@ https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag"
 
 ;; Handle source code blocks with Klipse
 
-(defcustom org-html-klipsify-src nil
+(defcustom org-ipynb-klipsify-src nil
   "When non-nil, source code blocks are editable in exported presentation."
   :group 'org-export-html
   :package-version '(Org . "9.1")
   :type 'boolean)
 
-(defcustom org-html-klipse-css
+(defcustom org-ipynb-klipse-css
   "https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"
   "Location of the codemirror CSS file for use with klipse."
   :group 'org-export-html
   :package-version '(Org . "9.1")
   :type 'string)
 
-(defcustom org-html-klipse-js
+(defcustom org-ipynb-klipse-js
   "https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"
   "Location of the klipse javascript file."
   :group 'org-export-html
   :type 'string)
 
-(defcustom org-html-klipse-selection-script
+(defcustom org-ipynb-klipse-selection-script
   "window.klipse_settings = {selector_eval_html: '.src-html',
                              selector_eval_js: '.src-js',
                              selector_eval_python_client: '.src-python',
@@ -1609,7 +1609,7 @@ https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag"
 
 ;;;; Todos
 
-(defcustom org-html-todo-kwd-class-prefix ""
+(defcustom org-ipynb-todo-kwd-class-prefix ""
   "Prefix to class names for TODO keywords.
 Each TODO keyword gets a class given by the keyword itself, with this prefix.
 The default prefix is empty because it is nice to just use the keyword
@@ -1621,38 +1621,38 @@ CSS classes, then this prefix can be very useful."
 
 ;;; Internal Functions
 
-(defun org-html-xhtml-p (info)
-  (let ((dt (downcase (plist-get info :html-doctype))))
+(defun org-ipynb-xipynb-p (info)
+  (let ((dt (downcase (plist-get info :ipynb-doctype))))
     (string-match-p "xhtml" dt)))
 
-(defun org-html-html5-p (info)
-  (let ((dt (downcase (plist-get info :html-doctype))))
+(defun org-ipynb-html5-p (info)
+  (let ((dt (downcase (plist-get info :ipynb-doctype))))
 	(member dt '("html5" "xhtml5" "<!doctype html>"))))
 
-(defun org-html--html5-fancy-p (info)
+(defun org-ipynb--html5-fancy-p (info)
   "Non-nil when exporting to HTML5 with fancy elements.
 INFO is the current state of the export process, as a plist."
-  (and (plist-get info :html-html5-fancy)
-       (org-html-html5-p info)))
+  (and (plist-get info :ipynb-html5-fancy)
+       (org-ipynb-html5-p info)))
 
-(defun org-html-close-tag (tag attr info)
+(defun org-ipynb-close-tag (tag attr info)
   "Return close-tag for string TAG.
 ATTR specifies additional attributes.  INFO is a property list
 containing current export state."
   (concat "<" tag
 	  (org-string-nw-p (concat " " attr))
-	  (if (org-html-xhtml-p info) " />" ">")))
+	  (if (org-ipynb-xipynb-p info) " />" ">")))
 
-(defun org-html-doctype (info)
+(defun org-ipynb-doctype (info)
   "Return correct HTML doctype tag.
 INFO is a plist used as a communication channel.  Doctype tag is
-extracted from `org-html-doctype-alist', or the literal value
-of :html-doctype from INFO if :html-doctype is not found in the
+extracted from `org-ipynb-doctype-alist', or the literal value
+of :ipynb-doctype from INFO if :ipynb-doctype is not found in the
 alist."
-  (let ((dt (plist-get info :html-doctype)))
-    (or (cdr (assoc dt org-html-doctype-alist)) dt)))
+  (let ((dt (plist-get info :ipynb-doctype)))
+    (or (cdr (assoc dt org-ipynb-doctype-alist)) dt)))
 
-(defun org-html--make-attribute-string (attributes)
+(defun org-ipynb--make-attribute-string (attributes)
   "Return a list of attributes, as a string.
 ATTRIBUTES is a plist where values are either strings or nil.  An
 attribute with a nil value will be omitted from the result."
@@ -1662,15 +1662,15 @@ attribute with a nil value will be omitted from the result."
             ((symbolp item) (push (substring (symbol-name item) 1) output))
             (t (let ((key (car output))
                      (value (replace-regexp-in-string
-                             "\"" "&quot;" (org-html-encode-plain-text item))))
+                             "\"" "&quot;" (org-ipynb-encode-plain-text item))))
                  (setcar output (format "%s=\"%s\"" key value))))))))
 
-(defun org-html--wrap-image (contents info &optional caption label)
+(defun org-ipynb--wrap-image (contents info &optional caption label)
   "Wrap CONTENTS string within an appropriate environment for images.
 INFO is a plist used as a communication channel.  When optional
 arguments CAPTION and LABEL are given, use them for caption and
 \"id\" attribute."
-  (let ((html5-fancy (org-html--html5-fancy-p info)))
+  (let ((html5-fancy (org-ipynb--html5-fancy-p info)))
     (format (if html5-fancy "\n<figure%s>\n%s%s\n</figure>"
 	      "\n<div%s class=\"figure\">\n%s%s\n</div>")
 	    ;; ID.
@@ -1683,27 +1683,27 @@ arguments CAPTION and LABEL are given, use them for caption and
 			"\n<p>%s</p>")
 		      caption)))))
 
-(defun org-html--format-image (source attributes info)
+(defun org-ipynb--format-image (source attributes info)
   "Return \"img\" tag with given SOURCE and ATTRIBUTES.
 SOURCE is a string specifying the location of the image.
 ATTRIBUTES is a plist, as returned by
 `org-export-read-attribute'.  INFO is a plist used as
 a communication channel."
   (if (string= "svg" (file-name-extension source))
-      (org-html--svg-image source attributes info)
-    (org-html-close-tag
+      (org-ipynb--svg-image source attributes info)
+    (org-ipynb-close-tag
      "img"
-     (org-html--make-attribute-string
+     (org-ipynb--make-attribute-string
       (org-combine-plists
        (list :src source
 	     :alt (if (string-match-p "^ltxpng/" source)
-		      (org-html-encode-plain-text
+		      (org-ipynb-encode-plain-text
 		       (org-find-text-property-in-string 'org-latex-src source))
 		    (file-name-nondirectory source)))
        attributes))
      info)))
 
-(defun org-html--svg-image (source attributes info)
+(defun org-ipynb--svg-image (source attributes info)
   "Return \"object\" embedding svg file SOURCE with given ATTRIBUTES.
 INFO is a plist used as a communication channel.
 
@@ -1712,7 +1712,7 @@ fallback image file to use if the object embedding is not
 supported.  CSS class \"org-svg\" is assigned as the class of the
 object unless a different class is specified with an attribute."
   (let ((fallback (plist-get attributes :fallback))
-	(attrs (org-html--make-attribute-string
+	(attrs (org-ipynb--make-attribute-string
 		(org-combine-plists
                  ;; Remove fallback attribute, which is not meant to
                  ;; appear directly in the attributes string, and
@@ -1722,11 +1722,11 @@ object unless a different class is specified with an attribute."
 	    source
 	    attrs
 	    (if fallback
-		(org-html-close-tag
+		(org-ipynb-close-tag
 		 "img" (format "src=\"%s\" %s" fallback attrs) info)
 	      "Sorry, your browser does not support SVG."))))
 
-(defun org-html--textarea-block (element)
+(defun org-ipynb--textarea-block (element)
   "Transcode ELEMENT into a textarea block.
 ELEMENT is either a source or an example block."
   (let* ((code (car (org-export-unravel-code element)))
@@ -1736,21 +1736,21 @@ ELEMENT is either a source or an example block."
 	    (or (plist-get attr :height) (org-count-lines code))
 	    code)))
 
-(defun org-html--has-caption-p (element &optional _info)
+(defun org-ipynb--has-caption-p (element &optional _info)
   "Non-nil when ELEMENT has a caption affiliated keyword.
 INFO is a plist used as a communication channel.  This function
 is meant to be used as a predicate for `org-export-get-ordinal' or
-a value to `org-html-standalone-image-predicate'."
+a value to `org-ipynb-standalone-image-predicate'."
   (org-element-property :caption element))
 
 ;;;; Table
 
-(defun org-html-htmlize-region-for-paste (beg end)
+(defun org-ipynb-htmlize-region-for-paste (beg end)
   "Convert the region between BEG and END to HTML, using htmlize.el.
 This is much like `htmlize-region-for-paste', only that it uses
 the settings define in the org-... variables."
-  (let* ((htmlize-output-type org-html-htmlize-output-type)
-	 (htmlize-css-name-prefix org-html-htmlize-font-prefix)
+  (let* ((htmlize-output-type org-ipynb-htmlize-output-type)
+	 (htmlize-css-name-prefix org-ipynb-htmlize-font-prefix)
 	 (htmlbuf (htmlize-region beg end)))
     (unwind-protect
 	(with-current-buffer htmlbuf
@@ -1759,7 +1759,7 @@ the settings define in the org-... variables."
       (kill-buffer htmlbuf))))
 
 ;;;###autoload
-(defun org-html-htmlize-generate-css ()
+(defun org-ipynb-htmlize-generate-css ()
   "Create the CSS for all font definitions in the current Emacs session.
 Use this to create face definitions in your CSS style file that can then
 be used by code snippets transformed by htmlize.
@@ -1767,8 +1767,8 @@ This command just produces a buffer that contains class definitions for all
 faces used in the current Emacs session.  You can copy and paste the ones you
 need into your CSS file.
 
-If you then set `org-html-htmlize-output-type' to `css', calls
-to the function `org-html-htmlize-region-for-paste' will
+If you then set `org-ipynb-htmlize-output-type' to `css', calls
+to the function `org-ipynb-htmlize-region-for-paste' will
 produce code that uses these same face definitions."
   (interactive)
   (unless (require 'htmlize nil t)
@@ -1794,24 +1794,24 @@ produce code that uses these same face definitions."
   (when (looking-at " +") (replace-match ""))
   (goto-char (point-min)))
 
-(defun org-html--make-string (n string)
+(defun org-ipynb--make-string (n string)
   "Build a string by concatenating N times STRING."
   (let (out) (dotimes (_ n out) (setq out (concat string out)))))
 
-(defun org-html-fix-class-name (kwd)	; audit callers of this function
+(defun org-ipynb-fix-class-name (kwd)	; audit callers of this function
   "Turn todo keyword KWD into a valid class name.
 Replaces invalid characters with \"_\"."
   (replace-regexp-in-string "[^a-zA-Z0-9_]" "_" kwd nil t))
 
-(defun org-html-footnote-section (info)
+(defun org-ipynb-footnote-section (info)
   "Format the footnote section.
 INFO is a plist used as a communication channel."
   (pcase (org-export-collect-footnote-definitions info)
     (`nil nil)
     (definitions
       (format
-       (plist-get info :html-footnotes-section)
-       (org-html--translate "Footnotes" info)
+       (plist-get info :ipynb-footnotes-section)
+       (org-ipynb--translate "Footnotes" info)
        (format
 	"\n%s\n"
 	(mapconcat
@@ -1825,14 +1825,14 @@ INFO is a plist used as a communication channel."
 	      ;; a "footpara" class paragraph.
 	      (let ((inline? (not (org-element-map def org-element-all-elements
 				    #'identity nil t)))
-		    (anchor (org-html--anchor
+		    (anchor (org-ipynb--anchor
 			     (format "fn.%d" n)
 			     n
 			     (format " class=\"footnum\" href=\"#fnr.%d\"" n)
 			     info))
 		    (contents (org-trim (org-export-data def info))))
 		(format "<div class=\"footdef\">%s %s</div>\n"
-			(format (plist-get info :html-footnote-format) anchor)
+			(format (plist-get info :ipynb-footnote-format) anchor)
 			(format "<div class=\"footpara\">%s</div>"
 				(if (not inline?) contents
 				  (format "<p class=\"footpara\">%s</p>"
@@ -1843,13 +1843,13 @@ INFO is a plist used as a communication channel."
 
 ;;; Template
 
-(defun org-html--build-meta-info (info)
+(defun org-ipynb--build-meta-info (info)
   "Return meta tags for exported document.
 INFO is a plist used as a communication channel."
   (let* ((protect-string
           (lambda (str)
             (replace-regexp-in-string
-             "\"" "&quot;" (org-html-encode-plain-text str))))
+             "\"" "&quot;" (org-ipynb-encode-plain-text str))))
          (title (org-export-data (plist-get info :title) info))
          ;; Set title to an invisible character instead of leaving it
          ;; empty, which is invalid.
@@ -1860,30 +1860,30 @@ INFO is a plist used as a communication channel."
                         (and auth (org-element-interpret-data auth)))))
          (description (plist-get info :description))
          (keywords (plist-get info :keywords))
-         (charset (or (and org-html-coding-system
+         (charset (or (and org-ipynb-coding-system
                            (fboundp 'coding-system-get)
-                           (coding-system-get org-html-coding-system
+                           (coding-system-get org-ipynb-coding-system
                                               'mime-charset))
                       "iso-8859-1")))
     (concat
      (when (plist-get info :time-stamp-file)
        (format-time-string
 	(concat "<!-- "
-		(plist-get info :html-metadata-timestamp-format)
+		(plist-get info :ipynb-metadata-timestamp-format)
 		" -->\n")))
      (format
-      (if (org-html-html5-p info)
-	  (org-html-close-tag "meta" "charset=\"%s\"" info)
-	(org-html-close-tag
+      (if (org-ipynb-html5-p info)
+	  (org-ipynb-close-tag "meta" "charset=\"%s\"" info)
+	(org-ipynb-close-tag
 	 "meta" "http-equiv=\"Content-Type\" content=\"text/html;charset=%s\""
 	 info))
       charset) "\n"
      (let ((viewport-options
 	    (cl-remove-if-not (lambda (cell) (org-string-nw-p (cadr cell)))
-			      (plist-get info :html-viewport))))
+			      (plist-get info :ipynb-viewport))))
        (and viewport-options
 	    (concat
-	     (org-html-close-tag
+	     (org-ipynb-close-tag
 	      "meta"
 	      (format "name=\"viewport\" content=\"%s\""
 		      (mapconcat
@@ -1892,56 +1892,56 @@ INFO is a plist used as a communication channel."
 	      info)
 	     "\n")))
      (format "<title>%s</title>\n" title)
-     (org-html-close-tag "meta" "name=\"generator\" content=\"Org mode\"" info)
+     (org-ipynb-close-tag "meta" "name=\"generator\" content=\"Org mode\"" info)
      "\n"
      (and (org-string-nw-p author)
 	  (concat
-	   (org-html-close-tag "meta"
+	   (org-ipynb-close-tag "meta"
 			       (format "name=\"author\" content=\"%s\""
 				       (funcall protect-string author))
 			       info)
 	   "\n"))
      (and (org-string-nw-p description)
 	  (concat
-	   (org-html-close-tag "meta"
+	   (org-ipynb-close-tag "meta"
 			       (format "name=\"description\" content=\"%s\"\n"
 				       (funcall protect-string description))
 			       info)
 	   "\n"))
      (and (org-string-nw-p keywords)
 	  (concat
-	   (org-html-close-tag "meta"
+	   (org-ipynb-close-tag "meta"
 			       (format "name=\"keywords\" content=\"%s\""
 				       (funcall protect-string keywords))
 			       info)
 	   "\n")))))
 
-(defun org-html--build-head (info)
+(defun org-ipynb--build-head (info)
   "Return information for the <head>..</head> of the HTML output.
 INFO is a plist used as a communication channel."
   (org-element-normalize-string
    (concat
-    (when (plist-get info :html-head-include-default-style)
-      (org-element-normalize-string org-html-style-default))
-    (org-element-normalize-string (plist-get info :html-head))
-    (org-element-normalize-string (plist-get info :html-head-extra))
-    (when (and (plist-get info :html-htmlized-css-url)
-	       (eq org-html-htmlize-output-type 'css))
-      (org-html-close-tag "link"
+    (when (plist-get info :ipynb-head-include-default-style)
+      (org-element-normalize-string org-ipynb-style-default))
+    (org-element-normalize-string (plist-get info :ipynb-head))
+    (org-element-normalize-string (plist-get info :ipynb-head-extra))
+    (when (and (plist-get info :ipynb-htmlized-css-url)
+	       (eq org-ipynb-htmlize-output-type 'css))
+      (org-ipynb-close-tag "link"
 			  (format "rel=\"stylesheet\" href=\"%s\" type=\"text/css\""
-				  (plist-get info :html-htmlized-css-url))
+				  (plist-get info :ipynb-htmlized-css-url))
 			  info))
-    (when (plist-get info :html-head-include-scripts) org-html-scripts))))
+    (when (plist-get info :ipynb-head-include-scripts) org-ipynb-scripts))))
 
-(defun org-html--build-mathjax-config (info)
+(defun org-ipynb--build-mathjax-config (info)
   "Insert the user setup into the mathjax template.
 INFO is a plist used as a communication channel."
   (when (and (memq (plist-get info :with-latex) '(mathjax t))
 	     (org-element-map (plist-get info :parse-tree)
 		 '(latex-fragment latex-environment) #'identity info t nil t))
-    (let ((template (plist-get info :html-mathjax-template))
-	  (options (plist-get info :html-mathjax-options))
-	  (in-buffer (or (plist-get info :html-mathjax) "")))
+    (let ((template (plist-get info :ipynb-mathjax-template))
+	  (options (plist-get info :ipynb-mathjax-options))
+	  (in-buffer (or (plist-get info :ipynb-mathjax) "")))
       (dolist (e options (org-element-normalize-string template))
 	(let ((name (car e))
 	      (val (nth 1 e)))
@@ -1953,10 +1953,10 @@ INFO is a plist used as a communication channel."
 			       template)
 	    (setq template (replace-match val t t template))))))))
 
-(defun org-html-format-spec (info)
+(defun org-ipynb-format-spec (info)
   "Return format specification for preamble and postamble.
 INFO is a plist used as a communication channel."
-  (let ((timestamp-format (plist-get info :html-metadata-timestamp-format)))
+  (let ((timestamp-format (plist-get info :ipynb-metadata-timestamp-format)))
     `((?t . ,(org-export-data (plist-get info :title) info))
       (?s . ,(org-export-data (plist-get info :subtitle) info))
       (?d . ,(org-export-data (org-export-get-date info timestamp-format)
@@ -1972,14 +1972,14 @@ INFO is a plist used as a communication channel."
 	       (format-time-string timestamp-format
 				   (and file (file-attribute-modification-time
 					      (file-attributes file))))))
-      (?v . ,(or (plist-get info :html-validation-link) "")))))
+      (?v . ,(or (plist-get info :ipynb-validation-link) "")))))
 
-(defun org-html--build-pre/postamble (type info)
+(defun org-ipynb--build-pre/postamble (type info)
   "Return document preamble or postamble as a string, or nil.
 TYPE is either `preamble' or `postamble', INFO is a plist used as a
 communication channel."
-  (let ((section (plist-get info (intern (format ":html-%s" type))))
-	(spec (org-html-format-spec info)))
+  (let ((section (plist-get info (intern (format ":ipynb-%s" type))))
+	(spec (org-ipynb-format-spec info)))
     (when section
       (let ((section-contents
 	     (if (functionp section) (funcall section info)
@@ -1995,24 +1995,24 @@ communication channel."
 		    (and (plist-get info :with-date)
 			 (org-string-nw-p date)
 			 (format "<p class=\"date\">%s: %s</p>\n"
-				 (org-html--translate "Date" info)
+				 (org-ipynb--translate "Date" info)
 				 date))
 		    (and (plist-get info :with-author)
 			 (org-string-nw-p author)
 			 (format "<p class=\"author\">%s: %s</p>\n"
-				 (org-html--translate "Author" info)
+				 (org-ipynb--translate "Author" info)
 				 author))
 		    (and (plist-get info :with-email)
 			 (org-string-nw-p email)
 			 (format "<p class=\"email\">%s: %s</p>\n"
-				 (org-html--translate "Email" info)
+				 (org-ipynb--translate "Email" info)
 				 email))
 		    (and (plist-get info :time-stamp-file)
 			 (format
 			  "<p class=\"date\">%s: %s</p>\n"
-			  (org-html--translate "Created" info)
+			  (org-ipynb--translate "Created" info)
 			  (format-time-string
-			   (plist-get info :html-metadata-timestamp-format))))
+			   (plist-get info :ipynb-metadata-timestamp-format))))
 		    (and (plist-get info :with-creator)
 			 (org-string-nw-p creator)
 			 (format "<p class=\"creator\">%s</p>\n" creator))
@@ -2021,88 +2021,88 @@ communication channel."
 				 validation-link)))))
 		(t
 		 (let ((formats (plist-get info (if (eq type 'preamble)
-						    :html-preamble-format
-						  :html-postamble-format)))
+						    :ipynb-preamble-format
+						  :ipynb-postamble-format)))
 		       (language (plist-get info :language)))
 		   (format-spec
 		    (cadr (or (assoc-string language formats t)
 			      (assoc-string "en" formats t)))
 		    spec)))))))
-	(let ((div (assq type (plist-get info :html-divs))))
+	(let ((div (assq type (plist-get info :ipynb-divs))))
 	  (when (org-string-nw-p section-contents)
 	    (concat
 	     (format "<%s id=\"%s\" class=\"%s\">\n"
 		     (nth 1 div)
 		     (nth 2 div)
-		     org-html--pre/postamble-class)
+		     org-ipynb--pre/postamble-class)
 	     (org-element-normalize-string section-contents)
 	     (format "</%s>\n" (nth 1 div)))))))))
 
-(defun org-html-inner-template (contents info)
+(defun org-ipynb-inner-template (contents info)
   "Return body of document string after HTML conversion.
 CONTENTS is the transcoded contents string.  INFO is a plist
 holding export options."
   (concat
    ;; Table of contents.
    (let ((depth (plist-get info :with-toc)))
-     (when depth (org-html-toc depth info)))
+     (when depth (org-ipynb-toc depth info)))
    ;; Document contents.
    contents
    ;; Footnotes section.
-   (org-html-footnote-section info)))
+   (org-ipynb-footnote-section info)))
 
-(defun org-html-template (contents info)
+(defun org-ipynb-template (contents info)
   "Return complete document string after HTML conversion.
 CONTENTS is the transcoded contents string.  INFO is a plist
 holding export options."
   (concat
-   (when (and (not (org-html-html5-p info)) (org-html-xhtml-p info))
-     (let* ((xml-declaration (plist-get info :html-xml-declaration))
+   (when (and (not (org-ipynb-html5-p info)) (org-ipynb-xipynb-p info))
+     (let* ((xml-declaration (plist-get info :ipynb-xml-declaration))
 	    (decl (or (and (stringp xml-declaration) xml-declaration)
-		      (cdr (assoc (plist-get info :html-extension)
+		      (cdr (assoc (plist-get info :ipynb-extension)
 				  xml-declaration))
 		      (cdr (assoc "html" xml-declaration))
 		      "")))
        (when (not (or (not decl) (string= "" decl)))
 	 (format "%s\n"
 		 (format decl
-			 (or (and org-html-coding-system
+			 (or (and org-ipynb-coding-system
 				  (fboundp 'coding-system-get)
-				  (coding-system-get org-html-coding-system 'mime-charset))
+				  (coding-system-get org-ipynb-coding-system 'mime-charset))
 			     "iso-8859-1"))))))
-   (org-html-doctype info)
+   (org-ipynb-doctype info)
    "\n"
    (concat "<html"
-	   (cond ((org-html-xhtml-p info)
+	   (cond ((org-ipynb-xipynb-p info)
 		  (format
 		   " xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"%s\" xml:lang=\"%s\""
 		   (plist-get info :language) (plist-get info :language)))
-		 ((org-html-html5-p info)
+		 ((org-ipynb-html5-p info)
 		  (format " lang=\"%s\"" (plist-get info :language))))
 	   ">\n")
    "<head>\n"
-   (org-html--build-meta-info info)
-   (org-html--build-head info)
-   (org-html--build-mathjax-config info)
+   (org-ipynb--build-meta-info info)
+   (org-ipynb--build-head info)
+   (org-ipynb--build-mathjax-config info)
    "</head>\n"
    "<body>\n"
-   (let ((link-up (org-trim (plist-get info :html-link-up)))
-	 (link-home (org-trim (plist-get info :html-link-home))))
+   (let ((link-up (org-trim (plist-get info :ipynb-link-up)))
+	 (link-home (org-trim (plist-get info :ipynb-link-home))))
      (unless (and (string= link-up "") (string= link-home ""))
-       (format (plist-get info :html-home/up-format)
+       (format (plist-get info :ipynb-home/up-format)
 	       (or link-up link-home)
 	       (or link-home link-up))))
    ;; Preamble.
-   (org-html--build-pre/postamble 'preamble info)
+   (org-ipynb--build-pre/postamble 'preamble info)
    ;; Document contents.
-   (let ((div (assq 'content (plist-get info :html-divs))))
+   (let ((div (assq 'content (plist-get info :ipynb-divs))))
      (format "<%s id=\"%s\">\n" (nth 1 div) (nth 2 div)))
    ;; Document title.
    (when (plist-get info :with-title)
      (let ((title (and (plist-get info :with-title)
 		       (plist-get info :title)))
 	   (subtitle (plist-get info :subtitle))
-	   (html5-fancy (org-html--html5-fancy-p info)))
+	   (html5-fancy (org-ipynb--html5-fancy-p info)))
        (when title
 	 (format
 	  (if html5-fancy
@@ -2113,34 +2113,34 @@ holding export options."
 	      (format
 	       (if html5-fancy
 		   "<p class=\"subtitle\">%s</p>\n"
-		 (concat "\n" (org-html-close-tag "br" nil info) "\n"
+		 (concat "\n" (org-ipynb-close-tag "br" nil info) "\n"
 			 "<span class=\"subtitle\">%s</span>\n"))
 	       (org-export-data subtitle info))
 	    "")))))
    contents
-   (format "</%s>\n" (nth 1 (assq 'content (plist-get info :html-divs))))
+   (format "</%s>\n" (nth 1 (assq 'content (plist-get info :ipynb-divs))))
    ;; Postamble.
-   (org-html--build-pre/postamble 'postamble info)
+   (org-ipynb--build-pre/postamble 'postamble info)
    ;; Possibly use the Klipse library live code blocks.
-   (when (plist-get info :html-klipsify-src)
-     (concat "<script>" (plist-get info :html-klipse-selection-script)
+   (when (plist-get info :ipynb-klipsify-src)
+     (concat "<script>" (plist-get info :ipynb-klipse-selection-script)
 	     "</script><script src=\""
-	     org-html-klipse-js
+	     org-ipynb-klipse-js
 	     "\"></script><link rel=\"stylesheet\" type=\"text/css\" href=\""
-	     org-html-klipse-css "\"/>"))
+	     org-ipynb-klipse-css "\"/>"))
    ;; Closing document.
    "</body>\n</html>"))
 
-(defun org-html--translate (s info)
+(defun org-ipynb--translate (s info)
   "Translate string S according to specified language.
 INFO is a plist used as a communication channel."
   (org-export-translate s :html info))
 
 ;;;; Anchor
 
-(defun org-html--anchor (id desc attributes info)
+(defun org-ipynb--anchor (id desc attributes info)
   "Format a HTML anchor."
-  (let* ((name (and (plist-get info :html-allow-name-attribute-in-anchors) id))
+  (let* ((name (and (plist-get info :ipynb-allow-name-attribute-in-anchors) id))
 	 (attributes (concat (and id (format " id=\"%s\"" id))
 			     (and name (format " name=\"%s\"" name))
 			     attributes)))
@@ -2148,18 +2148,18 @@ INFO is a plist used as a communication channel."
 
 ;;;; Todo
 
-(defun org-html--todo (todo info)
+(defun org-ipynb--todo (todo info)
   "Format TODO keywords into HTML."
   (when todo
     (format "<span class=\"%s %s%s\">%s</span>"
 	    (if (member todo org-done-keywords) "done" "todo")
-	    (or (plist-get info :html-todo-kwd-class-prefix) "")
-	    (org-html-fix-class-name todo)
+	    (or (plist-get info :ipynb-todo-kwd-class-prefix) "")
+	    (org-ipynb-fix-class-name todo)
 	    todo)))
 
 ;;;; Priority
 
-(defun org-html--priority (priority _info)
+(defun org-ipynb--priority (priority _info)
   "Format a priority into HTML.
 PRIORITY is the character code of the priority or nil.  INFO is
 a plist containing export options."
@@ -2167,7 +2167,7 @@ a plist containing export options."
 
 ;;;; Tags
 
-(defun org-html--tags (tags info)
+(defun org-ipynb--tags (tags info)
   "Format TAGS into HTML.
 INFO is a plist containing export options."
   (when tags
@@ -2175,29 +2175,29 @@ INFO is a plist containing export options."
 	    (mapconcat
 	     (lambda (tag)
 	       (format "<span class=\"%s\">%s</span>"
-		       (concat (plist-get info :html-tag-class-prefix)
-			       (org-html-fix-class-name tag))
+		       (concat (plist-get info :ipynb-tag-class-prefix)
+			       (org-ipynb-fix-class-name tag))
 		       tag))
 	     tags "&#xa0;"))))
 
 ;;;; Src Code
 
-(defun org-html-fontify-code (code lang)
+(defun org-ipynb-fontify-code (code lang)
   "Color CODE with htmlize library.
 CODE is a string representing the source code to colorize.  LANG
 is the language used for CODE, as a string, or nil."
   (when code
     (cond
      ;; No language.  Possibly an example block.
-     ((not lang) (org-html-encode-plain-text code))
+     ((not lang) (org-ipynb-encode-plain-text code))
      ;; Plain text explicitly set.
-     ((not org-html-htmlize-output-type) (org-html-encode-plain-text code))
+     ((not org-ipynb-htmlize-output-type) (org-ipynb-encode-plain-text code))
      ;; No htmlize library or an inferior version of htmlize.
      ((not (progn (require 'htmlize nil t)
 		  (fboundp 'htmlize-region-for-paste)))
       ;; Emit a warning.
       (message "Cannot fontify source block (htmlize.el >= 1.34 required)")
-      (org-html-encode-plain-text code))
+      (org-ipynb-encode-plain-text code))
      (t
       ;; Map language
       (setq lang (or (assoc-default lang org-src-lang-modes) lang))
@@ -2205,13 +2205,13 @@ is the language used for CODE, as a string, or nil."
 	(cond
 	 ;; Case 1: Language is not associated with any Emacs mode
 	 ((not (functionp lang-mode))
-	  (org-html-encode-plain-text code))
+	  (org-ipynb-encode-plain-text code))
 	 ;; Case 2: Default.  Fontify code.
 	 (t
 	  ;; htmlize
 	  (setq code
-		(let ((output-type org-html-htmlize-output-type)
-		      (font-prefix org-html-htmlize-font-prefix))
+		(let ((output-type org-ipynb-htmlize-output-type)
+		      (font-prefix org-ipynb-htmlize-font-prefix))
 		  (with-temp-buffer
 		    ;; Switch to language-specific mode.
 		    (funcall lang-mode)
@@ -2229,16 +2229,16 @@ is the language used for CODE, as a string, or nil."
 		    (org-src-mode)
 		    (set-buffer-modified-p nil)
 		    ;; Htmlize region.
-		    (let ((org-html-htmlize-output-type output-type)
-			  (org-html-htmlize-font-prefix font-prefix))
-		      (org-html-htmlize-region-for-paste
+		    (let ((org-ipynb-htmlize-output-type output-type)
+			  (org-ipynb-htmlize-font-prefix font-prefix))
+		      (org-ipynb-htmlize-region-for-paste
 		       (point-min) (point-max))))))
 	  ;; Strip any enclosing <pre></pre> tags.
 	  (let* ((beg (and (string-match "\\`<pre[^>]*>\n?" code) (match-end 0)))
 		 (end (and beg (string-match "</pre>\\'" code))))
 	    (if (and beg end) (substring code beg end) code)))))))))
 
-(defun org-html-do-format-code
+(defun org-ipynb-do-format-code
   (code &optional lang refs retain-labels num-start wrap-lines)
   "Format CODE string as source code.
 Optional arguments LANG, REFS, RETAIN-LABELS, NUM-START, WRAP-LINES
@@ -2254,7 +2254,7 @@ wrapped in code elements."
 	  (and num-start
 	       (format "%%%ds: "
 		       (length (number-to-string (+ code-length num-start))))))
-	 (code (org-html-fontify-code code lang)))
+	 (code (org-ipynb-fontify-code code lang)))
     (org-export-format-code
      code
      (lambda (loc line-num ref)
@@ -2268,7 +2268,7 @@ wrapped in code elements."
 	      (if wrap-lines
 		  (format "<code%s>%s</code>"
 			  (if num-start
-                              (format " data-ox-html-linenr=\"%s\"" line-num)
+                              (format " data-ox-ipynb-linenr=\"%s\"" line-num)
                             "")
 			  loc)
 		loc)
@@ -2280,7 +2280,7 @@ wrapped in code elements."
 		 ref loc)))
      num-start refs)))
 
-(defun org-html-format-code (element info)
+(defun org-ipynb-format-code (element info)
   "Format contents of ELEMENT as source code.
 ELEMENT is either an example or a source block.  INFO is a plist
 used as a communication channel."
@@ -2294,13 +2294,13 @@ used as a communication channel."
 	 ;; Does it have line numbers?
 	 (num-start (org-export-get-loc element info))
 	 ;; Should lines be wrapped in code elements?
-	 (wrap-lines (plist-get info :html-wrap-src-lines)))
-    (org-html-do-format-code code lang refs retain-labels num-start wrap-lines)))
+	 (wrap-lines (plist-get info :ipynb-wrap-src-lines)))
+    (org-ipynb-do-format-code code lang refs retain-labels num-start wrap-lines)))
 
 
 ;;; Tables of Contents
 
-(defun org-html-toc (depth info &optional scope)
+(defun org-ipynb-toc (depth info &optional scope)
   "Build a table of contents.
 DEPTH is an integer specifying the depth of the table.  INFO is
 a plist used as a communication channel.  Optional argument SCOPE
@@ -2308,27 +2308,27 @@ is an element defining the scope of the table.  Return the table
 of contents as a string, or nil if it is empty."
   (let ((toc-entries
 	 (mapcar (lambda (headline)
-		   (cons (org-html--format-toc-headline headline info)
+		   (cons (org-ipynb--format-toc-headline headline info)
 			 (org-export-get-relative-level headline info)))
 		 (org-export-collect-headlines info depth scope))))
     (when toc-entries
       (let ((toc (concat "<div id=\"text-table-of-contents\">"
-			 (org-html--toc-text toc-entries)
+			 (org-ipynb--toc-text toc-entries)
 			 "</div>\n")))
 	(if scope toc
-	  (let ((outer-tag (if (org-html--html5-fancy-p info)
+	  (let ((outer-tag (if (org-ipynb--html5-fancy-p info)
 			       "nav"
 			     "div")))
 	    (concat (format "<%s id=\"table-of-contents\">\n" outer-tag)
-		    (let ((top-level (plist-get info :html-toplevel-hlevel)))
+		    (let ((top-level (plist-get info :ipynb-toplevel-hlevel)))
 		      (format "<h%d>%s</h%d>\n"
 			      top-level
-			      (org-html--translate "Table of Contents" info)
+			      (org-ipynb--translate "Table of Contents" info)
 			      top-level))
 		    toc
 		    (format "</%s>\n" outer-tag))))))))
 
-(defun org-html--toc-text (toc-entries)
+(defun org-ipynb--toc-text (toc-entries)
   "Return innards of a table of contents, as a string.
 TOC-ENTRIES is an alist where key is an entry title, as a string,
 and value is its relative level, as an integer."
@@ -2344,15 +2344,15 @@ and value is its relative level, as an integer."
 		  (times (if (> cnt 0) (1- cnt) (- cnt))))
 	     (setq prev-level level)
 	     (concat
-	      (org-html--make-string
+	      (org-ipynb--make-string
 	       times (cond ((> cnt 0) "\n<ul>\n<li>")
 			   ((< cnt 0) "</li>\n</ul>\n")))
 	      (if (> cnt 0) "\n<ul>\n<li>" "</li>\n<li>")))
 	   headline)))
       toc-entries "")
-     (org-html--make-string (- prev-level start-level) "</li>\n</ul>\n"))))
+     (org-ipynb--make-string (- prev-level start-level) "</li>\n</ul>\n"))))
 
-(defun org-html--format-toc-headline (headline info)
+(defun org-ipynb--format-toc-headline (headline info)
   "Return an appropriate table of contents entry for HEADLINE.
 INFO is a plist used as a communication channel."
   (let* ((headline-number (org-export-get-headline-number headline info))
@@ -2378,25 +2378,25 @@ INFO is a plist used as a communication channel."
 		  (org-export-numbered-headline-p headline info)
 		  (concat (mapconcat #'number-to-string headline-number ".")
 			  ". "))
-	     (apply (plist-get info :html-format-headline-function)
+	     (apply (plist-get info :ipynb-format-headline-function)
 		    todo todo-type priority text tags :section-number nil)))))
 
-(defun org-html-list-of-listings (info)
+(defun org-ipynb-list-of-listings (info)
   "Build a list of listings.
 INFO is a plist used as a communication channel.  Return the list
 of listings as a string, or nil if it is empty."
   (let ((lol-entries (org-export-collect-listings info)))
     (when lol-entries
       (concat "<div id=\"list-of-listings\">\n"
-	      (let ((top-level (plist-get info :html-toplevel-hlevel)))
+	      (let ((top-level (plist-get info :ipynb-toplevel-hlevel)))
 		(format "<h%d>%s</h%d>\n"
 			top-level
-			(org-html--translate "List of Listings" info)
+			(org-ipynb--translate "List of Listings" info)
 			top-level))
 	      "<div id=\"text-list-of-listings\">\n<ul>\n"
 	      (let ((count 0)
 		    (initial-fmt (format "<span class=\"listing-number\">%s</span>"
-					 (org-html--translate "Listing %d:" info))))
+					 (org-ipynb--translate "Listing %d:" info))))
 		(mapconcat
 		 (lambda (entry)
 		   (let ((label (and (org-element-property :name entry)
@@ -2420,22 +2420,22 @@ of listings as a string, or nil if it is empty."
 		 lol-entries "\n"))
 	      "\n</ul>\n</div>\n</div>"))))
 
-(defun org-html-list-of-tables (info)
+(defun org-ipynb-list-of-tables (info)
   "Build a list of tables.
 INFO is a plist used as a communication channel.  Return the list
 of tables as a string, or nil if it is empty."
   (let ((lol-entries (org-export-collect-tables info)))
     (when lol-entries
       (concat "<div id=\"list-of-tables\">\n"
-	      (let ((top-level (plist-get info :html-toplevel-hlevel)))
+	      (let ((top-level (plist-get info :ipynb-toplevel-hlevel)))
 		(format "<h%d>%s</h%d>\n"
 			top-level
-			(org-html--translate "List of Tables" info)
+			(org-ipynb--translate "List of Tables" info)
 			top-level))
 	      "<div id=\"text-list-of-tables\">\n<ul>\n"
 	      (let ((count 0)
 		    (initial-fmt (format "<span class=\"table-number\">%s</span>"
-					 (org-html--translate "Table %d:" info))))
+					 (org-ipynb--translate "Table %d:" info))))
 		(mapconcat
 		 (lambda (entry)
 		   (let ((label (and (org-element-property :name entry)
@@ -2464,16 +2464,16 @@ of tables as a string, or nil if it is empty."
 
 ;;;; Bold
 
-(defun org-html-bold (_bold contents info)
+(defun org-ipynb-bold (_bold contents info)
   "Transcode BOLD from Org to HTML.
 CONTENTS is the text with bold markup.  INFO is a plist holding
 contextual information."
-  (format (or (cdr (assq 'bold (plist-get info :html-text-markup-alist))) "%s")
+  (format (or (cdr (assq 'bold (plist-get info :ipynb-text-markup-alist))) "%s")
 	  contents))
 
 ;;;; Center Block
 
-(defun org-html-center-block (_center-block contents _info)
+(defun org-ipynb-center-block (_center-block contents _info)
   "Transcode a CENTER-BLOCK element from Org to HTML.
 CONTENTS holds the contents of the block.  INFO is a plist
 holding contextual information."
@@ -2481,7 +2481,7 @@ holding contextual information."
 
 ;;;; Clock
 
-(defun org-html-clock (clock _contents _info)
+(defun org-ipynb-clock (clock _contents _info)
   "Transcode a CLOCK element from Org to HTML.
 CONTENTS is nil.  INFO is a plist used as a communication
 channel."
@@ -2497,26 +2497,26 @@ channel."
 
 ;;;; Code
 
-(defun org-html-code (code _contents info)
+(defun org-ipynb-code (code _contents info)
   "Transcode CODE from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
-  (format (or (cdr (assq 'code (plist-get info :html-text-markup-alist))) "%s")
-	  (org-html-encode-plain-text (org-element-property :value code))))
+  (format (or (cdr (assq 'code (plist-get info :ipynb-text-markup-alist))) "%s")
+	  (org-ipynb-encode-plain-text (org-element-property :value code))))
 
 ;;;; Drawer
 
-(defun org-html-drawer (drawer contents info)
+(defun org-ipynb-drawer (drawer contents info)
   "Transcode a DRAWER element from Org to HTML.
 CONTENTS holds the contents of the block.  INFO is a plist
 holding contextual information."
-  (funcall (plist-get info :html-format-drawer-function)
+  (funcall (plist-get info :ipynb-format-drawer-function)
 	   (org-element-property :drawer-name drawer)
 	   contents))
 
 ;;;; Dynamic Block
 
-(defun org-html-dynamic-block (_dynamic-block contents _info)
+(defun org-ipynb-dynamic-block (_dynamic-block contents _info)
   "Transcode a DYNAMIC-BLOCK element from Org to HTML.
 CONTENTS holds the contents of the block.  INFO is a plist
 holding contextual information.  See `org-export-data'."
@@ -2524,7 +2524,7 @@ holding contextual information.  See `org-export-data'."
 
 ;;;; Entity
 
-(defun org-html-entity (entity _contents _info)
+(defun org-ipynb-entity (entity _contents _info)
   "Transcode an ENTITY object from Org to HTML.
 CONTENTS are the definition itself.  INFO is a plist holding
 contextual information."
@@ -2532,25 +2532,25 @@ contextual information."
 
 ;;;; Example Block
 
-(defun org-html-example-block (example-block _contents info)
+(defun org-ipynb-example-block (example-block _contents info)
   "Transcode a EXAMPLE-BLOCK element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
   (let ((attributes (org-export-read-attribute :attr_html example-block)))
     (if (plist-get attributes :textarea)
-	(org-html--textarea-block example-block)
+	(org-ipynb--textarea-block example-block)
       (format "<pre class=\"example\"%s>\n%s</pre>"
 	      (let* ((name (org-element-property :name example-block))
-		     (a (org-html--make-attribute-string
+		     (a (org-ipynb--make-attribute-string
 			 (if (or (not name) (plist-member attributes :id))
 			     attributes
 			   (plist-put attributes :id name)))))
 		(if (org-string-nw-p a) (concat " " a) ""))
-	      (org-html-format-code example-block info)))))
+	      (org-ipynb-format-code example-block info)))))
 
 ;;;; Export Snippet
 
-(defun org-html-export-snippet (export-snippet _contents _info)
+(defun org-ipynb-export-snippet (export-snippet _contents _info)
   "Transcode a EXPORT-SNIPPET object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
@@ -2559,7 +2559,7 @@ information."
 
 ;;;; Export Block
 
-(defun org-html-export-block (export-block _contents _info)
+(defun org-ipynb-export-block (export-block _contents _info)
   "Transcode a EXPORT-BLOCK element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (when (string= (org-element-property :type export-block) "HTML")
@@ -2567,24 +2567,24 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
 
 ;;;; Fixed Width
 
-(defun org-html-fixed-width (fixed-width _contents _info)
+(defun org-ipynb-fixed-width (fixed-width _contents _info)
   "Transcode a FIXED-WIDTH element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (format "<pre class=\"example\">\n%s</pre>"
-	  (org-html-do-format-code
+	  (org-ipynb-do-format-code
 	   (org-remove-indentation
 	    (org-element-property :value fixed-width)))))
 
 ;;;; Footnote Reference
 
-(defun org-html-footnote-reference (footnote-reference _contents info)
+(defun org-ipynb-footnote-reference (footnote-reference _contents info)
   "Transcode a FOOTNOTE-REFERENCE element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (concat
    ;; Insert separator between two footnotes in a row.
    (let ((prev (org-export-get-previous-element footnote-reference info)))
      (when (eq (org-element-type prev) 'footnote-reference)
-       (plist-get info :html-footnote-separator)))
+       (plist-get info :ipynb-footnote-separator)))
    (let* ((n (org-export-get-footnote-number footnote-reference info))
 	  (id (format "fnr.%d%s"
 		      n
@@ -2593,13 +2593,13 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
 			  ""
 			".100"))))
      (format
-      (plist-get info :html-footnote-format)
-      (org-html--anchor
+      (plist-get info :ipynb-footnote-format)
+      (org-ipynb--anchor
        id n (format " class=\"footref\" href=\"#fn.%d\"" n) info)))))
 
 ;;;; Headline
 
-(defun org-html-headline (headline contents info)
+(defun org-ipynb-headline (headline contents info)
   "Transcode a HEADLINE element from Org to HTML.
 CONTENTS holds the contents of the headline.  INFO is a plist
 holding contextual information."
@@ -2607,7 +2607,7 @@ holding contextual information."
     (let* ((numberedp (org-export-numbered-headline-p headline info))
            (numbers (org-export-get-headline-number headline info))
            (level (+ (org-export-get-relative-level headline info)
-                     (1- (plist-get info :html-toplevel-hlevel))))
+                     (1- (plist-get info :ipynb-toplevel-hlevel))))
            (todo (and (plist-get info :with-todo-keywords)
                       (let ((todo (org-element-property :todo-keyword headline)))
                         (and todo (org-export-data todo info)))))
@@ -2617,28 +2617,28 @@ holding contextual information."
            (text (org-export-data (org-element-property :title headline) info))
            (tags (and (plist-get info :with-tags)
                       (org-export-get-tags headline info)))
-           (full-text (funcall (plist-get info :html-format-headline-function)
+           (full-text (funcall (plist-get info :ipynb-format-headline-function)
                                todo todo-type priority text tags info))
            (contents (or contents ""))
 	   (id (or (org-element-property :CUSTOM_ID headline)
 		   (org-export-get-reference headline info)))
 	   (formatted-text
-	    (if (plist-get info :html-self-link-headlines)
+	    (if (plist-get info :ipynb-self-link-headlines)
 		(format "<a href=\"#%s\">%s</a>" id full-text)
 	      full-text)))
       (if (org-export-low-level-p headline info)
           ;; This is a deep sub-tree: export it as a list item.
-          (let* ((html-type (if numberedp "ol" "ul")))
+          (let* ((ipynb-type (if numberedp "ol" "ul")))
 	    (concat
 	     (and (org-export-first-sibling-p headline info)
 		  (apply #'format "<%s class=\"org-%s\">\n"
-			 (make-list 2 html-type)))
-	     (org-html-format-list-item
+			 (make-list 2 ipynb-type)))
+	     (org-ipynb-format-list-item
 	      contents (if numberedp 'ordered 'unordered)
 	      nil info nil
-	      (concat (org-html--anchor id nil nil info) formatted-text)) "\n"
+	      (concat (org-ipynb--anchor id nil nil info) formatted-text)) "\n"
 	     (and (org-export-last-sibling-p headline info)
-		  (format "</%s>\n" html-type))))
+		  (format "</%s>\n" ipynb-type))))
 	;; Standard headline.  Export it as a section.
         (let ((extra-class
 	       (org-element-property :HTML_CONTAINER_CLASS headline))
@@ -2646,7 +2646,7 @@ holding contextual information."
 	       (org-element-property :HTML_HEADLINE_CLASS headline))
               (first-content (car (org-element-contents headline))))
           (format "<%s id=\"%s\" class=\"%s\">%s%s</%s>\n"
-                  (org-html--container headline info)
+                  (org-ipynb--container headline info)
                   (concat "outline-container-"
 			  (org-export-get-reference headline info))
                   (concat (format "outline-%d" level)
@@ -2670,42 +2670,42 @@ holding contextual information."
                   ;; class="outline-...> which is needed by
                   ;; `org-info.js'.
                   (if (eq (org-element-type first-content) 'section) contents
-                    (concat (org-html-section first-content "" info) contents))
-                  (org-html--container headline info)))))))
+                    (concat (org-ipynb-section first-content "" info) contents))
+                  (org-ipynb--container headline info)))))))
 
-(defun org-html-format-headline-default-function
+(defun org-ipynb-format-headline-default-function
     (todo _todo-type priority text tags info)
   "Default format function for a headline.
-See `org-html-format-headline-function' for details."
-  (let ((todo (org-html--todo todo info))
-	(priority (org-html--priority priority info))
-	(tags (org-html--tags tags info)))
+See `org-ipynb-format-headline-function' for details."
+  (let ((todo (org-ipynb--todo todo info))
+	(priority (org-ipynb--priority priority info))
+	(tags (org-ipynb--tags tags info)))
     (concat todo (and todo " ")
 	    priority (and priority " ")
 	    text
 	    (and tags "&#xa0;&#xa0;&#xa0;") tags)))
 
-(defun org-html--container (headline info)
+(defun org-ipynb--container (headline info)
   (or (org-element-property :HTML_CONTAINER headline)
       (if (= 1 (org-export-get-relative-level headline info))
-	  (plist-get info :html-container)
+	  (plist-get info :ipynb-container)
 	"div")))
 
 ;;;; Horizontal Rule
 
-(defun org-html-horizontal-rule (_horizontal-rule _contents info)
+(defun org-ipynb-horizontal-rule (_horizontal-rule _contents info)
   "Transcode an HORIZONTAL-RULE  object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
-  (org-html-close-tag "hr" nil info))
+  (org-ipynb-close-tag "hr" nil info))
 
 ;;;; Inline Src Block
 
-(defun org-html-inline-src-block (inline-src-block _contents info)
+(defun org-ipynb-inline-src-block (inline-src-block _contents info)
   "Transcode an INLINE-SRC-BLOCK element from Org to HTML.
 CONTENTS holds the contents of the item.  INFO is a plist holding
 contextual information."
   (let* ((lang (org-element-property :language inline-src-block))
-	 (code (org-html-fontify-code
+	 (code (org-ipynb-fontify-code
 		(org-element-property :value inline-src-block)
 		lang))
 	 (label
@@ -2716,7 +2716,7 @@ contextual information."
 
 ;;;; Inlinetask
 
-(defun org-html-inlinetask (inlinetask contents info)
+(defun org-ipynb-inlinetask (inlinetask contents info)
   "Transcode an INLINETASK element from Org to HTML.
 CONTENTS holds the contents of the block.  INFO is a plist
 holding contextual information."
@@ -2729,49 +2729,49 @@ holding contextual information."
 	 (text (org-export-data (org-element-property :title inlinetask) info))
 	 (tags (and (plist-get info :with-tags)
 		    (org-export-get-tags inlinetask info))))
-    (funcall (plist-get info :html-format-inlinetask-function)
+    (funcall (plist-get info :ipynb-format-inlinetask-function)
 	     todo todo-type priority text tags contents info)))
 
-(defun org-html-format-inlinetask-default-function
+(defun org-ipynb-format-inlinetask-default-function
   (todo todo-type priority text tags contents info)
   "Default format function for inlinetasks.
-See `org-html-format-inlinetask-function' for details."
+See `org-ipynb-format-inlinetask-function' for details."
   (format "<div class=\"inlinetask\">\n<b>%s</b>%s\n%s</div>"
-	  (org-html-format-headline-default-function
+	  (org-ipynb-format-headline-default-function
 	   todo todo-type priority text tags info)
-	  (org-html-close-tag "br" nil info)
+	  (org-ipynb-close-tag "br" nil info)
 	  contents))
 
 ;;;; Italic
 
-(defun org-html-italic (_italic contents info)
+(defun org-ipynb-italic (_italic contents info)
   "Transcode ITALIC from Org to HTML.
 CONTENTS is the text with italic markup.  INFO is a plist holding
 contextual information."
   (format
-   (or (cdr (assq 'italic (plist-get info :html-text-markup-alist))) "%s")
+   (or (cdr (assq 'italic (plist-get info :ipynb-text-markup-alist))) "%s")
    contents))
 
 ;;;; Item
 
-(defun org-html-checkbox (checkbox info)
+(defun org-ipynb-checkbox (checkbox info)
   "Format CHECKBOX into HTML.
 INFO is a plist holding contextual information.  See
-`org-html-checkbox-type' for customization options."
+`org-ipynb-checkbox-type' for customization options."
   (cdr (assq checkbox
-	     (cdr (assq (plist-get info :html-checkbox-type)
-			org-html-checkbox-types)))))
+	     (cdr (assq (plist-get info :ipynb-checkbox-type)
+			org-ipynb-checkbox-types)))))
 
-(defun org-html-format-list-item (contents type checkbox info
+(defun org-ipynb-format-list-item (contents type checkbox info
 					   &optional term-counter-id
 					   headline)
   "Format a list item into HTML."
   (let ((class (if checkbox
 		   (format " class=\"%s\""
 			   (symbol-name checkbox)) ""))
-	(checkbox (concat (org-html-checkbox checkbox info)
+	(checkbox (concat (org-ipynb-checkbox checkbox info)
 			  (and checkbox " ")))
-	(br (org-html-close-tag "br" nil info))
+	(br (org-ipynb-close-tag "br" nil info))
 	(extra-newline (if (and (org-string-nw-p contents) headline) "\n" "")))
     (concat
      (pcase type
@@ -2803,7 +2803,7 @@ INFO is a plist holding contextual information.  See
        (`unordered "</li>")
        (`descriptive "</dd>")))))
 
-(defun org-html-item (item contents info)
+(defun org-ipynb-item (item contents info)
   "Transcode an ITEM element from Org to HTML.
 CONTENTS holds the contents of the item.  INFO is a plist holding
 contextual information."
@@ -2813,12 +2813,12 @@ contextual information."
 	 (checkbox (org-element-property :checkbox item))
 	 (tag (let ((tag (org-element-property :tag item)))
 		(and tag (org-export-data tag info)))))
-    (org-html-format-list-item
+    (org-ipynb-format-list-item
      contents type checkbox info (or tag counter))))
 
 ;;;; Keyword
 
-(defun org-html-keyword (keyword _contents info)
+(defun org-ipynb-keyword (keyword _contents info)
   "Transcode a KEYWORD element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (let ((key (org-element-property :key keyword))
@@ -2837,18 +2837,18 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
 		   (org-export-resolve-link
 		    (org-strip-quotes (match-string 1 value)) info))
 		  ((string-match-p "\\<local\\>" value) keyword)))) ;local
-	    (org-html-toc depth info scope)))
-	 ((string= "listings" value) (org-html-list-of-listings info))
-	 ((string= "tables" value) (org-html-list-of-tables info))))))))
+	    (org-ipynb-toc depth info scope)))
+	 ((string= "listings" value) (org-ipynb-list-of-listings info))
+	 ((string= "tables" value) (org-ipynb-list-of-tables info))))))))
 
 ;;;; Latex Environment
 
-(defun org-html-format-latex (latex-frag processing-type info)
+(defun org-ipynb-format-latex (latex-frag processing-type info)
   "Format a LaTeX fragment LATEX-FRAG into HTML.
 PROCESSING-TYPE designates the tool used for conversion.  It can
 be `mathjax', `verbatim', nil, t or symbols in
 `org-preview-latex-process-alist', e.g., `dvipng', `dvisvgm' or
-`imagemagick'.  See `org-html-with-latex' for more information.
+`imagemagick'.  See `org-ipynb-with-latex' for more information.
 INFO is a plist containing export properties."
   (let ((cache-relpath "") (cache-dir ""))
     (unless (eq processing-type 'mathjax)
@@ -2878,7 +2878,7 @@ INFO is a plist containing export properties."
 			"Creating LaTeX Image..." nil processing-type)
       (buffer-string))))
 
-(defun org-html--wrap-latex-environment (contents _ &optional caption label)
+(defun org-ipynb--wrap-latex-environment (contents _ &optional caption label)
   "Wrap CONTENTS string within appropriate environment for equations.
 When optional arguments CAPTION and LABEL are given, use them for
 caption and \"id\" attribute."
@@ -2892,22 +2892,22 @@ caption and \"id\" attribute."
             (format "\n<span class=\"equation-label\">\n%s\n</span>"
                     caption))))
 
-(defun org-html--math-environment-p (element &optional _)
+(defun org-ipynb--math-environment-p (element &optional _)
   "Non-nil when ELEMENT is a LaTeX math environment.
 Math environments match the regular expression defined in
 `org-latex-math-environments-re'.  This function is meant to be
 used as a predicate for `org-export-get-ordinal' or a value to
-`org-html-standalone-image-predicate'."
+`org-ipynb-standalone-image-predicate'."
   (string-match-p org-latex-math-environments-re
                   (org-element-property :value element)))
 
-(defun org-html--latex-environment-numbered-p (element)
+(defun org-ipynb--latex-environment-numbered-p (element)
   "Non-nil when ELEMENT contains a numbered LaTeX math environment.
 Starred and \"displaymath\" environments are not numbered."
   (not (string-match-p "\\`[ \t]*\\\\begin{\\(.*\\*\\|displaymath\\)}"
 		       (org-element-property :value element))))
 
-(defun org-html--unlabel-latex-environment (latex-frag)
+(defun org-ipynb--unlabel-latex-environment (latex-frag)
   "Change environment in LATEX-FRAG string to an unnumbered one.
 For instance, change an 'equation' environment to 'equation*'."
   (replace-regexp-in-string
@@ -2918,7 +2918,7 @@ For instance, change an 'equation' environment to 'equation*'."
 			     latex-frag nil nil 1)
    nil nil 1))
 
-(defun org-html-latex-environment (latex-environment _contents info)
+(defun org-ipynb-latex-environment (latex-environment _contents info)
   "Transcode a LATEX-ENVIRONMENT element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (let ((processing-type (plist-get info :with-latex))
@@ -2927,16 +2927,16 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
         (attributes (org-export-read-attribute :attr_html latex-environment))
         (label (and (org-element-property :name latex-environment)
                     (org-export-get-reference latex-environment info)))
-        (caption (and (org-html--latex-environment-numbered-p latex-environment)
+        (caption (and (org-ipynb--latex-environment-numbered-p latex-environment)
 		      (number-to-string
 		       (org-export-get-ordinal
 			latex-environment info nil
 			(lambda (l _)
-			  (and (org-html--math-environment-p l)
-			       (org-html--latex-environment-numbered-p l))))))))
+			  (and (org-ipynb--math-environment-p l)
+			       (org-ipynb--latex-environment-numbered-p l))))))))
     (cond
      ((memq processing-type '(t mathjax))
-      (org-html-format-latex
+      (org-ipynb-format-latex
        (if (org-string-nw-p label)
 	   (replace-regexp-in-string "\\`.*"
 				     (format "\\&\n\\\\label{%s}" label)
@@ -2945,54 +2945,54 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
        'mathjax info))
      ((assq processing-type org-preview-latex-process-alist)
       (let ((formula-link
-             (org-html-format-latex
-              (org-html--unlabel-latex-environment latex-frag)
+             (org-ipynb-format-latex
+              (org-ipynb--unlabel-latex-environment latex-frag)
               processing-type info)))
         (when (and formula-link (string-match "file:\\([^]]*\\)" formula-link))
-          (org-html--wrap-latex-environment
-           (org-html--format-image
+          (org-ipynb--wrap-latex-environment
+           (org-ipynb--format-image
             (match-string 1 formula-link) attributes info)
            info caption label))))
-     (t (org-html--wrap-latex-environment latex-frag info caption label)))))
+     (t (org-ipynb--wrap-latex-environment latex-frag info caption label)))))
 
 ;;;; Latex Fragment
 
-(defun org-html-latex-fragment (latex-fragment _contents info)
+(defun org-ipynb-latex-fragment (latex-fragment _contents info)
   "Transcode a LATEX-FRAGMENT object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (let ((latex-frag (org-element-property :value latex-fragment))
 	(processing-type (plist-get info :with-latex)))
     (cond
      ((memq processing-type '(t mathjax))
-      (org-html-format-latex latex-frag 'mathjax info))
+      (org-ipynb-format-latex latex-frag 'mathjax info))
      ((assq processing-type org-preview-latex-process-alist)
       (let ((formula-link
-	     (org-html-format-latex latex-frag processing-type info)))
+	     (org-ipynb-format-latex latex-frag processing-type info)))
 	(when (and formula-link (string-match "file:\\([^]]*\\)" formula-link))
-	  (org-html--format-image (match-string 1 formula-link) nil info))))
+	  (org-ipynb--format-image (match-string 1 formula-link) nil info))))
      (t latex-frag))))
 
 ;;;; Line Break
 
-(defun org-html-line-break (_line-break _contents info)
+(defun org-ipynb-line-break (_line-break _contents info)
   "Transcode a LINE-BREAK object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
-  (concat (org-html-close-tag "br" nil info) "\n"))
+  (concat (org-ipynb-close-tag "br" nil info) "\n"))
 
 ;;;; Link
 
-(defun org-html-image-link-filter (data _backend info)
-  (org-export-insert-image-links data info org-html-inline-image-rules))
+(defun org-ipynb-image-link-filter (data _backend info)
+  (org-export-insert-image-links data info org-ipynb-inline-image-rules))
 
-(defun org-html-inline-image-p (link info)
+(defun org-ipynb-inline-image-p (link info)
   "Non-nil when LINK is meant to appear as an image.
 INFO is a plist used as a communication channel.  LINK is an
 inline image when it has no description and targets an image
-file (see `org-html-inline-image-rules' for more information), or
+file (see `org-ipynb-inline-image-rules' for more information), or
 if its description is a single link targeting an image file."
   (if (not (org-element-contents link))
       (org-export-inline-image-p
-       link (plist-get info :html-inline-image-rules))
+       link (plist-get info :ipynb-inline-image-rules))
     (not
      (let ((link-count 0))
        (org-element-map (org-element-contents link)
@@ -3003,12 +3003,12 @@ if its description is a single link targeting an image file."
 	     (`link (if (= link-count 1) t
 		      (cl-incf link-count)
 		      (not (org-export-inline-image-p
-			    obj (plist-get info :html-inline-image-rules)))))
+			    obj (plist-get info :ipynb-inline-image-rules)))))
 	     (_ t)))
          info t)))))
 
-(defvar org-html-standalone-image-predicate)
-(defun org-html-standalone-image-p (element info)
+(defvar org-ipynb-standalone-image-predicate)
+(defun org-ipynb-standalone-image-p (element info)
   "Non-nil if ELEMENT is a standalone image.
 
 INFO is a plist holding contextual information.
@@ -3021,7 +3021,7 @@ An element or object is a standalone image when
   - its type is `link' and its containing paragraph has no other
     content save white spaces.
 
-Bind `org-html-standalone-image-predicate' to constrain paragraph
+Bind `org-ipynb-standalone-image-predicate' to constrain paragraph
 further.  For example, to check for only captioned standalone
 images, set it to:
 
@@ -3030,8 +3030,8 @@ images, set it to:
 		     (`paragraph element)
 		     (`link (org-export-get-parent element)))))
     (and (eq (org-element-type paragraph) 'paragraph)
-	 (or (not (fboundp 'org-html-standalone-image-predicate))
-	     (funcall org-html-standalone-image-predicate paragraph))
+	 (or (not (fboundp 'org-ipynb-standalone-image-predicate))
+	     (funcall org-ipynb-standalone-image-predicate paragraph))
 	 (catch 'exit
 	   (let ((link-count 0))
 	     (org-element-map (org-element-contents paragraph)
@@ -3040,27 +3040,27 @@ images, set it to:
 		 (when (pcase (org-element-type obj)
 			 (`plain-text (org-string-nw-p obj))
 			 (`link (or (> (cl-incf link-count) 1)
-				    (not (org-html-inline-image-p obj info))))
+				    (not (org-ipynb-inline-image-p obj info))))
 			 (_ t))
 		   (throw 'exit nil)))
 	       info nil 'link)
 	     (= link-count 1))))))
 
-(defun org-html-link (link desc info)
+(defun org-ipynb-link (link desc info)
   "Transcode a LINK object from Org to HTML.
 DESC is the description part of the link, or the empty string.
 INFO is a plist holding contextual information.  See
 `org-export-data'."
-  (let* ((link-org-files-as-html-maybe
+  (let* ((link-org-files-as-ipynb-maybe
 	  (lambda (raw-path info)
 	    ;; Treat links to `file.org' as links to `file.html', if
-	    ;; needed.  See `org-html-link-org-files-as-html'.
+	    ;; needed.  See `org-ipynb-link-org-files-as-html'.
 	    (cond
-	     ((and (plist-get info :html-link-org-files-as-html)
+	     ((and (plist-get info :ipynb-link-org-files-as-html)
 		   (string= ".org"
 			    (downcase (file-name-extension raw-path "."))))
 	      (concat (file-name-sans-extension raw-path) "."
-		      (plist-get info :html-extension)))
+		      (plist-get info :ipynb-extension)))
 	     (t raw-path))))
 	 (type (org-element-property :type link))
 	 (raw-path (org-element-property :path link))
@@ -3077,16 +3077,16 @@ INFO is a plist holding contextual information.  See
 	    (setq raw-path
 		  (org-export-file-uri
 		   (org-publish-file-relative-name raw-path info)))
-	    ;; Possibly append `:html-link-home' to relative file
+	    ;; Possibly append `:ipynb-link-home' to relative file
 	    ;; name.
-	    (let ((home (and (plist-get info :html-link-home)
-			     (org-trim (plist-get info :html-link-home)))))
+	    (let ((home (and (plist-get info :ipynb-link-home)
+			     (org-trim (plist-get info :ipynb-link-home)))))
 	      (when (and home
-			 (plist-get info :html-link-use-abs-url)
+			 (plist-get info :ipynb-link-use-abs-url)
 			 (file-name-absolute-p raw-path))
 		(setq raw-path (concat (file-name-as-directory home) raw-path))))
 	    ;; Maybe turn ".org" into ".html".
-	    (setq raw-path (funcall link-org-files-as-html-maybe raw-path info))
+	    (setq raw-path (funcall link-org-files-as-ipynb-maybe raw-path info))
 	    ;; Add search option, if any.  A search option can be
 	    ;; relative to a custom-id, a headline title, a name or
 	    ;; a target.
@@ -3106,27 +3106,27 @@ INFO is a plist holding contextual information.  See
 	   (let* ((parent (org-export-get-parent-element link))
 		  (link (let ((container (org-export-get-parent link)))
 			  (if (and (eq 'link (org-element-type container))
-				   (org-html-inline-image-p link info))
+				   (org-ipynb-inline-image-p link info))
 			      container
 			    link))))
 	     (and (eq link (org-element-map parent 'link #'identity info t))
 		  (org-export-read-attribute :attr_html parent)))
 	   ;; Also add attributes from link itself.  Currently, those
-	   ;; need to be added programmatically before `org-html-link'
+	   ;; need to be added programmatically before `org-ipynb-link'
 	   ;; is invoked, for example, by backends building upon HTML
 	   ;; export.
 	   (org-export-read-attribute :attr_html link)))
 	 (attributes
-	  (let ((attr (org-html--make-attribute-string attributes-plist)))
+	  (let ((attr (org-ipynb--make-attribute-string attributes-plist)))
 	    (if (org-string-nw-p attr) (concat " " attr) ""))))
     (cond
      ;; Link type is handled by a special function.
      ((org-export-custom-protocol-maybe link desc 'html))
      ;; Image file.
-     ((and (plist-get info :html-inline-images)
+     ((and (plist-get info :ipynb-inline-images)
 	   (org-export-inline-image-p
-	    link (plist-get info :html-inline-image-rules)))
-      (org-html--format-image path attributes-plist info))
+	    link (plist-get info :ipynb-inline-image-rules)))
+      (org-ipynb--format-image path attributes-plist info))
      ;; Radio target: Transcode target's contents and use them as
      ;; link's description.
      ((string= type "radio")
@@ -3147,7 +3147,7 @@ INFO is a plist holding contextual information.  See
 	  (`plain-text
 	   (let ((fragment (concat "ID-" path))
 		 ;; Treat links to ".org" files as ".html", if needed.
-		 (path (funcall link-org-files-as-html-maybe
+		 (path (funcall link-org-files-as-ipynb-maybe
 				destination info)))
 	     (format "<a href=\"%s#%s\"%s>%s</a>"
 		     path fragment attributes (or desc destination))))
@@ -3189,19 +3189,19 @@ INFO is a plist holding contextual information.  See
                (format "\\eqref{%s}"
                        (org-export-get-reference destination info))
              (let* ((ref (org-export-get-reference destination info))
-                    (org-html-standalone-image-predicate
-                     #'org-html--has-caption-p)
+                    (org-ipynb-standalone-image-predicate
+                     #'org-ipynb--has-caption-p)
                     (counter-predicate
                      (if (eq 'latex-environment (org-element-type destination))
-                         #'org-html--math-environment-p
-                       #'org-html--has-caption-p))
+                         #'org-ipynb--math-environment-p
+                       #'org-ipynb--has-caption-p))
                     (number
 		     (cond
 		      (desc nil)
-		      ((org-html-standalone-image-p destination info)
+		      ((org-ipynb-standalone-image-p destination info)
 		       (org-export-get-ordinal
 			(org-element-map destination 'link #'identity info t)
-			info 'link 'org-html-standalone-image-p))
+			info 'link 'org-ipynb-standalone-image-p))
 		      (t (org-export-get-ordinal
 			  destination info nil counter-predicate))))
                     (desc
@@ -3213,7 +3213,7 @@ INFO is a plist holding contextual information.  See
      ;; Coderef: replace link with the reference name or the
      ;; equivalent line number.
      ((string= type "coderef")
-      (let ((fragment (concat "coderef-" (org-html-encode-plain-text path))))
+      (let ((fragment (concat "coderef-" (org-ipynb-encode-plain-text path))))
 	(format "<a href=\"#%s\" %s%s>%s</a>"
 		fragment
 		(format "class=\"coderef\" onmouseover=\"CodeHighlightOn(this, \
@@ -3225,12 +3225,12 @@ INFO is a plist holding contextual information.  See
      ;; External link with a description part.
      ((and path desc)
       (format "<a href=\"%s\"%s>%s</a>"
-	      (org-html-encode-plain-text path)
+	      (org-ipynb-encode-plain-text path)
 	      attributes
 	      desc))
      ;; External link without a description part.
      (path
-      (let ((path (org-html-encode-plain-text path)))
+      (let ((path (org-ipynb-encode-plain-text path)))
 	(format "<a href=\"%s\"%s>%s</a>" path attributes path)))
      ;; No path, only description.  Try to do something useful.
      (t
@@ -3238,7 +3238,7 @@ INFO is a plist holding contextual information.  See
 
 ;;;; Node Property
 
-(defun org-html-node-property (node-property _contents _info)
+(defun org-ipynb-node-property (node-property _contents _info)
   "Transcode a NODE-PROPERTY element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
@@ -3249,7 +3249,7 @@ information."
 
 ;;;; Paragraph
 
-(defun org-html-paragraph (paragraph contents info)
+(defun org-ipynb-paragraph (paragraph contents info)
   "Transcode a PARAGRAPH element from Org to HTML.
 CONTENTS is the contents of the paragraph, as a string.  INFO is
 the plist used as a communication channel."
@@ -3257,7 +3257,7 @@ the plist used as a communication channel."
 	 (parent-type (org-element-type parent))
 	 (style '((footnote-definition " class=\"footpara\"")
 		  (org-data " class=\"footpara\"")))
-	 (attributes (org-html--make-attribute-string
+	 (attributes (org-ipynb--make-attribute-string
 		      (org-export-read-attribute :attr_html paragraph)))
 	 (extra (or (cadr (assq parent-type style)) "")))
     (cond
@@ -3269,25 +3269,25 @@ the plist used as a communication channel."
       ;; First paragraph in an item has no tag if it is alone or
       ;; followed, at most, by a sub-list.
       contents)
-     ((org-html-standalone-image-p paragraph info)
+     ((org-ipynb-standalone-image-p paragraph info)
       ;; Standalone image.
       (let ((caption
 	     (let ((raw (org-export-data
 			 (org-export-get-caption paragraph) info))
-		   (org-html-standalone-image-predicate
-		    #'org-html--has-caption-p))
+		   (org-ipynb-standalone-image-predicate
+		    #'org-ipynb--has-caption-p))
 	       (if (not (org-string-nw-p raw)) raw
 		 (concat "<span class=\"figure-number\">"
-			 (format (org-html--translate "Figure %d:" info)
+			 (format (org-ipynb--translate "Figure %d:" info)
 				 (org-export-get-ordinal
 				  (org-element-map paragraph 'link
 				    #'identity info t)
-				  info nil #'org-html-standalone-image-p))
+				  info nil #'org-ipynb-standalone-image-p))
 			 " </span>"
 			 raw))))
 	    (label (and (org-element-property :name paragraph)
 			(org-export-get-reference paragraph info))))
-	(org-html--wrap-image contents info caption label)))
+	(org-ipynb--wrap-image contents info caption label)))
      ;; Regular paragraph.
      (t (format "<p%s%s>\n%s</p>"
 		(if (org-string-nw-p attributes)
@@ -3296,7 +3296,7 @@ the plist used as a communication channel."
 
 ;;;; Plain List
 
-(defun org-html-plain-list (plain-list contents _info)
+(defun org-ipynb-plain-list (plain-list contents _info)
   "Transcode a PLAIN-LIST element from Org to HTML.
 CONTENTS is the contents of the list.  INFO is a plist holding
 contextual information."
@@ -3309,7 +3309,7 @@ contextual information."
 	 (attributes (org-export-read-attribute :attr_html plain-list)))
     (format "<%s %s>\n%s</%s>"
 	    type
-	    (org-html--make-attribute-string
+	    (org-ipynb--make-attribute-string
 	     (plist-put attributes :class
 			(org-trim
 			 (mapconcat #'identity
@@ -3320,46 +3320,46 @@ contextual information."
 
 ;;;; Plain Text
 
-(defun org-html-convert-special-strings (string)
+(defun org-ipynb-convert-special-strings (string)
   "Convert special characters in STRING to HTML."
-  (dolist (a org-html-special-string-regexps string)
+  (dolist (a org-ipynb-special-string-regexps string)
     (let ((re (car a))
 	  (rpl (cdr a)))
       (setq string (replace-regexp-in-string re rpl string t)))))
 
-(defun org-html-encode-plain-text (text)
+(defun org-ipynb-encode-plain-text (text)
   "Convert plain text characters from TEXT to HTML equivalent.
-Possible conversions are set in `org-html-protect-char-alist'."
-  (dolist (pair org-html-protect-char-alist text)
+Possible conversions are set in `org-ipynb-protect-char-alist'."
+  (dolist (pair org-ipynb-protect-char-alist text)
     (setq text (replace-regexp-in-string (car pair) (cdr pair) text t t))))
 
-(defun org-html-plain-text (text info)
+(defun org-ipynb-plain-text (text info)
   "Transcode a TEXT string from Org to HTML.
 TEXT is the string to transcode.  INFO is a plist holding
 contextual information."
   (let ((output text))
     ;; Protect following characters: <, >, &.
-    (setq output (org-html-encode-plain-text output))
+    (setq output (org-ipynb-encode-plain-text output))
     ;; Handle smart quotes.  Be sure to provide original string since
     ;; OUTPUT may have been modified.
     (when (plist-get info :with-smart-quotes)
       (setq output (org-export-activate-smart-quotes output :html info text)))
     ;; Handle special strings.
     (when (plist-get info :with-special-strings)
-      (setq output (org-html-convert-special-strings output)))
+      (setq output (org-ipynb-convert-special-strings output)))
     ;; Handle break preservation if required.
     (when (plist-get info :preserve-breaks)
       (setq output
 	    (replace-regexp-in-string
 	     "\\(\\\\\\\\\\)?[ \t]*\n"
-	     (concat (org-html-close-tag "br" nil info) "\n") output)))
+	     (concat (org-ipynb-close-tag "br" nil info) "\n") output)))
     ;; Return value.
     output))
 
 
 ;; Planning
 
-(defun org-html-planning (planning _contents info)
+(defun org-ipynb-planning (planning _contents info)
   "Transcode a PLANNING element from Org to HTML.
 CONTENTS is nil.  INFO is a plist used as a communication
 channel."
@@ -3374,7 +3374,7 @@ channel."
 	     (format "<span class=\"timestamp-kwd\">%s</span> \
 <span class=\"timestamp\">%s</span> "
 		     string
-		     (org-html-plain-text (org-timestamp-translate timestamp)
+		     (org-ipynb-plain-text (org-timestamp-translate timestamp)
 					  info))))))
      `((,org-closed-string . ,(org-element-property :closed planning))
        (,org-deadline-string . ,(org-element-property :deadline planning))
@@ -3383,7 +3383,7 @@ channel."
 
 ;;;; Property Drawer
 
-(defun org-html-property-drawer (_property-drawer contents _info)
+(defun org-ipynb-property-drawer (_property-drawer contents _info)
   "Transcode a PROPERTY-DRAWER element from Org to HTML.
 CONTENTS holds the contents of the drawer.  INFO is a plist
 holding contextual information."
@@ -3392,14 +3392,14 @@ holding contextual information."
 
 ;;;; Quote Block
 
-(defun org-html-quote-block (quote-block contents _info)
+(defun org-ipynb-quote-block (quote-block contents _info)
   "Transcode a QUOTE-BLOCK element from Org to HTML.
 CONTENTS holds the contents of the block.  INFO is a plist
 holding contextual information."
   (format "<blockquote%s>\n%s</blockquote>"
 	  (let* ((name (org-element-property :name quote-block))
 		 (attributes (org-export-read-attribute :attr_html quote-block))
-		 (a (org-html--make-attribute-string
+		 (a (org-ipynb--make-attribute-string
 		     (if (or (not name) (plist-member attributes :id))
 			 attributes
 		       (plist-put attributes :id name)))))
@@ -3408,7 +3408,7 @@ holding contextual information."
 
 ;;;; Section
 
-(defun org-html-section (section contents info)
+(defun org-ipynb-section (section contents info)
   "Transcode a SECTION element from Org to HTML.
 CONTENTS holds the contents of the section.  INFO is a plist
 holding contextual information."
@@ -3417,7 +3417,7 @@ holding contextual information."
     (if (not parent) contents
       ;; Get div's class and id references.
       (let* ((class-num (+ (org-export-get-relative-level parent info)
-			   (1- (plist-get info :html-toplevel-hlevel))))
+			   (1- (plist-get info :ipynb-toplevel-hlevel))))
 	     (section-number
 	      (and (org-export-numbered-headline-p parent info)
 		   (mapconcat
@@ -3433,22 +3433,22 @@ holding contextual information."
 
 ;;;; Radio Target
 
-(defun org-html-radio-target (radio-target text info)
+(defun org-ipynb-radio-target (radio-target text info)
   "Transcode a RADIO-TARGET object from Org to HTML.
 TEXT is the text of the target.  INFO is a plist holding
 contextual information."
   (let ((ref (org-export-get-reference radio-target info)))
-    (org-html--anchor ref text nil info)))
+    (org-ipynb--anchor ref text nil info)))
 
 ;;;; Special Block
 
-(defun org-html-special-block (special-block contents info)
+(defun org-ipynb-special-block (special-block contents info)
   "Transcode a SPECIAL-BLOCK element from Org to HTML.
 CONTENTS holds the contents of the block.  INFO is a plist
 holding contextual information."
   (let* ((block-type (org-element-property :type special-block))
-         (html5-fancy (and (org-html--html5-fancy-p info)
-                           (member block-type org-html-html5-elements)))
+         (html5-fancy (and (org-ipynb--html5-fancy-p info)
+                           (member block-type org-ipynb-html5-elements)))
          (attributes (org-export-read-attribute :attr_html special-block)))
     (unless html5-fancy
       (let ((class (plist-get attributes :class)))
@@ -3457,7 +3457,7 @@ holding contextual information."
                                       block-type)))))
     (let* ((contents (or contents ""))
 	   (name (org-element-property :name special-block))
-	   (a (org-html--make-attribute-string
+	   (a (org-ipynb--make-attribute-string
 	       (if (or (not name) (plist-member attributes :id))
 		   attributes
 		 (plist-put attributes :id name))))
@@ -3468,18 +3468,18 @@ holding contextual information."
 
 ;;;; Src Block
 
-(defun org-html-src-block (src-block _contents info)
+(defun org-ipynb-src-block (src-block _contents info)
   "Transcode a SRC-BLOCK element from Org to HTML.
 CONTENTS holds the contents of the item.  INFO is a plist holding
 contextual information."
   (if (org-export-read-attribute :attr_html src-block :textarea)
-      (org-html--textarea-block src-block)
+      (org-ipynb--textarea-block src-block)
     (let* ((lang (org-element-property :language src-block))
-	  (code (org-html-format-code src-block info))
+	  (code (org-ipynb-format-code src-block info))
 	  (label (let ((lbl (and (org-element-property :name src-block)
 				 (org-export-get-reference src-block info))))
 		   (if lbl (format " id=\"%s\"" lbl) "")))
-	  (klipsify  (and  (plist-get info :html-klipsify-src)
+	  (klipsify  (and  (plist-get info :ipynb-klipsify-src)
                            (member lang '("javascript" "js"
 					  "ruby" "scheme" "clojure" "php" "html")))))
       (if (not lang) (format "<pre class=\"example\"%s>\n%s</pre>" label code)
@@ -3491,9 +3491,9 @@ contextual information."
 			   (format
 			    "<span class=\"listing-number\">%s </span>"
 			    (format
-			     (org-html--translate "Listing %d:" info)
+			     (org-ipynb--translate "Listing %d:" info)
 			     (org-export-get-ordinal
-			      src-block info nil #'org-html--has-caption-p)))))
+			      src-block info nil #'org-ipynb--has-caption-p)))))
 		      (format "<label class=\"org-src-name\">%s%s</label>"
 			      listing-number
 			      (org-trim (org-export-data caption info))))))
@@ -3511,7 +3511,7 @@ contextual information."
 
 ;;;; Statistics Cookie
 
-(defun org-html-statistics-cookie (statistics-cookie _contents _info)
+(defun org-ipynb-statistics-cookie (statistics-cookie _contents _info)
   "Transcode a STATISTICS-COOKIE object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (let ((cookie-value (org-element-property :value statistics-cookie)))
@@ -3519,18 +3519,18 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
 
 ;;;; Strike-Through
 
-(defun org-html-strike-through (_strike-through contents info)
+(defun org-ipynb-strike-through (_strike-through contents info)
   "Transcode STRIKE-THROUGH from Org to HTML.
 CONTENTS is the text with strike-through markup.  INFO is a plist
 holding contextual information."
   (format
-   (or (cdr (assq 'strike-through (plist-get info :html-text-markup-alist)))
+   (or (cdr (assq 'strike-through (plist-get info :ipynb-text-markup-alist)))
        "%s")
    contents))
 
 ;;;; Subscript
 
-(defun org-html-subscript (_subscript contents _info)
+(defun org-ipynb-subscript (_subscript contents _info)
   "Transcode a SUBSCRIPT object from Org to HTML.
 CONTENTS is the contents of the object.  INFO is a plist holding
 contextual information."
@@ -3538,7 +3538,7 @@ contextual information."
 
 ;;;; Superscript
 
-(defun org-html-superscript (_superscript contents _info)
+(defun org-ipynb-superscript (_superscript contents _info)
   "Transcode a SUPERSCRIPT object from Org to HTML.
 CONTENTS is the contents of the object.  INFO is a plist holding
 contextual information."
@@ -3546,16 +3546,16 @@ contextual information."
 
 ;;;; Table Cell
 
-(defun org-html-table-cell (table-cell contents info)
+(defun org-ipynb-table-cell (table-cell contents info)
   "Transcode a TABLE-CELL element from Org to HTML.
 CONTENTS is nil.  INFO is a plist used as a communication
 channel."
   (let* ((table-row (org-export-get-parent table-cell))
 	 (table (org-export-get-parent-table table-cell))
 	 (cell-attrs
-	  (if (not (plist-get info :html-table-align-individual-fields)) ""
-	    (format (if (and (boundp 'org-html-format-table-no-css)
-			     org-html-format-table-no-css)
+	  (if (not (plist-get info :ipynb-table-align-individual-fields)) ""
+	    (format (if (and (boundp 'org-ipynb-format-table-no-css)
+			     org-ipynb-format-table-no-css)
 			" align=\"%s\"" " class=\"org-%s\"")
 		    (org-export-table-cell-alignment table-cell info)))))
     (when (or (not contents) (string= "" (org-trim contents)))
@@ -3563,24 +3563,24 @@ channel."
     (cond
      ((and (org-export-table-has-header-p table info)
 	   (= 1 (org-export-table-row-group table-row info)))
-      (let ((header-tags (plist-get info :html-table-header-tags)))
+      (let ((header-tags (plist-get info :ipynb-table-header-tags)))
 	(concat "\n" (format (car header-tags) "col" cell-attrs)
 		contents
 		(cdr header-tags))))
-     ((and (plist-get info :html-table-use-header-tags-for-first-column)
+     ((and (plist-get info :ipynb-table-use-header-tags-for-first-column)
 	   (zerop (cdr (org-export-table-cell-address table-cell info))))
-      (let ((header-tags (plist-get info :html-table-header-tags)))
+      (let ((header-tags (plist-get info :ipynb-table-header-tags)))
 	(concat "\n" (format (car header-tags) "row" cell-attrs)
 		contents
 		(cdr header-tags))))
-     (t (let ((data-tags (plist-get info :html-table-data-tags)))
+     (t (let ((data-tags (plist-get info :ipynb-table-data-tags)))
 	  (concat "\n" (format (car data-tags) cell-attrs)
 		  contents
 		  (cdr data-tags)))))))
 
 ;;;; Table Row
 
-(defun org-html-table-row (table-row contents info)
+(defun org-ipynb-table-row (table-row contents info)
   "Transcode a TABLE-ROW element from Org to HTML.
 CONTENTS is the contents of the row.  INFO is a plist used as a
 communication channel."
@@ -3598,13 +3598,13 @@ communication channel."
 	   (bottomp (and (equal start-group-p '(above))
 			 (equal end-group-p '(bottom above))))
            (row-open-tag
-            (pcase (plist-get info :html-table-row-open-tag)
+            (pcase (plist-get info :ipynb-table-row-open-tag)
               ((and accessor (pred functionp))
                (funcall accessor
 			number group start-group-p end-group-p topp bottomp))
 	      (accessor accessor)))
            (row-close-tag
-            (pcase (plist-get info :html-table-row-close-tag)
+            (pcase (plist-get info :ipynb-table-row-close-tag)
               ((and accessor (pred functionp))
                (funcall accessor
 			number group start-group-p end-group-p topp bottomp))
@@ -3629,7 +3629,7 @@ communication channel."
 
 ;;;; Table
 
-(defun org-html-table-first-row-data-cells (table info)
+(defun org-ipynb-table-first-row-data-cells (table info)
   "Transcode the first row of TABLE.
 INFO is a plist used as a communication channel."
   (let ((table-row
@@ -3641,7 +3641,7 @@ INFO is a plist used as a communication channel."
     (if (not special-column-p) (org-element-contents table-row)
       (cdr (org-element-contents table-row)))))
 
-(defun org-html-table--table.el-table (table _info)
+(defun org-ipynb-table--table.el-table (table _info)
   "Format table.el tables into HTML.
 INFO is a plist used as a communication channel."
   (when (eq (org-element-property :type table) 'table.el)
@@ -3658,27 +3658,27 @@ INFO is a plist used as a communication channel."
 	(prog1 (org-trim (buffer-string))
 	  (kill-buffer) )))))
 
-(defun org-html-table (table contents info)
+(defun org-ipynb-table (table contents info)
   "Transcode a TABLE element from Org to HTML.
 CONTENTS is the contents of the table.  INFO is a plist holding
 contextual information."
   (if (eq (org-element-property :type table) 'table.el)
       ;; "table.el" table.  Convert it using appropriate tools.
-      (org-html-table--table.el-table table info)
+      (org-ipynb-table--table.el-table table info)
     ;; Standard table.
     (let* ((caption (org-export-get-caption table))
 	   (number (org-export-get-ordinal
-		    table info nil #'org-html--has-caption-p))
+		    table info nil #'org-ipynb--has-caption-p))
 	   (attributes
-	    (org-html--make-attribute-string
+	    (org-ipynb--make-attribute-string
 	     (org-combine-plists
 	      (and (org-element-property :name table)
 		   (list :id (org-export-get-reference table info)))
-	      (and (not (org-html-html5-p info))
-		   (plist-get info :html-table-attributes))
+	      (and (not (org-ipynb-html5-p info))
+		   (plist-get info :ipynb-table-attributes))
 	      (org-export-read-attribute :attr_html table))))
 	   (alignspec
-	    (if (bound-and-true-p org-html-format-table-no-css)
+	    (if (bound-and-true-p org-ipynb-format-table-no-css)
 		"align=\"%s\""
 	      "class=\"org-%s\""))
 	   (table-column-specs
@@ -3694,90 +3694,90 @@ contextual information."
 		      "\n<colgroup>")
 		    ;; Add a column.  Also specify its alignment.
 		    (format "\n%s"
-			    (org-html-close-tag
+			    (org-ipynb-close-tag
 			     "col" (concat " " (format alignspec alignment)) info))
 		    ;; End a colgroup?
 		    (when (org-export-table-cell-ends-colgroup-p
 			   table-cell info)
 		      "\n</colgroup>"))))
-	       (org-html-table-first-row-data-cells table info) "\n"))))
+	       (org-ipynb-table-first-row-data-cells table info) "\n"))))
       (format "<table%s>\n%s\n%s\n%s</table>"
 	      (if (equal attributes "") "" (concat " " attributes))
 	      (if (not caption) ""
-		(format (if (plist-get info :html-table-caption-above)
+		(format (if (plist-get info :ipynb-table-caption-above)
 			    "<caption class=\"t-above\">%s</caption>"
 			  "<caption class=\"t-bottom\">%s</caption>")
 			(concat
 			 "<span class=\"table-number\">"
-			 (format (org-html--translate "Table %d:" info) number)
+			 (format (org-ipynb--translate "Table %d:" info) number)
 			 "</span> " (org-export-data caption info))))
 	      (funcall table-column-specs table info)
 	      contents))))
 
 ;;;; Target
 
-(defun org-html-target (target _contents info)
+(defun org-ipynb-target (target _contents info)
   "Transcode a TARGET object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
   (let ((ref (org-export-get-reference target info)))
-    (org-html--anchor ref nil nil info)))
+    (org-ipynb--anchor ref nil nil info)))
 
 ;;;; Timestamp
 
-(defun org-html-timestamp (timestamp _contents info)
+(defun org-ipynb-timestamp (timestamp _contents info)
   "Transcode a TIMESTAMP object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
-  (let ((value (org-html-plain-text (org-timestamp-translate timestamp) info)))
+  (let ((value (org-ipynb-plain-text (org-timestamp-translate timestamp) info)))
     (format "<span class=\"timestamp-wrapper\"><span class=\"timestamp\">%s</span></span>"
 	    (replace-regexp-in-string "--" "&#x2013;" value))))
 
 ;;;; Underline
 
-(defun org-html-underline (_underline contents info)
+(defun org-ipynb-underline (_underline contents info)
   "Transcode UNDERLINE from Org to HTML.
 CONTENTS is the text with underline markup.  INFO is a plist
 holding contextual information."
-  (format (or (cdr (assq 'underline (plist-get info :html-text-markup-alist)))
+  (format (or (cdr (assq 'underline (plist-get info :ipynb-text-markup-alist)))
 	      "%s")
 	  contents))
 
 ;;;; Verbatim
 
-(defun org-html-verbatim (verbatim _contents info)
+(defun org-ipynb-verbatim (verbatim _contents info)
   "Transcode VERBATIM from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
-  (format (or (cdr (assq 'verbatim (plist-get info :html-text-markup-alist))) "%s")
-	  (org-html-encode-plain-text (org-element-property :value verbatim))))
+  (format (or (cdr (assq 'verbatim (plist-get info :ipynb-text-markup-alist))) "%s")
+	  (org-ipynb-encode-plain-text (org-element-property :value verbatim))))
 
 ;;;; Verse Block
 
-(defun org-html-verse-block (_verse-block contents info)
+(defun org-ipynb-verse-block (_verse-block contents info)
   "Transcode a VERSE-BLOCK element from Org to HTML.
 CONTENTS is verse block contents.  INFO is a plist holding
 contextual information."
   (format "<p class=\"verse\">\n%s</p>"
 	  ;; Replace leading white spaces with non-breaking spaces.
 	  (replace-regexp-in-string
-	   "^[ \t]+" (lambda (m) (org-html--make-string (length m) "&#xa0;"))
+	   "^[ \t]+" (lambda (m) (org-ipynb--make-string (length m) "&#xa0;"))
 	   ;; Replace each newline character with line break.  Also
 	   ;; remove any trailing "br" close-tag so as to avoid
 	   ;; duplicates.
-	   (let* ((br (org-html-close-tag "br" nil info))
+	   (let* ((br (org-ipynb-close-tag "br" nil info))
 		  (re (format "\\(?:%s\\)?[ \t]*\n" (regexp-quote br))))
 	     (replace-regexp-in-string re (concat br "\n") contents)))))
 
 
 ;;; Filter Functions
 
-(defun org-html-final-function (contents _backend info)
+(defun org-ipynb-final-function (contents _backend info)
   "Filter to indent the HTML and convert HTML entities."
   (with-temp-buffer
     (insert contents)
     (set-auto-mode t)
-    (when (plist-get info :html-indent)
+    (when (plist-get info :ipynb-indent)
       (indent-region (point-min) (point-max)))
     (buffer-substring-no-properties (point-min) (point-max))))
 
@@ -3785,7 +3785,7 @@ contextual information."
 ;;; End-user functions
 
 ;;;###autoload
-(defun org-html-export-as-html
+(defun org-ipynb-export-as-html
   (&optional async subtreep visible-only body-only ext-plist)
   "Export current buffer to an HTML buffer.
 
@@ -3821,7 +3821,7 @@ is non-nil."
     (lambda () (set-auto-mode t))))
 
 ;;;###autoload
-(defun org-html-convert-region-to-html ()
+(defun org-ipynb-convert-region-to-html ()
   "Assume the current region has Org syntax, and convert it to HTML.
 This can be used in any buffer.  For example, you can write an
 itemized list in Org syntax in an HTML buffer and use this command
@@ -3830,7 +3830,7 @@ to convert it."
   (org-export-replace-region-by 'html))
 
 ;;;###autoload
-(defun org-html-export-to-html
+(defun org-ipynb-export-to-html
   (&optional async subtreep visible-only body-only ext-plist)
   "Export current buffer to a HTML file.
 
@@ -3859,16 +3859,16 @@ file-local settings.
 
 Return output file's name."
   (interactive)
-  (let* ((extension (concat "." (or (plist-get ext-plist :html-extension)
-				    org-html-extension
+  (let* ((extension (concat "." (or (plist-get ext-plist :ipynb-extension)
+				    org-ipynb-extension
 				    "html")))
 	 (file (org-export-output-file-name extension subtreep))
-	 (org-export-coding-system org-html-coding-system))
+	 (org-export-coding-system org-ipynb-coding-system))
     (org-export-to-file 'html file
       async subtreep visible-only body-only ext-plist)))
 
 ;;;###autoload
-(defun org-html-publish-to-html (plist filename pub-dir)
+(defun org-ipynb-publish-to-html (plist filename pub-dir)
   "Publish an org file to HTML.
 
 FILENAME is the filename of the Org file to be published.  PLIST
@@ -3877,8 +3877,8 @@ publishing directory.
 
 Return output file name."
   (org-publish-org-to 'html filename
-		      (concat "." (or (plist-get plist :html-extension)
-				      org-html-extension
+		      (concat "." (or (plist-get plist :ipynb-extension)
+				      org-ipynb-extension
 				      "html"))
 		      plist pub-dir))
 
