@@ -535,7 +535,7 @@ a communication channel."
   "Transcode PLAIN-LIST element into Markdown format.
 CONTENTS is the plain-list contents.  INFO is a plist used as
 a communication channel."
-  contents)
+  (org-ipynb--format-block contents))
 
 
 ;;;; Plain Text
