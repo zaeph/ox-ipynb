@@ -53,7 +53,7 @@
 
 ;;; Define Back-End
 
-(org-export-define-backend 'html
+(org-export-define-backend 'ipynb
   '((bold . org-ipynb-bold)
     (center-block . org-ipynb-center-block)
     (clock . org-ipynb-clock)
@@ -107,13 +107,13 @@
 		   (:filter-parse-tree . org-ipynb-image-link-filter)
 		   (:filter-final-output . org-ipynb-final-function))
   :menu-entry
-  '(?h "Export to HTML"
-       ((?H "As HTML buffer" org-ipynb-export-as-html)
-	(?h "As HTML file" org-ipynb-export-to-html)
-	(?o "As HTML file and open"
+  '(?i "Export to IPYNB"
+       ((?I "As IPYNB buffer" org-ipynb-export-as-ipynb)
+	(?i "As IPYNB file" org-ipynb-export-to-ipynb)
+	(?o "As IPYNB file and open"
 	    (lambda (a s v b)
-	      (if a (org-ipynb-export-to-html t s v b)
-		(org-open-file (org-ipynb-export-to-html nil s v b)))))))
+	      (if a (org-ipynb-export-to-ipynb t s v b)
+		(org-open-file (org-ipynb-export-to-ipynb nil s v b)))))))
   :options-alist
   '((:ipynb-doctype "HTML_DOCTYPE" nil org-ipynb-doctype)
     (:ipynb-container "HTML_CONTAINER" nil org-ipynb-container-element)
@@ -475,9 +475,9 @@ customize `org-ipynb-head-include-default-style'.")
 
 ;;; User Configuration Variables
 
-(defgroup org-export-html nil
-  "Options for exporting Org mode files to HTML."
-  :tag "Org Export HTML"
+(defgroup org-export-ipynb nil
+  "Options for exporting Org mode files to IPYNB."
+  :tag "Org Export IPYNB"
   :group 'org-export)
 
 ;;;; Handle infojs
@@ -503,7 +503,7 @@ It can also be the symbol `when-configured', meaning that the
 script will be linked into the export file if and only if there
 is a \"#+INFOJS_OPT:\" line in the buffer.  See also the variable
 `org-ipynb-infojs-options'."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type '(choice
@@ -520,7 +520,7 @@ a property.  This property is then assumed to be a property that is defined
 by the Export/Publishing setup of Org.
 The `sdepth' and `tdepth' parameters can also be set to \"max\", which
 means to use the maximum value consistent with other options."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type
@@ -599,7 +599,7 @@ org_html_manager.setup();  // activate after the parameters are set
 </script>"
   "The template for the export style additions when org-info.js is used.
 Option settings will replace the %MANAGER-OPTIONS cookie."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'string)
@@ -690,9 +690,9 @@ export back-end currently used."
 ;;;; Bold, etc.
 
 (defcustom org-ipynb-text-markup-alist
-  '((bold . "<b>%s</b>")
+  '((bold . "**%s**")
     (code . "<code>%s</code>")
-    (italic . "<i>%s</i>")
+    (italic . "*%s*")
     (strike-through . "<del>%s</del>")
     (underline . "<span class=\"underline\">%s</span>")
     (verbatim . "<code>%s</code>"))
@@ -704,7 +704,7 @@ a formatting string to wrap fontified text with.
 
 If no association can be found for a given markup, text will be
 returned as-is."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type '(alist :key-type (symbol :tag "Markup type")
@@ -714,7 +714,7 @@ returned as-is."
 (defcustom org-ipynb-indent nil
   "Non-nil means to indent the generated HTML.
 Warning: non-nil may break indentation of source code blocks."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'boolean)
@@ -734,7 +734,7 @@ For example, the variable could be set to the following function
 in order to mimic default behavior:
 
 The default value simply returns the value of CONTENTS."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'function)
@@ -751,18 +751,18 @@ The default value simply returns the value of CONTENTS."
 Should contain a two instances of %s.  The first will be replaced with the
 language-specific word for \"Footnotes\", the second one will be replaced
 by the footnotes themselves."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'string)
 
 (defcustom org-ipynb-footnote-format "<sup>%s</sup>"
   "The format for the footnote reference.
 %s will be replaced by the footnote reference itself."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'string)
 
 (defcustom org-ipynb-footnote-separator "<sup>, </sup>"
   "Text used to separate footnotes."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'string)
 
 ;;;; Headline
@@ -775,7 +775,7 @@ be <h1>, and the corresponding classes will be outline-1, section-number-1,
 and outline-text-1.  If this is 2, all of these will get a 2 instead.
 The default for this variable is 2, because we use <h1> for formatting the
 document title."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'integer)
 
 (defcustom org-ipynb-format-headline-function
@@ -791,7 +791,7 @@ TAGS      the tags (string or nil).
 INFO      the export options (plist).
 
 The function result will be used in the section format string."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "26.1"
   :package-version '(Org . "8.3")
   :type 'function)
@@ -802,14 +802,14 @@ The function result will be used in the section format string."
   "When nil, do not set \"name\" attribute in anchors.
 By default, when appropriate, anchors are formatted with \"id\"
 but without \"name\" attribute."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'boolean)
 
 (defcustom org-ipynb-self-link-headlines nil
   "When non-nil, the headlines contain a hyperlink to themselves."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :package-version '(Org . "9.3")
   :type 'boolean
   :safe #'booleanp)
@@ -830,7 +830,7 @@ The function must accept seven parameters:
   INFO      the export options, as a plist
 
 The function should return the string to be exported."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "26.1"
   :package-version '(Org . "8.3")
   :type 'function)
@@ -852,7 +852,7 @@ e.g. \"tex:mathjax\".  Allowed values are:
                 be loaded.
   SYMBOL        Any symbol defined in `org-preview-latex-process-alist',
                 e.g., `dvipng'."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type '(choice
@@ -872,7 +872,7 @@ However, links to other Org files (recognized by the extension
 file, assuming that the linked `org-mode' file will also be
 converted to HTML.
 When nil, the links still point to the plain \".org\" file."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'boolean)
 
 ;;;; Links :: Inline images
@@ -881,7 +881,7 @@ When nil, the links still point to the plain \".org\" file."
   "Non-nil means inline images into exported HTML pages.
 This is done using an <img> tag.  When nil, an anchor with href is used to
 link to the image."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.1")
   :type 'boolean)
@@ -895,7 +895,7 @@ link to the image."
 A rule consists in an association whose key is the type of link
 to consider, and value is a regexp that will be matched against
 link's path."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type '(alist :key-type (string :tag "Type")
@@ -928,19 +928,19 @@ To get a start for your css file, start Emacs session and make sure that
 all the faces you are interested in are defined, for example by loading files
 in all modes you want.  Then, use the command
 `\\[org-ipynb-htmlize-generate-css]' to extract class definitions."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type '(choice (const css) (const inline-css) (const nil)))
 
 (defcustom org-ipynb-htmlize-font-prefix "org-"
   "The prefix for CSS class names for htmlize font specifications."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'string)
 
 (defcustom org-ipynb-wrap-src-lines nil
   "If non-nil, wrap individual lines of source blocks in \"code\" elements.
 In this case, add line number in attribute \"data-ox-ipynb-linenr\" when line
 numbers are enabled."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :package-version '(Org . "9.3")
   :type 'boolean
   :safe t)
@@ -954,7 +954,7 @@ This is a plist where attributes are symbols, starting with
 colons, and values are strings.
 
 When exporting to HTML5, these values will be disregarded."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type '(plist :key-type (symbol :tag "Property")
@@ -967,7 +967,7 @@ The first %s will be filled with the scope of the field, either row or col.
 The second %s will be replaced by a style entry to align the field.
 See also the variable `org-ipynb-table-use-header-tags-for-first-column'.
 See also the variable `org-ipynb-table-align-individual-fields'."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type '(cons (string :tag "Opening tag") (string :tag "Closing tag")))
 
 (defcustom org-ipynb-table-data-tags '("<td%s>" . "</td>")
@@ -976,7 +976,7 @@ This is customizable so that alignment options can be specified.
 The first %s will be filled with the scope of the field, either row or col.
 The second %s will be replaced by a style entry to align the field.
 See also the variable `org-ipynb-table-align-individual-fields'."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type '(cons (string :tag "Opening tag") (string :tag "Closing tag")))
 
 (defcustom org-ipynb-table-row-open-tag "<tr>"
@@ -1007,7 +1007,7 @@ For example:
 will use the \"tr-top\" and \"tr-bottom\" classes for the top row
 and the bottom row, and otherwise alternate between \"tr-odd\" and
 \"tr-even\" for odd and even rows."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type '(choice :tag "Opening tag"
 		 (string :tag "Specify")
 		 (function)))
@@ -1019,7 +1019,7 @@ Instead of strings, this can be a Lisp function that will be
 evaluated for each row in order to construct the table row tags.
 
 See documentation of `org-ipynb-table-row-open-tag'."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type '(choice :tag "Closing tag"
 		 (string :tag "Specify")
 		 (function)))
@@ -1029,19 +1029,19 @@ See documentation of `org-ipynb-table-row-open-tag'."
 When nil, alignment will only be specified in the column tags, but this
 is ignored by some browsers (like Firefox, Safari).  Opera does it right
 though."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'boolean)
 
 (defcustom org-ipynb-table-use-header-tags-for-first-column nil
   "Non-nil means format column one in tables with header tags.
 When nil, also column one will use data tags."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'boolean)
 
 (defcustom org-ipynb-table-caption-above t
   "When non-nil, place caption string at the beginning of the table.
 Otherwise, place it near the end."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'boolean)
 
 ;;;; Tags
@@ -1052,14 +1052,14 @@ Each tag gets a class given by the tag itself, with this prefix.
 The default prefix is empty because it is nice to just use the keyword
 as a class name.  But if you get into conflicts with other, existing
 CSS classes, then this prefix can be very useful."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'string)
 
 ;;;; Template :: Generic
 
 (defcustom org-ipynb-extension "html"
   "The extension for exported HTML files."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'string)
 
 (defcustom org-ipynb-xml-declaration
@@ -1071,7 +1071,7 @@ This may be a string, or an alist with export extensions
 and corresponding declarations.
 
 This declaration only applies when exporting to XHTML."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type '(choice
 	  (string :tag "Single declaration")
 	  (repeat :tag "Dependent on extension"
@@ -1081,7 +1081,7 @@ This declaration only applies when exporting to XHTML."
 (defcustom org-ipynb-coding-system 'utf-8
   "Coding system for HTML export.
 Use utf-8 as the default value."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'coding-system)
@@ -1090,7 +1090,7 @@ Use utf-8 as the default value."
   "Document type definition to use for exported HTML files.
 Can be set with the in-buffer HTML_DOCTYPE property or for
 publishing, with :ipynb-doctype."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type (append
@@ -1107,7 +1107,7 @@ idea to download some form of the html5shiv (for instance
 https://code.google.com/p/html5shiv/) and add it to your
 HTML_HEAD_EXTRA, so that your pages don't break for users of IE
 versions 8 and below."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'boolean)
@@ -1119,7 +1119,7 @@ publishing, with :ipynb-container.
 
 Note that changing the default will prevent you from using
 org-info.js for your website."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'string)
@@ -1135,7 +1135,7 @@ section of the exported document.
 
 Note that changing the default will prevent you from using
 org-info.js for your website."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type '(list :greedy t
@@ -1175,7 +1175,7 @@ checkboxes. The other two use the `off' checkbox for `trans'.")
   "The type of checkboxes to use for HTML export.
 See `org-ipynb-checkbox-types' for the values used for each
 option."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type '(choice
@@ -1186,7 +1186,7 @@ option."
 (defcustom org-ipynb-metadata-timestamp-format "%Y-%m-%d %a %H:%M"
   "Format used for timestamps in preamble, postamble and metadata.
 See `format-time-string' for more information on its components."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'string)
@@ -1233,7 +1233,7 @@ You can also customize this for each buffer, using something like
 For further information about MathJax options, see the MathJax documentation:
 
   http://docs.mathjax.org/"
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :package-version '(Org . "8.3")
   :type '(list :greedy t
 	       (list :tag "path   (the path from where to load MathJax.js)"
@@ -1295,7 +1295,7 @@ For further information about MathJax options, see the MathJax documentation:
 <script type=\"text/javascript\"
         src=\"%PATH\"></script>"
   "The MathJax template.  See also `org-ipynb-mathjax-options'."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'string)
 
 ;;;; Template :: Postamble
@@ -1315,7 +1315,7 @@ options as its only argument.
 
 Setting :ipynb-postamble in publishing projects will take
 precedence over this variable."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type '(choice (const :tag "No postamble" nil)
 		 (const :tag "Auto postamble" auto)
 		 (const :tag "Default formatting string" t)
@@ -1347,7 +1347,7 @@ postamble itself.  This format string can contain these elements:
 
 If you need to use a \"%\" character, you need to escape it
 like that: \"%%\"."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type '(repeat
 	  (list (string :tag "Language")
 		(string :tag "Format string"))))
@@ -1355,7 +1355,7 @@ like that: \"%%\"."
 (defcustom org-ipynb-validation-link
   "<a href=\"http://validator.w3.org/check?uri=referer\">Validate</a>"
   "Link to HTML validation service."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'string)
 
 (defcustom org-ipynb-creator-string
@@ -1364,7 +1364,7 @@ like that: \"%%\"."
 	  (if (fboundp 'org-version) (org-version) "unknown version"))
   "Information about the creator of the HTML document.
 This option can also be set on with the CREATOR keyword."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type '(string :tag "Creator string"))
@@ -1385,7 +1385,7 @@ options as its only argument.
 
 Setting :ipynb-preamble in publishing projects will take
 precedence over this variable."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type '(choice (const :tag "No preamble" nil)
 		 (const :tag "Default preamble" t)
 		 (string :tag "Custom formatting string")
@@ -1415,24 +1415,24 @@ like that: \"%%\".
 
 See the default value of `org-ipynb-postamble-format' for an
 example."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type '(repeat
 	  (list (string :tag "Language")
 		(string :tag "Format string"))))
 
 (defcustom org-ipynb-link-up ""
   "Where should the \"UP\" link of exported HTML pages lead?"
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type '(string :tag "File or URL"))
 
 (defcustom org-ipynb-link-home ""
   "Where should the \"HOME\" link of exported HTML pages lead?"
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type '(string :tag "File or URL"))
 
 (defcustom org-ipynb-link-use-abs-url nil
   "Should we prepend relative links with HTML_LINK_HOME?"
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.1")
   :type 'boolean)
@@ -1448,7 +1448,7 @@ This is a format string, the first %s will receive the UP link,
 the second the HOME link.  If both `org-ipynb-link-up' and
 `org-ipynb-link-home' are empty, the entire snippet will be
 ignored."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'string)
 
 ;;;; Template :: Scripts
@@ -1457,7 +1457,7 @@ ignored."
   "Non-nil means include the JavaScript snippets in exported HTML files.
 The actual script is defined in `org-ipynb-scripts' and should
 not be modified."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'boolean)
@@ -1469,7 +1469,7 @@ not be modified."
 The actual style is defined in `org-ipynb-style-default' and
 should not be modified.  Use `org-ipynb-head' to use your own
 style information."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'boolean)
@@ -1506,7 +1506,7 @@ header.
 
 You can set this on a per-file basis using #+HTML_HEAD:,
 or for publication projects using the :ipynb-head property."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'string)
@@ -1518,7 +1518,7 @@ or for publication projects using the :ipynb-head property."
 
 You can set this on a per-file basis using #+HTML_HEAD_EXTRA:,
 or for publication projects using the :ipynb-head-extra property."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "24.4"
   :package-version '(Org . "8.0")
   :type 'string)
@@ -1546,7 +1546,7 @@ The viewport meta tag is inserted if this variable is non-nil.
 
 See the following site for a reference:
 https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag"
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :version "26.1"
   :package-version '(Org . "8.3")
   :type '(choice (const :tag "Disable" nil)
@@ -1577,21 +1577,21 @@ https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag"
 
 (defcustom org-ipynb-klipsify-src nil
   "When non-nil, source code blocks are editable in exported presentation."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :package-version '(Org . "9.1")
   :type 'boolean)
 
 (defcustom org-ipynb-klipse-css
   "https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"
   "Location of the codemirror CSS file for use with klipse."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :package-version '(Org . "9.1")
   :type 'string)
 
 (defcustom org-ipynb-klipse-js
   "https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"
   "Location of the klipse javascript file."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'string)
 
 (defcustom org-ipynb-klipse-selection-script
@@ -1602,7 +1602,7 @@ https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag"
                              selector: '.src-clojure',
                              selector_eval_ruby: '.src-ruby'};"
   "Javascript snippet to activate klipse."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :package-version '(Org . "9.1")
   :type 'string)
 
@@ -1615,7 +1615,7 @@ Each TODO keyword gets a class given by the keyword itself, with this prefix.
 The default prefix is empty because it is nice to just use the keyword
 as a class name.  But if you get into conflicts with other, existing
 CSS classes, then this prefix can be very useful."
-  :group 'org-export-html
+  :group 'org-export-ipynb
   :type 'string)
 
 
@@ -3785,7 +3785,7 @@ contextual information."
 ;;; End-user functions
 
 ;;;###autoload
-(defun org-ipynb-export-as-html
+(defun org-ipynb-export-as-ipynb
   (&optional async subtreep visible-only body-only ext-plist)
   "Export current buffer to an HTML buffer.
 
@@ -3830,7 +3830,7 @@ to convert it."
   (org-export-replace-region-by 'html))
 
 ;;;###autoload
-(defun org-ipynb-export-to-html
+(defun org-ipynb-export-to-ipynb
   (&optional async subtreep visible-only body-only ext-plist)
   "Export current buffer to a HTML file.
 
