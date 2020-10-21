@@ -40,17 +40,17 @@
 
 ;;; User-Configurable Variables
 
-(defgroup org-export-md nil
-  "Options specific to Markdown export back-end."
-  :tag "Org Markdown"
+(defgroup org-export-ipynb nil
+  "Options specific to Jupyter export back-end."
+  :tag "Org Jupyter"
   :group 'org-export
   :version "24.4"
   :package-version '(Org . "8.0"))
 
-(defcustom org-md-headline-style 'atx
+(defcustom org-ipynb-headline-style 'atx
   "Style used to format headlines.
 This variable can be set to either `atx' or `setext'."
-  :group 'org-export-md
+  :group 'org-export-ipynb
   :type '(choice
 	  (const :tag "Use \"atx\" style" atx)
 	  (const :tag "Use \"Setext\" style" setext)))
@@ -58,19 +58,19 @@ This variable can be set to either `atx' or `setext'."
 
 ;;;; Footnotes
 
-(defcustom org-md-footnotes-section "%s%s"
+(defcustom org-ipynb-footnotes-section "%s%s"
   "Format string for the footnotes section.
 The first %s placeholder will be replaced with the localized Footnotes section
 heading, the second with the contents of the Footnotes section."
- :group 'org-export-md
+ :group 'org-export-ipynb
  :type 'string
  :version "26.1"
  :package-version '(Org . "9.0"))
 
-(defcustom org-md-footnote-format "<sup>%s</sup>"
+(defcustom org-ipynb-footnote-format "<sup>%s</sup>"
   "Format string for the footnote reference.
 The %s will be replaced by the footnote reference itself."
-  :group 'org-export-md
+  :group 'org-export-ipynb
   :type 'string
   :version "26.1"
   :package-version '(Org . "9.0"))
@@ -78,50 +78,52 @@ The %s will be replaced by the footnote reference itself."
 
 ;;; Define Back-End
 
-(org-export-define-derived-backend 'md 'html
-  :filters-alist '((:filter-parse-tree . org-md-separate-elements))
+(org-export-define-derived-backend 'ipynb 'html
+  :filters-alist '((:filter-parse-tree . org-ipynb-separate-elements)
+                   ;; (:filter-final-output . org-ipynb-final-function)
+                   )
   :menu-entry
-  '(?m "Export to Markdown"
-       ((?M "To temporary buffer"
-	    (lambda (a s v b) (org-md-export-as-markdown a s v)))
-	(?m "To file" (lambda (a s v b) (org-md-export-to-markdown a s v)))
+  '(?j "Export to Jupyter"
+       ((?J "To temporary buffer"
+	    (lambda (a s v b) (org-ipynb-export-as-ipynb a s v)))
+	(?j "To file" (lambda (a s v b) (org-ipynb-export-to-ipynb a s v)))
 	(?o "To file and open"
 	    (lambda (a s v b)
-	      (if a (org-md-export-to-markdown t s v)
-		(org-open-file (org-md-export-to-markdown nil s v)))))))
-  :translate-alist '((bold . org-md-bold)
-		     (code . org-md-verbatim)
-		     (example-block . org-md-example-block)
-		     (export-block . org-md-export-block)
-		     (fixed-width . org-md-example-block)
-		     (headline . org-md-headline)
-		     (horizontal-rule . org-md-horizontal-rule)
-		     (inline-src-block . org-md-verbatim)
-		     (inner-template . org-md-inner-template)
-		     (italic . org-md-italic)
-		     (item . org-md-item)
-		     (keyword . org-md-keyword)
-		     (line-break . org-md-line-break)
-		     (link . org-md-link)
-		     (node-property . org-md-node-property)
-		     (paragraph . org-md-paragraph)
-		     (plain-list . org-md-plain-list)
-		     (plain-text . org-md-plain-text)
-		     (property-drawer . org-md-property-drawer)
-		     (quote-block . org-md-quote-block)
-		     (section . org-md-section)
-		     (src-block . org-md-example-block)
-		     (template . org-md-template)
-		     (verbatim . org-md-verbatim))
+	      (if a (org-ipynb-export-to-ipynb t s v)
+		(org-open-file (org-ipynb-export-to-ipynb nil s v)))))))
+  :translate-alist '((bold . org-ipynb-bold)
+		     (code . org-ipynb-verbatim)
+		     (example-block . org-ipynb-example-block)
+		     (export-block . org-ipynb-export-block)
+		     (fixed-width . org-ipynb-example-block)
+		     (headline . org-ipynb-headline)
+		     (horizontal-rule . org-ipynb-horizontal-rule)
+		     (inline-src-block . org-ipynb-verbatim)
+		     (inner-template . org-ipynb-inner-template)
+		     (italic . org-ipynb-italic)
+		     (item . org-ipynb-item)
+		     (keyword . org-ipynb-keyword)
+		     (line-break . org-ipynb-line-break)
+		     (link . org-ipynb-link)
+		     (node-property . org-ipynb-node-property)
+		     (paragraph . org-ipynb-paragraph)
+		     (plain-list . org-ipynb-plain-list)
+		     (plain-text . org-ipynb-plain-text)
+		     (property-drawer . org-ipynb-property-drawer)
+		     (quote-block . org-ipynb-quote-block)
+		     (section . org-ipynb-section)
+		     (src-block . org-ipynb-example-block)
+		     (template . org-ipynb-template)
+		     (verbatim . org-ipynb-verbatim))
   :options-alist
-  '((:md-footnote-format nil nil org-md-footnote-format)
-    (:md-footnotes-section nil nil org-md-footnotes-section)
-    (:md-headline-style nil nil org-md-headline-style)))
+  '((:md-footnote-format nil nil org-ipynb-footnote-format)
+    (:md-footnotes-section nil nil org-ipynb-footnotes-section)
+    (:md-headline-style nil nil org-ipynb-headline-style)))
 
 
 ;;; Filters
 
-(defun org-md-separate-elements (tree _backend info)
+(defun org-ipynb-separate-elements (tree _backend info)
   "Fix blank lines between elements.
 
 TREE is the parse tree being exported.  BACKEND is the export
@@ -152,13 +154,20 @@ Assume BACKEND is `md'."
   ;; Return updated tree.
   tree)
 
+(defun org-ipynb-final-function (contents _backend info)
+  "Filter to indent the JSON."
+  (with-temp-buffer
+    (insert contents)
+    ;; (set-auto-mode t)
+    (json-pretty-print-buffer)))
+
 
 
 ;;; Transcode Functions
 
 ;;;; Bold
 
-(defun org-md-bold (_bold contents _info)
+(defun org-ipynb-bold (_bold contents _info)
   "Transcode BOLD object into Markdown format.
 CONTENTS is the text within bold markup.  INFO is a plist used as
 a communication channel."
@@ -167,7 +176,7 @@ a communication channel."
 
 ;;;; Code and Verbatim
 
-(defun org-md-verbatim (verbatim _contents _info)
+(defun org-ipynb-verbatim (verbatim _contents _info)
   "Transcode VERBATIM object into Markdown format.
 CONTENTS is nil.  INFO is a plist used as a communication
 channel."
@@ -182,7 +191,7 @@ channel."
 
 ;;;; Example Block, Src Block and Export Block
 
-(defun org-md-example-block (example-block _contents info)
+(defun org-ipynb-example-block (example-block _contents info)
   "Transcode EXAMPLE-BLOCK element into Markdown format.
 CONTENTS is nil.  INFO is a plist used as a communication
 channel."
@@ -191,7 +200,7 @@ channel."
    (org-remove-indentation
     (org-export-format-code-default example-block info))))
 
-(defun org-md-export-block (export-block contents info)
+(defun org-ipynb-export-block (export-block contents info)
   "Transcode a EXPORT-BLOCK element from Org to Markdown.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (if (member (org-element-property :type export-block) '("MARKDOWN" "MD"))
@@ -202,7 +211,7 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
 
 ;;;; Headline
 
-(defun org-md-headline (headline contents info)
+(defun org-ipynb-headline (headline contents info)
   "Transcode HEADLINE element into Markdown format.
 CONTENTS is the headline contents.  INFO is a plist used as
 a communication channel."
@@ -240,15 +249,15 @@ a communication channel."
 		  (and contents (replace-regexp-in-string "^" "    " contents)))))
        (t
 	(let ((anchor
-	       (and (org-md--headline-referred-p headline info)
+	       (and (org-ipynb--headline-referred-p headline info)
 		    (format "<a id=\"%s\"></a>"
 			    (or (org-element-property :CUSTOM_ID headline)
 				(org-export-get-reference headline info))))))
-	  (concat (org-md--headline-title style level heading anchor tags)
+          (concat (org-ipynb--headline-title style level heading anchor tags)
 		  contents)))))))
 
 
-(defun org-md--headline-referred-p (headline info)
+(defun org-ipynb--headline-referred-p (headline info)
   "Non-nil when HEADLINE is being referred to.
 INFO is a plist used as a communication channel.  Links and table
 of contents can refer to headlines."
@@ -289,7 +298,7 @@ of contents can refer to headlines."
 	       (_ nil))))
        info t))))
 
-(defun org-md--headline-title (style level title &optional anchor tags)
+(defun org-ipynb--headline-title (style level title &optional anchor tags)
   "Generate a headline title in the preferred Markdown headline style.
 STYLE is the preferred style (`atx' or `setext').  LEVEL is the
 header level.  TITLE is the headline title.  ANCHOR is the HTML
@@ -300,15 +309,23 @@ the section."
     (if (and (eq style 'setext) (< level 3))
         (let* ((underline-char (if (= level 1) ?= ?-))
                (underline (concat (make-string (length title) underline-char)
-				  "\n")))
+                                  "\n")))
           (concat "\n" anchor-lines title tags "\n" underline "\n"))
-        ;; Use "Atx" style
-        (let ((level-mark (make-string level ?#)))
-          (concat "\n" anchor-lines level-mark " " title tags "\n\n")))))
+      ;; Use "Atx" style
+      (let ((level-mark (make-string level ?#)))
+        (format
+         "\n  {
+   \"cell_type\": \"markdown\",
+   \"metadata\": {},
+   \"source\": [
+    \"%s\"
+   ]
+  },"
+         (concat anchor-lines level-mark " " title tags))))))
 
 ;;;; Horizontal Rule
 
-(defun org-md-horizontal-rule (_horizontal-rule _contents _info)
+(defun org-ipynb-horizontal-rule (_horizontal-rule _contents _info)
   "Transcode HORIZONTAL-RULE element into Markdown format.
 CONTENTS is the horizontal rule contents.  INFO is a plist used
 as a communication channel."
@@ -317,7 +334,7 @@ as a communication channel."
 
 ;;;; Italic
 
-(defun org-md-italic (_italic contents _info)
+(defun org-ipynb-italic (_italic contents _info)
   "Transcode ITALIC object into Markdown format.
 CONTENTS is the text within italic markup.  INFO is a plist used
 as a communication channel."
@@ -326,7 +343,7 @@ as a communication channel."
 
 ;;;; Item
 
-(defun org-md-item (item contents info)
+(defun org-ipynb-item (item contents info)
   "Transcode ITEM element into Markdown format.
 CONTENTS is the item contents.  INFO is a plist used as
 a communication channel."
@@ -355,7 +372,7 @@ a communication channel."
 
 ;;;; Keyword
 
-(defun org-md-keyword (keyword contents info)
+(defun org-ipynb-keyword (keyword contents info)
   "Transcode a KEYWORD element into Markdown format.
 CONTENTS is nil.  INFO is a plist used as a communication
 channel."
@@ -375,13 +392,13 @@ channel."
 		   (org-strip-quotes (match-string 1 value)) info))
 		 ((string-match-p "\\<local\\>" value) keyword)))) ;local
 	   (org-remove-indentation
-	    (org-md--build-toc info depth keyword scope)))))))
+	    (org-ipynb--build-toc info depth keyword scope)))))))
     (_ (org-export-with-backend 'html keyword contents info))))
 
 
 ;;;; Line Break
 
-(defun org-md-line-break (_line-break _contents _info)
+(defun org-ipynb-line-break (_line-break _contents _info)
   "Transcode LINE-BREAK object into Markdown format.
 CONTENTS is nil.  INFO is a plist used as a communication
 channel."
@@ -390,7 +407,7 @@ channel."
 
 ;;;; Link
 
-(defun org-md-link (link contents info)
+(defun org-ipynb-link (link contents info)
   "Transcode LINE-BREAK object into Markdown format.
 CONTENTS is the link's description.  INFO is a plist used as
 a communication channel."
@@ -469,7 +486,7 @@ a communication channel."
 
 ;;;; Node Property
 
-(defun org-md-node-property (node-property _contents _info)
+(defun org-ipynb-node-property (node-property _contents _info)
   "Transcode a NODE-PROPERTY element into Markdown syntax.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
@@ -481,20 +498,20 @@ information."
 
 ;;;; Paragraph
 
-(defun org-md-paragraph (paragraph contents _info)
+(defun org-ipynb-paragraph (paragraph contents info)
   "Transcode PARAGRAPH element into Markdown format.
 CONTENTS is the paragraph contents.  INFO is a plist used as
 a communication channel."
-  (let ((first-object (car (org-element-contents paragraph))))
+  (let ((first-object (org-element-contents paragraph)))
     ;; If paragraph starts with a #, protect it.
     (if (and (stringp first-object) (string-prefix-p "#" first-object))
-	(concat "\\" contents)
+        (concat "\\" contents)
       contents)))
 
 
 ;;;; Plain List
 
-(defun org-md-plain-list (_plain-list contents _info)
+(defun org-ipynb-plain-list (_plain-list contents _info)
   "Transcode PLAIN-LIST element into Markdown format.
 CONTENTS is the plain-list contents.  INFO is a plist used as
 a communication channel."
@@ -503,7 +520,7 @@ a communication channel."
 
 ;;;; Plain Text
 
-(defun org-md-plain-text (text info)
+(defun org-ipynb-plain-text (text info)
   "Transcode a TEXT string into Markdown format.
 TEXT is the string to transcode.  INFO is a plist holding
 contextual information."
@@ -514,7 +531,7 @@ contextual information."
   (setq text (replace-regexp-in-string "[`*_\\]" "\\\\\\&" text))
   ;; Protect ambiguous #.  This will protect # at the beginning of
   ;; a line, but not at the beginning of a paragraph.  See
-  ;; `org-md-paragraph'.
+  ;; `org-ipynb-paragraph'.
   (setq text (replace-regexp-in-string "\n#" "\n\\\\#" text))
   ;; Protect ambiguous !
   (setq text (replace-regexp-in-string "\\(!\\)\\[" "\\\\!" text nil nil 1))
@@ -530,7 +547,7 @@ contextual information."
 
 ;;;; Property Drawer
 
-(defun org-md-property-drawer (_property-drawer contents _info)
+(defun org-ipynb-property-drawer (_property-drawer contents _info)
   "Transcode a PROPERTY-DRAWER element into Markdown format.
 CONTENTS holds the contents of the drawer.  INFO is a plist
 holding contextual information."
@@ -540,7 +557,7 @@ holding contextual information."
 
 ;;;; Quote Block
 
-(defun org-md-quote-block (_quote-block contents _info)
+(defun org-ipynb-quote-block (_quote-block contents _info)
   "Transcode QUOTE-BLOCK element into Markdown format.
 CONTENTS is the quote-block contents.  INFO is a plist used as
 a communication channel."
@@ -551,16 +568,27 @@ a communication channel."
 
 ;;;; Section
 
-(defun org-md-section (_section contents _info)
+(defun org-ipynb-section (section contents info)
   "Transcode SECTION element into Markdown format.
 CONTENTS is the section contents.  INFO is a plist used as
 a communication channel."
-  contents)
+  (let ((contents (replace-regexp-in-string "
+" "\\\\n" contents)))
+    (unless (string= contents "")
+      (format
+       "\n\n  {
+   \"cell_type\": \"markdown\",
+   \"metadata\": {},
+   \"source\": [
+    \"%s\"
+   ]
+  },"
+       contents))))
 
 
 ;;;; Template
 
-(defun org-md--build-toc (info &optional n _keyword scope)
+(defun org-ipynb--build-toc (info &optional n _keyword scope)
   "Return a table of contents.
 
 INFO is a plist used as a communication channel.
@@ -574,7 +602,7 @@ contents according to the specified element."
    (unless scope
      (let ((style (plist-get info :md-headline-style))
 	   (title (org-html--translate "Table of Contents" info)))
-       (org-md--headline-title style 1 title nil)))
+       (org-ipynb--headline-title style 1 title nil)))
    (mapconcat
     (lambda (headline)
       (let* ((indentation
@@ -604,7 +632,7 @@ contents according to the specified element."
     (org-export-collect-headlines info n scope) "\n")
    "\n"))
 
-(defun org-md--footnote-formatted (footnote info)
+(defun org-ipynb--footnote-formatted (footnote info)
   "Formats a single footnote entry FOOTNOTE.
 FOOTNOTE is a cons cell of the form (number . definition).
 INFO is a plist with contextual information."
@@ -616,7 +644,7 @@ INFO is a plist with contextual information."
          (fn-link-to-ref (org-html--anchor fn-anchor fn-num fn-href info)))
     (concat (format fn-format fn-link-to-ref) " " fn-text "\n")))
 
-(defun org-md--footnote-section (info)
+(defun org-ipynb--footnote-section (info)
   "Format the footnote section.
 INFO is a plist used as a communication channel."
   (let* ((fn-alist (org-export-collect-footnote-definitions info))
@@ -626,12 +654,12 @@ INFO is a plist used as a communication channel."
          (section-title (org-html--translate "Footnotes" info)))
     (when fn-alist
       (format (plist-get info :md-footnotes-section)
-              (org-md--headline-title headline-style 1 section-title)
-              (mapconcat (lambda (fn) (org-md--footnote-formatted fn info))
+              (org-ipynb--headline-title headline-style 1 section-title)
+              (mapconcat (lambda (fn) (org-ipynb--footnote-formatted fn info))
                          fn-alist
                          "\n")))))
 
-(defun org-md-inner-template (contents info)
+(defun org-ipynb-inner-template (contents info)
   "Return body of document after converting it to Markdown syntax.
 CONTENTS is the transcoded contents string.  INFO is a plist
 holding export options."
@@ -641,25 +669,51 @@ holding export options."
    ;; Table of contents.
    (let ((depth (plist-get info :with-toc)))
      (when depth
-       (concat (org-md--build-toc info (and (wholenump depth) depth)) "\n")))
+       (concat (org-ipynb--build-toc info (and (wholenump depth) depth)) "\n")))
    ;; Document contents.
    contents
    "\n"
    ;; Footnotes section.
-   (org-md--footnote-section info)))
+   (org-ipynb--footnote-section info)))
 
-(defun org-md-template (contents _info)
+(defun org-ipynb-template (contents _info)
   "Return complete document string after Markdown conversion.
 CONTENTS is the transcoded contents string.  INFO is a plist used
 as a communication channel."
-  contents)
+  (concat
+   "{
+ \"cells\": [\n"
+   (substring contents 0 -3)
+   "\n],
+ \"metadata\": {
+  \"kernelspec\": {
+   \"display_name\": \"Python 2\",
+   \"language\": \"python\",
+   \"name\": \"python2\"
+  },
+  \"language_info\": {
+   \"codemirror_mode\": {
+    \"name\": \"ipython\",
+    \"version\": 2
+   },
+   \"file_extension\": \".py\",
+   \"mimetype\": \"text/x-python\",
+   \"name\": \"python\",
+   \"nbconvert_exporter\": \"python\",
+   \"pygments_lexer\": \"ipython2\",
+   \"version\": \"2.7.10\"
+  }
+ },
+ \"nbformat\": 4,
+ \"nbformat_minor\": 0
+}"))
 
 
 
 ;;; Interactive function
 
 ;;;###autoload
-(defun org-md-export-as-markdown (&optional async subtreep visible-only)
+(defun org-ipynb-export-as-ipynb (&optional async subtreep visible-only)
   "Export current buffer to a Markdown buffer.
 
 If narrowing is active in the current buffer, only export its
@@ -682,11 +736,11 @@ Export is done in a buffer named \"*Org MD Export*\", which will
 be displayed when `org-export-show-temporary-export-buffer' is
 non-nil."
   (interactive)
-  (org-export-to-buffer 'md "*Org MD Export*"
+  (org-export-to-buffer 'ipynb "*Org Jupyter Export*"
     async subtreep visible-only nil nil (lambda () (text-mode))))
 
 ;;;###autoload
-(defun org-md-convert-region-to-md ()
+(defun org-ipynb-convert-region-to-md ()
   "Assume the current region has Org syntax, and convert it to Markdown.
 This can be used in any buffer.  For example, you can write an
 itemized list in Org syntax in a Markdown buffer and use
@@ -696,7 +750,7 @@ this command to convert it."
 
 
 ;;;###autoload
-(defun org-md-export-to-markdown (&optional async subtreep visible-only)
+(defun org-ipynb-export-to-ipynb (&optional async subtreep visible-only)
   "Export current buffer to a Markdown file.
 
 If narrowing is active in the current buffer, only export its
@@ -717,11 +771,11 @@ contents of hidden elements.
 
 Return output file's name."
   (interactive)
-  (let ((outfile (org-export-output-file-name ".md" subtreep)))
-    (org-export-to-file 'md outfile async subtreep visible-only)))
+  (let ((outfile (org-export-output-file-name ".ipynb" subtreep)))
+    (org-export-to-file 'ipynb outfile async subtreep visible-only)))
 
 ;;;###autoload
-(defun org-md-publish-to-md (plist filename pub-dir)
+(defun org-ipynb-publish-to-md (plist filename pub-dir)
   "Publish an org file to Markdown.
 
 FILENAME is the filename of the Org file to be published.  PLIST
