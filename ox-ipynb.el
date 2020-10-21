@@ -165,6 +165,25 @@ Assume BACKEND is `md'."
 
 ;;; Transcode Functions
 
+;;;; Helper functions
+
+(defun org-ipynb--escape-newlines (contents)
+  "Escape newlines in CONTENTS."
+  (replace-regexp-in-string "
+" "\\\\n" contents))
+
+(defun org-ipynb--format-block (contents)
+  "Format CONTENTS as a JSON block."
+  (format
+   "  {
+   \"cell_type\": \"markdown\",
+   \"metadata\": {},
+   \"source\": [
+    \"%s\"
+   ]
+  },"
+   (org-ipynb--escape-newlines contents)))
+
 ;;;; Bold
 
 (defun org-ipynb-bold (_bold contents _info)
@@ -313,7 +332,10 @@ the section."
           (concat "\n" anchor-lines title tags "\n" underline "\n"))
       ;; Use "Atx" style
       (let ((level-mark (make-string level ?#)))
-        (concat "\n" anchor-lines level-mark " " title tags "\n\n")))))
+        (concat
+         (org-ipynb--format-block
+          (concat anchor-lines level-mark " " title tags))
+         "\n\n")))))
 
 ;;;; Horizontal Rule
 
@@ -494,7 +516,13 @@ information."
   "Transcode PARAGRAPH element into Markdown format.
 CONTENTS is the paragraph contents.  INFO is a plist used as
 a communication channel."
-  (let ((first-object (car (org-element-contents paragraph))))
+  (let ((first-object (car (org-element-contents paragraph)))
+        (contents
+         (let* ((parent (org-export-get-parent-element paragraph))
+                (type (org-element-type parent)))
+           (if (eq type 'item)
+               contents
+             (org-ipynb--format-block contents)))))
     ;; If paragraph starts with a #, protect it.
     (if (and (stringp first-object) (string-prefix-p "#" first-object))
         (concat "\\" contents)
