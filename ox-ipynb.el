@@ -1,8 +1,8 @@
 ;;; ox-ipynb.el --- Org-mode exporter for Jupyter notebooks  -*- fill-column: 78; lexical-binding: t; -*-
 
-;; Copyright © 2020 Leo Vivier <Symbol’s value as variable is void: zp/email-dev>
+;; Copyright © 2020 Leo Vivier <zaeph@zaeph.net>
 
-;; Author: Leo Vivier <Symbol’s value as variable is void: zp/email-dev>
+;; Author: Leo Vivier <zaeph@zaeph.net>
 ;; URL: https://github.com/zaeph/ox-ipynb
 ;; Keywords: org, jupyter
 ;; Version: 0.1.0
