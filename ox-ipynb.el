@@ -313,15 +313,7 @@ the section."
           (concat "\n" anchor-lines title tags "\n" underline "\n"))
       ;; Use "Atx" style
       (let ((level-mark (make-string level ?#)))
-        (format
-         "\n  {
-   \"cell_type\": \"markdown\",
-   \"metadata\": {},
-   \"source\": [
-    \"%s\"
-   ]
-  },"
-         (concat anchor-lines level-mark " " title tags))))))
+        (concat "\n" anchor-lines level-mark " " title tags "\n\n")))))
 
 ;;;; Horizontal Rule
 
@@ -502,7 +494,7 @@ information."
   "Transcode PARAGRAPH element into Markdown format.
 CONTENTS is the paragraph contents.  INFO is a plist used as
 a communication channel."
-  (let ((first-object (org-element-contents paragraph)))
+  (let ((first-object (car (org-element-contents paragraph))))
     ;; If paragraph starts with a #, protect it.
     (if (and (stringp first-object) (string-prefix-p "#" first-object))
         (concat "\\" contents)
@@ -572,18 +564,7 @@ a communication channel."
   "Transcode SECTION element into Markdown format.
 CONTENTS is the section contents.  INFO is a plist used as
 a communication channel."
-  (let ((contents (replace-regexp-in-string "
-" "\\\\n" contents)))
-    (unless (string= contents "")
-      (format
-       "\n\n  {
-   \"cell_type\": \"markdown\",
-   \"metadata\": {},
-   \"source\": [
-    \"%s\"
-   ]
-  },"
-       contents))))
+  contents)
 
 
 ;;;; Template
