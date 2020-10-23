@@ -154,7 +154,7 @@ Assume BACKEND is `md'."
   ;; Return updated tree.
   tree)
 
-(defun org-ipynb-final-function (contents _backend info)
+(defun org-ipynb-final-function (contents _backend _info)
   "Filter to indent the JSON."
   (with-temp-buffer
     (insert contents)
@@ -512,7 +512,7 @@ information."
 
 ;;;; Paragraph
 
-(defun org-ipynb-paragraph (paragraph contents info)
+(defun org-ipynb-paragraph (paragraph contents _info)
   "Transcode PARAGRAPH element into Markdown format.
 CONTENTS is the paragraph contents.  INFO is a plist used as
 a communication channel."
@@ -588,7 +588,7 @@ a communication channel."
 
 ;;;; Section
 
-(defun org-ipynb-section (section contents info)
+(defun org-ipynb-section (_section contents _info)
   "Transcode SECTION element into Markdown format.
 CONTENTS is the section contents.  INFO is a plist used as
 a communication channel."
