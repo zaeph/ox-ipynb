@@ -110,8 +110,7 @@
 
 (defun org-ipynb--format-markdown-cell (contents)
   "Format CONTENTS as a JSON block."
-  (let ((print-escape-newlines t)
-        (contents (substring-no-properties contents)))
+  (let ((print-escape-newlines t))
     (prin1-to-string
      `((cell_type . markdown)
        (metadata . ,(make-hash-table))
@@ -119,14 +118,15 @@
 
 (defun org-ipynb--format-code-cell (contents)
   "Format CONTENTS as a JSON block."
-  (let ((contents (org-ipynb--escape-newlines contents)))
-    `((cell_type . code)
-      (metadata . ,(make-hash-table))
-      (execution_count . 1)
-      (source . ,(vconcat (list contents)))
-      (outputs . ,(vconcat (list '((name . stdout)
-                                   (output_type . stream)
-                                   (text . "foo"))))))))
+  (let ((print-escape-newlines t))
+    (prin1-to-string
+     `((cell_type . code)
+       (metadata . ,(make-hash-table))
+       (execution_count . 1)
+       (source . ,(vconcat (list contents)))
+       (outputs . ,(vconcat (list '((name . stdout)
+                                    (output_type . stream)
+                                    (text . "foo")))))))))
 
 ;;;; Bold
 
@@ -156,10 +156,9 @@ channel."
   "Transcode EXAMPLE-BLOCK element into Markdown format.
 CONTENTS is nil.  INFO is a plist used as a communication
 channel."
-  (replace-regexp-in-string
-   "^" "    "
-   (org-remove-indentation
-    (org-export-format-code-default example-block info))))
+  (org-ipynb--format-code-cell
+   (substring (org-export-format-code-default example-block info)
+              0 -1)))
 
 (defun org-ipynb-export-block (export-block contents info)
   "Transcode a EXPORT-BLOCK element from Org to Markdown.
@@ -175,8 +174,46 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
   "Transcode HEADLINE element into Markdown format.
 CONTENTS is the headline contents.  INFO is a plist used as
 a communication channel."
-  (let ((contents (org-md-headline headline contents info)))
-    (org-ipynb--format-markdown-cell contents)))
+  (unless (org-element-property :footnote-section-p headline)
+    (let* ((level (org-export-get-relative-level headline info))
+           (title (org-export-data (org-element-property :title headline) info))
+           (todo (and (plist-get info :with-todo-keywords)
+                      (let ((todo (org-element-property :todo-keyword
+                                    headline)))
+                        (and todo (concat (org-export-data todo info) " ")))))
+           (tags (and (plist-get info :with-tags)
+                      (let ((tag-list (org-export-get-tags headline info)))
+                        (and tag-list
+                             (concat "     " (org-make-tag-string tag-list))))))
+           (priority
+            (and (plist-get info :with-priority)
+                 (let ((char (org-element-property :priority headline)))
+                   (and char (format "[#%c] " char)))))
+           ;; Headline text without tags.
+           (heading (concat todo priority title))
+           (style (plist-get info :md-headline-style)))
+      (cond
+       ;; Cannot create a headline.  Fall-back to a list.
+       ((or (org-export-low-level-p headline info)
+            (not (memq style '(atx setext)))
+            (and (eq style 'atx) (> level 6))
+            (and (eq style 'setext) (> level 2)))
+        (let ((bullet
+               (if (not (org-export-numbered-headline-p headline info)) "-"
+                 (concat (number-to-string
+                          (car (last (org-export-get-headline-number
+                                      headline info))))
+                         "."))))
+          (concat bullet (make-string (- 4 (length bullet)) ?\s) heading tags "\n\n"
+                  (and contents (replace-regexp-in-string "^" "    " contents)))))
+       (t
+        (let ((anchor
+               (and (org-md--headline-referred-p headline info)
+                    (format "<a id=\"%s\"></a>"
+                            (or (org-element-property :CUSTOM_ID headline)
+                                (org-export-get-reference headline info))))))
+          (concat (org-ipynb--format-markdown-cell (org-md--headline-title style level heading anchor tags))
+                  contents)))))))
 
 (defun org-ipynb--headline-referred-p (headline info)
   "Non-nil when HEADLINE is being referred to.
@@ -234,10 +271,7 @@ the section."
           (concat "\n" anchor-lines title tags "\n" underline "\n"))
       ;; Use "Atx" style
       (let ((level-mark (make-string level ?#)))
-        (concat
-         (org-ipynb--format-block
-          (concat anchor-lines level-mark " " title tags))
-         "\n\n")))))
+        (concat anchor-lines level-mark " " title tags)))))
 
 ;;;; Horizontal Rule
 
@@ -419,7 +453,7 @@ information."
 CONTENTS is the paragraph contents.  INFO is a plist used as
 a communication channel."
   (let ((contents (org-md-paragraph paragraph contents info)))
-    contents))
+    (org-ipynb--format-markdown-cell contents)))
 
 
 ;;;; Plain List
