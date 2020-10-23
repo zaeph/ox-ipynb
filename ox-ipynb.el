@@ -110,11 +110,12 @@
 
 (defun org-ipynb--format-markdown-cell (contents)
   "Format CONTENTS as a JSON block."
-  (push `((cell_type . markdown)
-          (metadata . ,(make-hash-table))
-          (source . ,(vconcat (list contents))))
-        org-ipynb-cell-stack)
-  nil)
+  (let ((print-escape-newlines t)
+        (contents (substring-no-properties contents)))
+    (prin1-to-string
+     `((cell_type . markdown)
+       (metadata . ,(make-hash-table))
+       (source . ,(vconcat (list contents)))))))
 
 (defun org-ipynb--format-code-cell (contents)
   "Format CONTENTS as a JSON block."
@@ -170,11 +171,12 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
 
 ;;;; Headline
 
-(defun org-ipynb-headline (_headline contents _info)
+(defun org-ipynb-headline (headline contents info)
   "Transcode HEADLINE element into Markdown format.
 CONTENTS is the headline contents.  INFO is a plist used as
 a communication channel."
-  (org-ipynb--format-markdown-cell contents))
+  (let ((contents (org-md-headline headline contents info)))
+    (org-ipynb--format-markdown-cell contents)))
 
 (defun org-ipynb--headline-referred-p (headline info)
   "Non-nil when HEADLINE is being referred to.
@@ -412,11 +414,12 @@ information."
 
 ;;;; Paragraph
 
-(defun org-ipynb-paragraph (_paragraph contents _info)
+(defun org-ipynb-paragraph (paragraph contents info)
   "Transcode PARAGRAPH element into Markdown format.
 CONTENTS is the paragraph contents.  INFO is a plist used as
 a communication channel."
-  (org-ipynb--format-markdown-cell contents))
+  (let ((contents (org-md-paragraph paragraph contents info)))
+    contents))
 
 
 ;;;; Plain List
@@ -574,11 +577,11 @@ holding export options."
    ;; Footnotes section.
    (org-ipynb--footnote-section info)))
 
-(defun org-ipynb-template (_contents _info)
+(defun org-ipynb-template (contents _info)
   "Return complete document string after Markdown conversion.
 CONTENTS is the transcoded contents string.  INFO is a plist used
 as a communication channel."
-  (let ((cells (nreverse org-ipynb-cell-stack)))
+  (let ((cells (read (format "(%s)" contents))))
     (with-temp-buffer
       (insert
        (json-encode
