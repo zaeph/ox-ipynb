@@ -454,7 +454,6 @@ information."
   "Transcode PARAGRAPH element into Markdown format.
 CONTENTS is the paragraph contents.  INFO is a plist used as
 a communication channel."
-  (message (org-element-property :raw-value (org-export-get-parent-headline paragraph)))
   (let ((contents (org-md-paragraph paragraph contents info)))
     (org-ipynb--format-markdown-cell contents)))
 
