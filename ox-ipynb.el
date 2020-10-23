@@ -51,7 +51,7 @@
 ;;; Define Back-End
 
 (org-export-define-derived-backend 'ipynb 'html
-  :filters-alist '((:filter-parse-tree . org-ipynb-separate-elements)
+  :filters-alist '((:filter-parse-tree . org-md-separate-elements)
                    ;; (:filter-final-output . org-ipynb-final-function)
                    )
   :menu-entry
@@ -88,9 +88,9 @@
 		     (template . org-ipynb-template)
 		     (verbatim . org-ipynb-verbatim))
   :options-alist
-  '((:md-footnote-format nil nil org-ipynb-footnote-format)
-    (:md-footnotes-section nil nil org-ipynb-footnotes-section)
-    (:md-headline-style nil nil org-ipynb-headline-style)))
+  '((:md-footnote-format nil nil org-md-footnote-format)
+    (:md-footnotes-section nil nil org-md-footnotes-section)
+    (:md-headline-style nil nil org-md-headline-style)))
 
 
 ;;; Filters
@@ -110,7 +110,8 @@
 
 (defun org-ipynb--format-markdown-cell (contents)
   "Format CONTENTS as a JSON block."
-  (let ((print-escape-newlines t))
+  (let ((print-escape-newlines t)
+        (print-circle t))
     (prin1-to-string
      `((cell_type . markdown)
        (metadata . ,(make-hash-table))
@@ -118,7 +119,8 @@
 
 (defun org-ipynb--format-code-cell (contents)
   "Format CONTENTS as a JSON block."
-  (let ((print-escape-newlines t))
+  (let ((print-escape-newlines t)
+        (print-circle t))
     (prin1-to-string
      `((cell_type . code)
        (metadata . ,(make-hash-table))
