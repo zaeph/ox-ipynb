@@ -47,34 +47,6 @@
   :version "24.4"
   :package-version '(Org . "8.0"))
 
-(defcustom org-ipynb-headline-style 'atx
-  "Style used to format headlines.
-This variable can be set to either `atx' or `setext'."
-  :group 'org-export-ipynb
-  :type '(choice
-	  (const :tag "Use \"atx\" style" atx)
-	  (const :tag "Use \"Setext\" style" setext)))
-
-
-;;;; Footnotes
-
-(defcustom org-ipynb-footnotes-section "%s%s"
-  "Format string for the footnotes section.
-The first %s placeholder will be replaced with the localized Footnotes section
-heading, the second with the contents of the Footnotes section."
- :group 'org-export-ipynb
- :type 'string
- :version "26.1"
- :package-version '(Org . "9.0"))
-
-(defcustom org-ipynb-footnote-format "<sup>%s</sup>"
-  "Format string for the footnote reference.
-The %s will be replaced by the footnote reference itself."
-  :group 'org-export-ipynb
-  :type 'string
-  :version "26.1"
-  :package-version '(Org . "9.0"))
-
 
 ;;; Define Back-End
 
@@ -123,66 +95,37 @@ The %s will be replaced by the footnote reference itself."
 
 ;;; Filters
 
-(defun org-ipynb-separate-elements (tree _backend info)
-  "Fix blank lines between elements.
-
-TREE is the parse tree being exported.  BACKEND is the export
-back-end used.  INFO is a plist used as a communication channel.
-
-Enforce a blank line between elements.  There are two exceptions
-to this rule:
-
-  1. Preserve blank lines between sibling items in a plain list,
-
-  2. In an item, remove any blank line before the very first
-     paragraph and the next sub-list when the latter ends the
-     current item.
-
-Assume BACKEND is `md'."
-  (org-element-map tree (remq 'item org-element-all-elements)
-    (lambda (e)
-      (org-element-put-property
-       e :post-blank
-       (if (and (eq (org-element-type e) 'paragraph)
-		(eq (org-element-type (org-element-property :parent e)) 'item)
-		(org-export-first-sibling-p e info)
-		(let ((next (org-export-get-next-element e info)))
-		  (and (eq (org-element-type next) 'plain-list)
-		       (not (org-export-get-next-element next info)))))
-	   0
-	 1))))
-  ;; Return updated tree.
-  tree)
-
-(defun org-ipynb-final-function (contents _backend _info)
+(defun org-ipynb-final-function (_contents _backend _info)
   "Filter to indent the JSON."
   (with-temp-buffer
-    (insert contents)
-    ;; (set-auto-mode t)
-    (json-pretty-print-buffer)))
-
+    (insert "nope")))
 
 
 ;;; Transcode Functions
 
 ;;;; Helper functions
 
-(defun org-ipynb--escape-newlines (contents)
-  "Escape newlines in CONTENTS."
-  (replace-regexp-in-string "
-" "\\\\n" contents))
+(defvar org-ipynb-cell-stack nil
+  "Variable to hold the stack of cells to export.")
 
-(defun org-ipynb--format-block (contents)
+(defun org-ipynb--format-markdown-cell (contents)
   "Format CONTENTS as a JSON block."
-  (format
-   "  {
-   \"cell_type\": \"markdown\",
-   \"metadata\": {},
-   \"source\": [
-    \"%s\"
-   ]
-  },"
-   (org-ipynb--escape-newlines contents)))
+  (push `((cell_type . markdown)
+          (metadata . ,(make-hash-table))
+          (source . ,(vconcat (list contents))))
+        org-ipynb-cell-stack)
+  nil)
+
+(defun org-ipynb--format-code-cell (contents)
+  "Format CONTENTS as a JSON block."
+  (let ((contents (org-ipynb--escape-newlines contents)))
+    `((cell_type . code)
+      (metadata . ,(make-hash-table))
+      (execution_count . 1)
+      (source . ,(vconcat (list contents)))
+      (outputs . ,(vconcat (list '((name . stdout)
+                                   (output_type . stream)
+                                   (text . "foo"))))))))
 
 ;;;; Bold
 
@@ -191,7 +134,6 @@ Assume BACKEND is `md'."
 CONTENTS is the text within bold markup.  INFO is a plist used as
 a communication channel."
   (format "**%s**" contents))
-
 
 ;;;; Code and Verbatim
 
@@ -206,7 +148,6 @@ channel."
 		   "`` %s ``")
 		  (t "``%s``"))
 	    value)))
-
 
 ;;;; Example Block, Src Block and Export Block
 
@@ -227,54 +168,13 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
     ;; Also include HTML export blocks.
     (org-export-with-backend 'html export-block contents info)))
 
-
 ;;;; Headline
 
-(defun org-ipynb-headline (headline contents info)
+(defun org-ipynb-headline (_headline contents _info)
   "Transcode HEADLINE element into Markdown format.
 CONTENTS is the headline contents.  INFO is a plist used as
 a communication channel."
-  (unless (org-element-property :footnote-section-p headline)
-    (let* ((level (org-export-get-relative-level headline info))
-	   (title (org-export-data (org-element-property :title headline) info))
-	   (todo (and (plist-get info :with-todo-keywords)
-		      (let ((todo (org-element-property :todo-keyword
-							headline)))
-			(and todo (concat (org-export-data todo info) " ")))))
-	   (tags (and (plist-get info :with-tags)
-		      (let ((tag-list (org-export-get-tags headline info)))
-			(and tag-list
-			     (concat "     " (org-make-tag-string tag-list))))))
-	   (priority
-	    (and (plist-get info :with-priority)
-		 (let ((char (org-element-property :priority headline)))
-		   (and char (format "[#%c] " char)))))
-	   ;; Headline text without tags.
-	   (heading (concat todo priority title))
-	   (style (plist-get info :md-headline-style)))
-      (cond
-       ;; Cannot create a headline.  Fall-back to a list.
-       ((or (org-export-low-level-p headline info)
-	    (not (memq style '(atx setext)))
-	    (and (eq style 'atx) (> level 6))
-	    (and (eq style 'setext) (> level 2)))
-	(let ((bullet
-	       (if (not (org-export-numbered-headline-p headline info)) "-"
-		 (concat (number-to-string
-			  (car (last (org-export-get-headline-number
-				      headline info))))
-			 "."))))
-	  (concat bullet (make-string (- 4 (length bullet)) ?\s) heading tags "\n\n"
-		  (and contents (replace-regexp-in-string "^" "    " contents)))))
-       (t
-	(let ((anchor
-	       (and (org-ipynb--headline-referred-p headline info)
-		    (format "<a id=\"%s\"></a>"
-			    (or (org-element-property :CUSTOM_ID headline)
-				(org-export-get-reference headline info))))))
-          (concat (org-ipynb--headline-title style level heading anchor tags)
-		  contents)))))))
-
+  (org-ipynb--format-markdown-cell contents))
 
 (defun org-ipynb--headline-referred-p (headline info)
   "Non-nil when HEADLINE is being referred to.
@@ -512,30 +412,19 @@ information."
 
 ;;;; Paragraph
 
-(defun org-ipynb-paragraph (paragraph contents _info)
+(defun org-ipynb-paragraph (_paragraph contents _info)
   "Transcode PARAGRAPH element into Markdown format.
 CONTENTS is the paragraph contents.  INFO is a plist used as
 a communication channel."
-  (let ((first-object (car (org-element-contents paragraph)))
-        (contents
-         (let* ((parent (org-export-get-parent-element paragraph))
-                (type (org-element-type parent)))
-           (if (eq type 'item)
-               contents
-             (org-ipynb--format-block contents)))))
-    ;; If paragraph starts with a #, protect it.
-    (if (and (stringp first-object) (string-prefix-p "#" first-object))
-        (concat "\\" contents)
-      contents)))
+  (org-ipynb--format-markdown-cell contents))
 
 
 ;;;; Plain List
 
-(defun org-ipynb-plain-list (_plain-list contents _info)
+(defun org-ipynb-plain-list (_plain-list _contents _info)
   "Transcode PLAIN-LIST element into Markdown format.
 CONTENTS is the plain-list contents.  INFO is a plist used as
-a communication channel."
-  (org-ipynb--format-block contents))
+a communication channel.")
 
 
 ;;;; Plain Text
@@ -685,37 +574,30 @@ holding export options."
    ;; Footnotes section.
    (org-ipynb--footnote-section info)))
 
-(defun org-ipynb-template (contents _info)
+(defun org-ipynb-template (_contents _info)
   "Return complete document string after Markdown conversion.
 CONTENTS is the transcoded contents string.  INFO is a plist used
 as a communication channel."
-  (concat
-   "{
- \"cells\": [\n"
-   (substring contents 0 -3)
-   "\n],
- \"metadata\": {
-  \"kernelspec\": {
-   \"display_name\": \"Python 2\",
-   \"language\": \"python\",
-   \"name\": \"python2\"
-  },
-  \"language_info\": {
-   \"codemirror_mode\": {
-    \"name\": \"ipython\",
-    \"version\": 2
-   },
-   \"file_extension\": \".py\",
-   \"mimetype\": \"text/x-python\",
-   \"name\": \"python\",
-   \"nbconvert_exporter\": \"python\",
-   \"pygments_lexer\": \"ipython2\",
-   \"version\": \"2.7.10\"
-  }
- },
- \"nbformat\": 4,
- \"nbformat_minor\": 0
-}"))
+  (let ((cells (nreverse org-ipynb-cell-stack)))
+    (with-temp-buffer
+      (insert
+       (json-encode
+        `((cells . ,(vconcat cells))
+          (metadata . ((kernelspec . ((display_name . "Python 3")
+                                      (language . "python")
+                                      (name . "python3")))
+                       (language_info . ((codemirror_mode . ((name . ipython)
+                                                             (version . 3)))
+                                         (file_extension . ".py")
+                                         (mimetype . "text/x-python")
+                                         (name . "python")
+                                         (nbconvert_exporter . "python")
+                                         (pygments_lexer . "ipython3")
+                                         (version . "3.5.2")))))
+          (nbformat . 4)
+          (nbformat_minor . 0))))
+      (json-pretty-print (point-min) (point-max))
+      (buffer-string))))
 
 
 
@@ -745,6 +627,7 @@ Export is done in a buffer named \"*Org MD Export*\", which will
 be displayed when `org-export-show-temporary-export-buffer' is
 non-nil."
   (interactive)
+  (setq org-ipynb-cell-stack nil)
   (org-export-to-buffer 'ipynb "*Org Jupyter Export*"
     async subtreep visible-only nil nil (lambda () (text-mode))))
 
