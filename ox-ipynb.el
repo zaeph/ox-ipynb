@@ -146,6 +146,10 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
   "Transcode HEADLINE element into Markdown format.
 CONTENTS is the headline contents.  INFO is a plist used as
 a communication channel."
+  (message (if-let (a (org-element-property :raw-value headline))
+               a
+             "Nothing detected"))
+  (message contents)
   (unless (org-element-property :footnote-section-p headline)
     (let* ((level (org-export-get-relative-level headline info))
            (title (org-export-data (org-element-property :title headline) info))
@@ -303,6 +307,7 @@ information."
   "Transcode PARAGRAPH element into Markdown format.
 CONTENTS is the paragraph contents.  INFO is a plist used as
 a communication channel."
+  (message (org-element-property :raw-value (org-export-get-parent-headline paragraph)))
   (let ((contents (org-md-paragraph paragraph contents info)))
     (org-ipynb--format-markdown-cell contents)))
 
