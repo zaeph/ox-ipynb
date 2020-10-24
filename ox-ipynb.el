@@ -50,7 +50,7 @@
 
 ;;; Define Back-End
 
-(org-export-define-derived-backend 'ipynb 'html
+(org-export-define-derived-backend 'ipynb 'md
   :filters-alist '((:filter-parse-tree . org-md-separate-elements)
                    ;; (:filter-final-output . org-ipynb-final-function)
                    )
@@ -63,30 +63,22 @@
 	    (lambda (a s v b)
 	      (if a (org-ipynb-export-to-ipynb t s v)
 		(org-open-file (org-ipynb-export-to-ipynb nil s v)))))))
-  :translate-alist '((bold . org-ipynb-bold)
-		     (code . org-ipynb-verbatim)
-		     (example-block . org-ipynb-example-block)
+  :translate-alist '((example-block . org-ipynb-example-block)
 		     (export-block . org-ipynb-export-block)
 		     (fixed-width . org-ipynb-example-block)
 		     (headline . org-ipynb-headline)
 		     (horizontal-rule . org-ipynb-horizontal-rule)
 		     (inline-src-block . org-ipynb-verbatim)
 		     (inner-template . org-ipynb-inner-template)
-		     (italic . org-ipynb-italic)
-		     (item . org-ipynb-item)
 		     (keyword . org-ipynb-keyword)
 		     (line-break . org-ipynb-line-break)
-		     (link . org-ipynb-link)
+		     (link . org-html-link)
 		     (node-property . org-ipynb-node-property)
 		     (paragraph . org-ipynb-paragraph)
-		     (plain-list . org-ipynb-plain-list)
-		     (plain-text . org-ipynb-plain-text)
 		     (property-drawer . org-ipynb-property-drawer)
 		     (quote-block . org-ipynb-quote-block)
-		     (section . org-ipynb-section)
 		     (src-block . org-ipynb-example-block)
-		     (template . org-ipynb-template)
-		     (verbatim . org-ipynb-verbatim))
+		     (template . org-ipynb-template))
   :options-alist
   '((:md-footnote-format nil nil org-md-footnote-format)
     (:md-footnotes-section nil nil org-md-footnotes-section)
@@ -129,28 +121,6 @@
        (outputs . ,(vconcat (list '((name . stdout)
                                     (output_type . stream)
                                     (text . "foo")))))))))
-
-;;;; Bold
-
-(defun org-ipynb-bold (_bold contents _info)
-  "Transcode BOLD object into Markdown format.
-CONTENTS is the text within bold markup.  INFO is a plist used as
-a communication channel."
-  (format "**%s**" contents))
-
-;;;; Code and Verbatim
-
-(defun org-ipynb-verbatim (verbatim _contents _info)
-  "Transcode VERBATIM object into Markdown format.
-CONTENTS is nil.  INFO is a plist used as a communication
-channel."
-  (let ((value (org-element-property :value verbatim)))
-    (format (cond ((not (string-match "`" value)) "`%s`")
-		  ((or (string-prefix-p "`" value)
-		       (string-suffix-p "`" value))
-		   "`` %s ``")
-		  (t "``%s``"))
-	    value)))
 
 ;;;; Example Block, Src Block and Export Block
 
@@ -283,45 +253,6 @@ CONTENTS is the horizontal rule contents.  INFO is a plist used
 as a communication channel."
   "---")
 
-
-;;;; Italic
-
-(defun org-ipynb-italic (_italic contents _info)
-  "Transcode ITALIC object into Markdown format.
-CONTENTS is the text within italic markup.  INFO is a plist used
-as a communication channel."
-  (format "*%s*" contents))
-
-
-;;;; Item
-
-(defun org-ipynb-item (item contents info)
-  "Transcode ITEM element into Markdown format.
-CONTENTS is the item contents.  INFO is a plist used as
-a communication channel."
-  (let* ((type (org-element-property :type (org-export-get-parent item)))
-	 (struct (org-element-property :structure item))
-	 (bullet (if (not (eq type 'ordered)) "-"
-		   (concat (number-to-string
-			    (car (last (org-list-get-item-number
-					(org-element-property :begin item)
-					struct
-					(org-list-prevs-alist struct)
-					(org-list-parents-alist struct)))))
-			   "."))))
-    (concat bullet
-	    (make-string (- 4 (length bullet)) ? )
-	    (pcase (org-element-property :checkbox item)
-	      (`on "[X] ")
-	      (`trans "[-] ")
-	      (`off "[ ] "))
-	    (let ((tag (org-element-property :tag item)))
-	      (and tag (format "**%s:** "(org-export-data tag info))))
-	    (and contents
-		 (org-trim (replace-regexp-in-string "^" "    " contents))))))
-
-
-
 ;;;; Keyword
 
 (defun org-ipynb-keyword (keyword contents info)
@@ -347,7 +278,6 @@ channel."
 	    (org-ipynb--build-toc info depth keyword scope)))))))
     (_ (org-export-with-backend 'html keyword contents info))))
 
-
 ;;;; Line Break
 
 (defun org-ipynb-line-break (_line-break _contents _info)
@@ -355,86 +285,6 @@ channel."
 CONTENTS is nil.  INFO is a plist used as a communication
 channel."
   "  \n")
-
-
-;;;; Link
-
-(defun org-ipynb-link (link contents info)
-  "Transcode LINE-BREAK object into Markdown format.
-CONTENTS is the link's description.  INFO is a plist used as
-a communication channel."
-  (let ((link-org-files-as-md
-	 (lambda (raw-path)
-	   ;; Treat links to `file.org' as links to `file.md'.
-	   (if (string= ".org" (downcase (file-name-extension raw-path ".")))
-	       (concat (file-name-sans-extension raw-path) ".md")
-	     raw-path)))
-	(type (org-element-property :type link)))
-    (cond
-     ;; Link type is handled by a special function.
-     ((org-export-custom-protocol-maybe link contents 'md))
-     ((member type '("custom-id" "id" "fuzzy"))
-      (let ((destination (if (string= type "fuzzy")
-			     (org-export-resolve-fuzzy-link link info)
-			   (org-export-resolve-id-link link info))))
-	(pcase (org-element-type destination)
-	  (`plain-text			; External file.
-	   (let ((path (funcall link-org-files-as-md destination)))
-	     (if (not contents) (format "<%s>" path)
-	       (format "[%s](%s)" contents path))))
-	  (`headline
-	   (format
-	    "[%s](#%s)"
-	    ;; Description.
-	    (cond ((org-string-nw-p contents))
-		  ((org-export-numbered-headline-p destination info)
-		   (mapconcat #'number-to-string
-			      (org-export-get-headline-number destination info)
-			      "."))
-		  (t (org-export-data (org-element-property :title destination)
-				      info)))
-	    ;; Reference.
-	    (or (org-element-property :CUSTOM_ID destination)
-		(org-export-get-reference destination info))))
-	  (_
-	   (let ((description
-		  (or (org-string-nw-p contents)
-		      (let ((number (org-export-get-ordinal destination info)))
-			(cond
-			 ((not number) nil)
-			 ((atom number) (number-to-string number))
-			 (t (mapconcat #'number-to-string number ".")))))))
-	     (when description
-	       (format "[%s](#%s)"
-		       description
-		       (org-export-get-reference destination info))))))))
-     ((org-export-inline-image-p link org-html-inline-image-rules)
-      (let ((path (let ((raw-path (org-element-property :path link)))
-		    (cond ((not (equal "file" type)) (concat type ":" raw-path))
-			  ((not (file-name-absolute-p raw-path)) raw-path)
-			  (t (expand-file-name raw-path)))))
-	    (caption (org-export-data
-		      (org-export-get-caption
-		       (org-export-get-parent-element link)) info)))
-	(format "![img](%s)"
-		(if (not (org-string-nw-p caption)) path
-		  (format "%s \"%s\"" path caption)))))
-     ((string= type "coderef")
-      (let ((ref (org-element-property :path link)))
-	(format (org-export-get-coderef-format ref contents)
-		(org-export-resolve-coderef ref info))))
-     ((equal type "radio") contents)
-     (t (let* ((raw-path (org-element-property :path link))
-	       (path
-		(cond
-		 ((member type '("http" "https" "ftp" "mailto"))
-		  (concat type ":" raw-path))
-		 ((string= type "file")
-		  (org-export-file-uri (funcall link-org-files-as-md raw-path)))
-		 (t raw-path))))
-	  (if (not contents) (format "<%s>" path)
-	    (format "[%s](%s)" contents path)))))))
-
 
 ;;;; Node Property
 
@@ -447,7 +297,6 @@ information."
           (let ((value (org-element-property :value node-property)))
             (if value (concat " " value) ""))))
 
-
 ;;;; Paragraph
 
 (defun org-ipynb-paragraph (paragraph contents info)
@@ -457,42 +306,6 @@ a communication channel."
   (let ((contents (org-md-paragraph paragraph contents info)))
     (org-ipynb--format-markdown-cell contents)))
 
-
-;;;; Plain List
-
-(defun org-ipynb-plain-list (_plain-list _contents _info)
-  "Transcode PLAIN-LIST element into Markdown format.
-CONTENTS is the plain-list contents.  INFO is a plist used as
-a communication channel.")
-
-
-;;;; Plain Text
-
-(defun org-ipynb-plain-text (text info)
-  "Transcode a TEXT string into Markdown format.
-TEXT is the string to transcode.  INFO is a plist holding
-contextual information."
-  (when (plist-get info :with-smart-quotes)
-    (setq text (org-export-activate-smart-quotes text :html info)))
-  ;; The below series of replacements in `text' is order sensitive.
-  ;; Protect `, *, _, and \
-  (setq text (replace-regexp-in-string "[`*_\\]" "\\\\\\&" text))
-  ;; Protect ambiguous #.  This will protect # at the beginning of
-  ;; a line, but not at the beginning of a paragraph.  See
-  ;; `org-ipynb-paragraph'.
-  (setq text (replace-regexp-in-string "\n#" "\n\\\\#" text))
-  ;; Protect ambiguous !
-  (setq text (replace-regexp-in-string "\\(!\\)\\[" "\\\\!" text nil nil 1))
-  ;; Handle special strings, if required.
-  (when (plist-get info :with-special-strings)
-    (setq text (org-html-convert-special-strings text)))
-  ;; Handle break preservation, if required.
-  (when (plist-get info :preserve-breaks)
-    (setq text (replace-regexp-in-string "[ \t]*\n" "  \n" text)))
-  ;; Return value.
-  text)
-
-
 ;;;; Property Drawer
 
 (defun org-ipynb-property-drawer (_property-drawer contents _info)
@@ -501,7 +314,6 @@ CONTENTS holds the contents of the drawer.  INFO is a plist
 holding contextual information."
   (and (org-string-nw-p contents)
        (replace-regexp-in-string "^" "    " contents)))
-
 
 ;;;; Quote Block
 
@@ -513,7 +325,6 @@ a communication channel."
    "^" "> "
    (replace-regexp-in-string "\n\\'" "" contents)))
 
-
 ;;;; Section
 
 (defun org-ipynb-section (_section contents _info)
@@ -521,7 +332,6 @@ a communication channel."
 CONTENTS is the section contents.  INFO is a plist used as
 a communication channel."
   contents)
-
 
 ;;;; Template
 
