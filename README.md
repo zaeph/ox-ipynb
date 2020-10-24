@@ -6,11 +6,11 @@ Synopsis
 > **NOTE:** This repository is a WIP.  The software is still
 > a prototype, but it is functional.
 
-`ox-ipynb` is a [`org-mode`](https://orgmode.org/) exporter for [Jupyter
-Notebook](https://jupyter.org/).  It is written and designed with the
-intention of making it an official org-mode exporter, i.e., by merging
-it upstream.  As such, when a stable version is achieved, a request for
-an upstream merge will be issued.
+`ox-ipynb` is an [`org-mode`](https://orgmode.org/) exporter for
+[Jupyter Notebook](https://jupyter.org/).  It is written and designed
+with the intention of making it an official org-mode exporter, i.e., by
+merging it upstream.  As such, when a stable version is achieved,
+a request for an upstream merge will be issued.
 
 Preview
 ---------------
