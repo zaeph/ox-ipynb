@@ -303,8 +303,11 @@ information."
   "Transcode PARAGRAPH element into Markdown format.
 CONTENTS is the paragraph contents.  INFO is a plist used as
 a communication channel."
-  (let ((contents (org-md-paragraph paragraph contents info)))
-    (org-ipynb--format-markdown-cell contents)))
+  (if (equal (car (org-export-get-parent paragraph))
+             'quote-block)
+      contents
+      (let ((contents (org-md-paragraph paragraph contents info)))
+        (org-ipynb--format-markdown-cell contents))))
 
 ;;;; Property Drawer
 
@@ -321,9 +324,8 @@ holding contextual information."
   "Transcode QUOTE-BLOCK element into Markdown format.
 CONTENTS is the quote-block contents.  INFO is a plist used as
 a communication channel."
-  (replace-regexp-in-string
-   "^" "> "
-   (replace-regexp-in-string "\n\\'" "" contents)))
+  (org-ipynb--format-markdown-cell
+   (replace-regexp-in-string "^" "> " contents)))
 
 ;;;; Section
 
