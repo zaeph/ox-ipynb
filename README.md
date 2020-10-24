@@ -28,8 +28,8 @@ The package is not yet available on
 
 ### Via cloning
 
-You can also clone the repository somewhere in your `load-path`.  If
-you would like to assist with development, this is the way to go.
+You can clone the repository somewhere in your `load-path`.  If you
+would like to assist with development, this is the way to go.
 
 To do that:
 1. Create a directory where you’d like to clone the repository,
