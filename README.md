@@ -77,9 +77,9 @@ to you.
 Usage
 ---------------
 
-Q: How does this package differ from [`jkitchin/ox-ipynb`](https://github.com/jkitchin/ox-ipynb)?
+**Q**: How does this package differ from [`jkitchin/ox-ipynb`](https://github.com/jkitchin/ox-ipynb)?
 
-A: `jkitchin/ox-ipynb` is a another attempt at a Jupyter Notebook
+**A**: `jkitchin/ox-ipynb` is a another attempt at a Jupyter Notebook
 exporter for `org-mode`, and a great one at that.  It covers more
 edge-cases than `zaeph/ox-ipynb` currently does, but it suffers from
 early design decisions which 1) make it nearly impossible to implement
