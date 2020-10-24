@@ -56,7 +56,9 @@ your
 ### With `use-package`
 
 ```el
-(use-package ox-ipynb)
+(use-package ox-ipynb
+  :load-path "~/projects/org-roam-bibtex/" ;Modify with your own path
+  )
 ```
 
 ### Without `use-package`
