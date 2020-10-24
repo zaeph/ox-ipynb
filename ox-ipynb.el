@@ -71,6 +71,7 @@
 		     (inline-src-block . org-ipynb-verbatim)
 		     (inner-template . org-ipynb-inner-template)
 		     (keyword . org-ipynb-keyword)
+                     (latex-fragment . org-html-latex-fragment)
 		     (line-break . org-ipynb-line-break)
 		     (link . org-html-link)
 		     (node-property . org-ipynb-node-property)
