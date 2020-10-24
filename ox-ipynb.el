@@ -100,27 +100,24 @@
 (defvar org-ipynb-cell-stack nil
   "Variable to hold the stack of cells to export.")
 
+(defvar org-ipynb-cell-stack-staging nil
+  "Variable to hold the stack of cells in headlines to export.")
+
 (defun org-ipynb--format-markdown-cell (contents)
   "Format CONTENTS as a JSON block."
-  (let ((print-escape-newlines t)
-        (print-circle t))
-    (prin1-to-string
-     `((cell_type . markdown)
-       (metadata . ,(make-hash-table))
-       (source . ,(vconcat (list contents)))))))
+  `((cell_type . markdown)
+    (metadata . ,(make-hash-table))
+    (source . ,(vconcat (list contents)))))
 
 (defun org-ipynb--format-code-cell (contents)
   "Format CONTENTS as a JSON block."
-  (let ((print-escape-newlines t)
-        (print-circle t))
-    (prin1-to-string
-     `((cell_type . code)
-       (metadata . ,(make-hash-table))
-       (execution_count . 1)
-       (source . ,(vconcat (list contents)))
-       (outputs . ,(vconcat (list '((name . stdout)
-                                    (output_type . stream)
-                                    (text . "foo")))))))))
+  `((cell_type . code)
+    (metadata . ,(make-hash-table))
+    (execution_count . 1)
+    (source . ,(vconcat (list contents)))
+    (outputs . ,(vconcat (list '((name . stdout)
+                                 (output_type . stream)
+                                 (text . "foo")))))))
 
 ;;;; Example Block, Src Block and Export Block
 
@@ -303,8 +300,12 @@ information."
   "Transcode PARAGRAPH element into Markdown format.
 CONTENTS is the paragraph contents.  INFO is a plist used as
 a communication channel."
-  (let ((contents (org-md-paragraph paragraph contents info)))
-    (org-ipynb--format-markdown-cell contents)))
+  (let* ((contents (org-md-paragraph paragraph contents info))
+         (cell (org-ipynb--format-markdown-cell contents))
+         (parent (org-export-get-parent-headline paragraph)))
+    (if (org-export-get-parent-headline paragraph)
+        cell
+      (push cell org-ipynb-cell-stack))))
 
 ;;;; Property Drawer
 
