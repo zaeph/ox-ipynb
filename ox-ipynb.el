@@ -76,6 +76,7 @@
 		     (link . org-html-link)
 		     (node-property . org-ipynb-node-property)
 		     (paragraph . org-ipynb-paragraph)
+                     (plain-list . org-ipynb-plain-list)
 		     (property-drawer . org-ipynb-property-drawer)
 		     (quote-block . org-ipynb-quote-block)
 		     (src-block . org-ipynb-example-block)
@@ -304,11 +305,21 @@ information."
   "Transcode PARAGRAPH element into Markdown format.
 CONTENTS is the paragraph contents.  INFO is a plist used as
 a communication channel."
-  (if (equal (car (org-export-get-parent paragraph))
-             'quote-block)
-      contents
+  (let* ((parent (org-export-get-parent paragraph))
+         (parent-type (car parent))
+         (no-cell-types '(quote-block item)))
+    (if (member parent-type no-cell-types)
+        contents
       (let ((contents (org-md-paragraph paragraph contents info)))
-        (org-ipynb--format-markdown-cell contents))))
+        (org-ipynb--format-markdown-cell contents)))))
+
+;;;; Plain List
+
+(defun org-ipynb-plain-list (_plain-list contents _info)
+  "Transcode PLAIN-LIST element into Markdown format.
+CONTENTS is the plain-list contents.  INFO is a plist used as
+a communication channel."
+  (org-ipynb--format-markdown-cell contents))
 
 ;;;; Property Drawer
 
