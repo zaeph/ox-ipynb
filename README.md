@@ -74,7 +74,7 @@ pressing `C-c C-e`.  You will see a line `[j] Export to Jupyter` in the
 `*Org Export Dispatcher*` which mentions the different options available
 to you.
 
-Usage
+Frequently-Asked Questions
 ---------------
 
 **Q**: How does this package differ from [`jkitchin/ox-ipynb`](https://github.com/jkitchin/ox-ipynb)?
