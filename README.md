@@ -82,12 +82,11 @@ Frequently-Asked Questions
 **A**: `jkitchin/ox-ipynb` is a another attempt at a Jupyter Notebook
 exporter for `org-mode`, and a great one at that.  It covers more
 edge-cases than `zaeph/ox-ipynb` currently does, but it suffers from
-early design decisions which **1)** make it nearly impossible to
-implement some common `org-export` features, and **2)** make it
-impossible to merge it upstream.  `zaeph/ox-ipynb` was designed from the
-ground up with an upstream merge in mind, most notably by playing nice
-with [`ox.el`](https://orgmode.org/worg/dev/org-export-reference.html)
-and
+early design decisions which 1) make it nearly impossible to implement
+some common `org-export` features, and 2) make it impossible to merge it
+upstream.  `zaeph/ox-ipynb` was designed from the ground up with an
+upstream merge in mind, most notably by playing nice with
+[`ox.el`](https://orgmode.org/worg/dev/org-export-reference.html) and
 [`org-element.el`](https://orgmode.org/worg/dev/org-element-api.html),
 which has the added benefit of making a lot of things Just Work™.
 
