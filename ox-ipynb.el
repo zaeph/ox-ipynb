@@ -126,7 +126,7 @@
        (source . ,(vconcat (list contents)))
        (outputs . ,(vconcat (list '((name . stdout)
                                     (output_type . stream)
-                                    (text . "foo")))))))))
+                                    (text . "")))))))))
 
 (defun org-ipynb--read-attribute (object)
   "Read the attribute of OBJECT as a plist."
