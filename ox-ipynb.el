@@ -106,10 +106,6 @@
 (defvar org-ipynb--cells-staging nil
   "Variable to hold the stack of cells to export.")
 
-(defun org-ipynb--double-newlines (contents)
-  "Double newlines in CONTENTS."
-  (replace-regexp-in-string "\n" "\n\n" contents))
-
 (defun org-ipynb--format-markdown-cell (contents)
   "Format CONTENTS as a JSON block."
   (let ((print-escape-newlines t)
@@ -342,8 +338,7 @@ a communication channel."
   "Transcode PLAIN-LIST element into Markdown format.
 CONTENTS is the plain-list contents.  INFO is a plist used as
 a communication channel."
-  (let ((contents (org-ipynb--double-newlines contents)))
-    (org-ipynb--combine-object plain-list contents info)))
+  (org-ipynb--combine-object plain-list contents info))
 
 ;;;; Property Drawer
 
@@ -360,8 +355,7 @@ holding contextual information."
   "Transcode QUOTE-BLOCK element into Markdown format.
 CONTENTS is the quote-block contents.  INFO is a plist used as
 a communication channel."
-  (let ((contents (replace-regexp-in-string "^" "> "
-                                            (org-ipynb--double-newlines contents))))
+  (let ((contents (replace-regexp-in-string "^" "> " contents)))
     (org-ipynb--combine-object quote-block contents info)))
 
 ;;;; Section
