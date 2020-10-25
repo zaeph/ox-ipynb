@@ -330,10 +330,14 @@ information."
          (concat-types '(paragraph plain-list quote-block)))
     (cond ((and (member next-type concat-types)
                 (< (org-element-property :post-blank object) 2))
-           (setq org-ipynb--cells-staging (concat staging contents "\n"))
+           (pcase-let ((`(,staging-contents ,staging-metadata) staging))
+             (setq org-ipynb--cells-staging (list (concat staging-contents contents "\n")
+                                                  (or staging-metadata
+                                                      metadata))))
            nil)
           (t
-           (let ((contents (concat staging contents)))
+           (let ((contents (concat (pop staging) contents))
+                 (metadata (pop staging)))
              (setq org-ipynb--cells-staging nil)
              (org-ipynb--format-markdown-cell contents metadata))))))
 
