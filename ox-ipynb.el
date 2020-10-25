@@ -86,7 +86,8 @@
 		     (template . org-ipynb-template)
                      (verbatim . org-md-verbatim))
   :options-alist
-  '((:md-footnote-format nil nil org-md-footnote-format)
+  '((:ipynb-options "IPYNB_OPTIONS" nil nil t)
+    (:md-footnote-format nil nil org-md-footnote-format)
     (:md-footnotes-section nil nil org-md-footnotes-section)
     (:md-headline-style nil nil org-md-headline-style)))
 
@@ -484,11 +485,12 @@ holding export options."
    ;; Footnotes section.
    (org-ipynb--footnote-section info)))
 
-(defun org-ipynb-template (contents _info)
+(defun org-ipynb-template (contents info)
   "Return complete document string after Markdown conversion.
 CONTENTS is the transcoded contents string.  INFO is a plist used
 as a communication channel."
-  (let ((cells (read (format "(%s)" contents))))
+  (let ((options (read (format "(%s)" (plist-get info :ipynb-options))))
+        (cells (read (format "(%s)" contents))))
     (with-temp-buffer
       (insert
        (json-encode
@@ -503,7 +505,8 @@ as a communication channel."
                                          (name . "python")
                                          (nbconvert_exporter . "python")
                                          (pygments_lexer . "ipython3")
-                                         (version . "3.5.2")))))
+                                         (version . "3.5.2")))
+                       ,options))
           (nbformat . 4)
           (nbformat_minor . 0))))
       (json-pretty-print (point-min) (point-max))
