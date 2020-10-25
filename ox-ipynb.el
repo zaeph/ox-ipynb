@@ -317,7 +317,7 @@ information."
                   (< post-blank 2))
              ;; Add as many blank-lines as needed after contents
              (setq contents (concat contents
-                                    (apply #'concat (make-list post-blank "\n"))))
+                                    (when (> post-blank 1) "\n")))
              (setq org-ipynb--cells-staging (concat staging contents))
              nil)
             (t
