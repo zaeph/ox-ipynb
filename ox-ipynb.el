@@ -311,12 +311,14 @@ information."
 
 (defun org-ipynb--combine-object (object contents info)
   "Merge OBJECT’s CONTENTS with INFO."
+  (message "%s" (org-element-property :post-blank object))
   (let* ((contents (org-md-paragraph object contents info))
          (next (org-export-get-next-element object info))
          (next-type (car next))
          (staging org-ipynb--cells-staging)
          (concat-types '(paragraph plain-list)))
-    (cond ((member next-type concat-types)
+    (cond ((and (member next-type concat-types)
+                (< (org-element-property :post-blank object) 2))
            (setq org-ipynb--cells-staging (concat staging contents))
            nil)
           (t
