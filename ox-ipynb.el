@@ -78,7 +78,7 @@
 		     (node-property . org-ipynb-node-property)
 		     (paragraph . org-ipynb-paragraph)
                      (plain-list . org-ipynb-plain-list)
-                     (plain-text . org-md-plain-text)
+                     (plain-text . org-ipynb-plain-text)
 		     (property-drawer . org-ipynb-property-drawer)
 		     (quote-block . org-ipynb-quote-block)
                      (section . org-md-section)
@@ -339,6 +339,32 @@ a communication channel."
     (if (member parent-type no-cell-types)
         contents
       (org-ipynb--combine-object plain-list contents info))))
+
+;;;; Plain Text
+
+(defun org-ipynb-plain-text (text info)
+  "Transcode a TEXT string into Markdown format.
+TEXT is the string to transcode.  INFO is a plist holding
+contextual information."
+  (when (plist-get info :with-smart-quotes)
+    (setq text (org-export-activate-smart-quotes text :utf-8 info)))
+  ;; The below series of replacements in `text' is order sensitive.
+  ;; Protect `, *, _, and \
+  (setq text (replace-regexp-in-string "[`*_\\]" "\\\\\\&" text))
+  ;; Protect ambiguous #.  This will protect # at the beginning of
+  ;; a line, but not at the beginning of a paragraph.  See
+  ;; `org-md-paragraph'.
+  (setq text (replace-regexp-in-string "\n#" "\n\\\\#" text))
+  ;; Protect ambiguous !
+  (setq text (replace-regexp-in-string "\\(!\\)\\[" "\\\\!" text nil nil 1))
+  ;; Handle special strings, if required.
+  (when (plist-get info :with-special-strings)
+    (setq text (org-html-convert-special-strings text)))
+  ;; Handle break preservation, if required.
+  (when (plist-get info :preserve-breaks)
+    (setq text (replace-regexp-in-string "[ \t]*\n" "  \n" text)))
+  ;; Return value.
+  text)
 
 ;;;; Property Drawer
 
