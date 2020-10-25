@@ -107,7 +107,6 @@
   (let ((print-escape-newlines t)
         (print-circle t)
         (metadata (org-ipynb--plist-to-alist metadata)))
-    (message "%s" metadata)
     (prin1-to-string
      `((cell_type . markdown)
        (metadata . ,(or metadata
