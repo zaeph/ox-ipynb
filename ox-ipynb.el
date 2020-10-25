@@ -118,7 +118,7 @@
   "Format CONTENTS as a JSON block."
   (let ((print-escape-newlines t)
         (print-circle t)
-        (metadata (org-ipynb--plist-to-alist (read (format "%s" metadata)))))
+        (metadata (org-ipynb--plist-to-alist metadata)))
     (prin1-to-string
      `((cell_type . code)
        (metadata . ,(or metadata
@@ -131,9 +131,14 @@
 
 (defun org-ipynb--read-attribute (object)
   "Read the attribute of OBJECT as a plist."
-  (let ((attr (org-export-read-attribute :attr_ipynb object)))
+  (let ((attribute (org-export-read-attribute :attr_ipynb object)))
     ;; Convert the values of every keywords to lists
-    (read (format "%s" attr))))
+    (read (format "%s" attribute))))
+
+(defun org-ipynb--read-property (object)
+  "Read the property of OBJECT as a plist."
+  (let ((property (org-element-property :ATTR_IPYNB object)))
+    (read (format "(%s)" property))))
 
 ;;;; Example Block, Src Block and Export Block
 
@@ -179,7 +184,7 @@ a communication channel."
            ;; Headline text without tags.
            (heading (concat todo priority title))
            (style (plist-get info :md-headline-style))
-           (metadata (org-ipynb--read-attribute headline)))
+           (metadata (org-ipynb--read-property headline)))
       (cond
        ;; Cannot create a headline.  Fall-back to a list.
        ((or (org-export-low-level-p headline info)
@@ -200,7 +205,9 @@ a communication channel."
                     (format "<a id=\"%s\"></a>"
                             (or (org-element-property :CUSTOM_ID headline)
                                 (org-export-get-reference headline info))))))
-          (concat (org-ipynb--format-markdown-cell (org-md--headline-title style level heading anchor tags))
+          (concat (org-ipynb--format-markdown-cell
+                   (org-md--headline-title style level heading anchor tags)
+                   metadata)
                   contents)))))))
 
 (defun org-ipynb--headline-referred-p (headline info)
