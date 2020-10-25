@@ -333,7 +333,12 @@ a communication channel."
   "Transcode PLAIN-LIST element into Markdown format.
 CONTENTS is the plain-list contents.  INFO is a plist used as
 a communication channel."
-  (org-ipynb--combine-object plain-list contents info))
+  (let* ((parent (org-export-get-parent plain-list))
+         (parent-type (car parent))
+         (no-cell-types '(item)))
+    (if (member parent-type no-cell-types)
+        contents
+      (org-ipynb--combine-object plain-list contents info))))
 
 ;;;; Property Drawer
 
