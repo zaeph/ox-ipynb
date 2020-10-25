@@ -326,11 +326,22 @@ a communication channel."
 
 ;;;; Plain List
 
-(defun org-ipynb-plain-list (_plain-list contents _info)
+(defun org-ipynb-plain-list (plain-list contents info)
   "Transcode PLAIN-LIST element into Markdown format.
 CONTENTS is the plain-list contents.  INFO is a plist used as
 a communication channel."
-  (org-ipynb--format-markdown-cell contents))
+  (let* ((contents (org-md-paragraph plain-list contents info))
+         (next (org-export-get-next-element plain-list info))
+         (next-type (car next))
+         (staging org-ipynb--cells-staging)
+         (concat-types '(paragraph plain-list)))
+    (cond ((member next-type concat-types)
+           (setq org-ipynb--cells-staging (concat staging contents))
+           nil)
+          (t
+           (let ((contents (concat staging contents)))
+             (setq org-ipynb--cells-staging nil)
+             (org-ipynb--format-markdown-cell contents))))))
 
 ;;;; Property Drawer
 
