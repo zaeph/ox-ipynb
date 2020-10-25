@@ -50,7 +50,7 @@
 
 ;;; Define Back-End
 
-(org-export-define-derived-backend 'ipynb 'md
+(org-export-define-derived-backend 'ipynb 'html
   :menu-entry
   '(?j "Export to Jupyter"
        ((?J "To temporary buffer"
@@ -60,13 +60,17 @@
 	    (lambda (a s v b)
 	      (if a (org-ipynb-export-to-ipynb t s v)
 		(org-open-file (org-ipynb-export-to-ipynb nil s v)))))))
-  :translate-alist '((example-block . org-ipynb-example-block)
+  :translate-alist '((bold . org-md-bold)
+		     (code . org-md-verbatim)
+                     (example-block . org-ipynb-example-block)
 		     (export-block . org-ipynb-export-block)
 		     (fixed-width . org-ipynb-example-block)
 		     (headline . org-ipynb-headline)
 		     (horizontal-rule . org-ipynb-horizontal-rule)
 		     (inline-src-block . org-ipynb-verbatim)
 		     (inner-template . org-ipynb-inner-template)
+                     (italic . org-md-italic)
+		     (item . org-md-item)
 		     (keyword . org-ipynb-keyword)
                      (latex-fragment . org-html-latex-fragment)
 		     (line-break . org-ipynb-line-break)
@@ -74,10 +78,13 @@
 		     (node-property . org-ipynb-node-property)
 		     (paragraph . org-ipynb-paragraph)
                      (plain-list . org-ipynb-plain-list)
+                     (plain-text . org-md-plain-text)
 		     (property-drawer . org-ipynb-property-drawer)
 		     (quote-block . org-ipynb-quote-block)
+                     (section . org-md-section)
 		     (src-block . org-ipynb-example-block)
-		     (template . org-ipynb-template))
+		     (template . org-ipynb-template)
+                     (verbatim . org-md-verbatim))
   :options-alist
   '((:md-footnote-format nil nil org-md-footnote-format)
     (:md-footnotes-section nil nil org-md-footnotes-section)
