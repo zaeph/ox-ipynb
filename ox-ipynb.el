@@ -485,28 +485,45 @@ holding export options."
    ;; Footnotes section.
    (org-ipynb--footnote-section info)))
 
+(defun org-ipynb--plist-to-alist (plist)
+  "Convert PLIST to an alist."
+  (when plist
+    (cons
+     (cons (keyword-to-symbol (car plist))
+           (let ((cadr (cadr plist)))
+             (if (json-plist-p cadr)
+                 (plist->alist cadr)
+               cadr)))
+     (plist->alist (cddr plist)))))
+
+(defun org-ipynb--parse-options (info)
+  "Parse the options provided with `#+ipynb_options'.
+INFO is a plist used as a communication channel"
+  (let ((options (read (format "(%s)" (plist-get info :ipynb-options)))))
+    (plist->alist options)))
+
 (defun org-ipynb-template (contents info)
   "Return complete document string after Markdown conversion.
 CONTENTS is the transcoded contents string.  INFO is a plist used
 as a communication channel."
-  (let ((options (read (format "(%s)" (plist-get info :ipynb-options))))
+  (let ((options (org-ipynb--parse-options info))
         (cells (read (format "(%s)" contents))))
     (with-temp-buffer
       (insert
        (json-encode
         `((cells . ,(vconcat cells))
-          (metadata . ((kernelspec . ((display_name . "Python 3")
-                                      (language . "python")
-                                      (name . "python3")))
-                       (language_info . ((codemirror_mode . ((name . ipython)
-                                                             (version . 3)))
-                                         (file_extension . ".py")
-                                         (mimetype . "text/x-python")
-                                         (name . "python")
-                                         (nbconvert_exporter . "python")
-                                         (pygments_lexer . "ipython3")
-                                         (version . "3.5.2")))
-                       ,options))
+          (metadata (kernelspec (display_name . "Python 3")
+                                (language . "python")
+                                (name . "python3"))
+                    (language_info (codemirror_mode . ((name . ipython)
+                                                       (version . 3)))
+                                   (file_extension . ".py")
+                                   (mimetype . "text/x-python")
+                                   (name . "python")
+                                   (nbconvert_exporter . "python")
+                                   (pygments_lexer . "ipython3")
+                                   (version . "3.5.2"))
+                    ,@options)
           (nbformat . 4)
           (nbformat_minor . 0))))
       (json-pretty-print (point-min) (point-max))
