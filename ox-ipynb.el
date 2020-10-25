@@ -96,8 +96,12 @@
 
 ;;;; Helper functions
 
-(defvar org-ipynb-cell-stack nil
+(defvar org-ipynb--cells-staging nil
   "Variable to hold the stack of cells to export.")
+
+(defun org-ipynb--double-newlines (contents)
+  "Double newlines in CONTENTS."
+  (replace-regexp-in-string "\n" "\n\n" contents))
 
 (defun org-ipynb--format-markdown-cell (contents)
   "Format CONTENTS as a JSON block."
@@ -106,7 +110,7 @@
     (prin1-to-string
      `((cell_type . markdown)
        (metadata . ,(make-hash-table))
-       (source . ,(vconcat (list contents)))))))
+       (source . ,(vconcat (list (org-ipynb--double-newlines contents))))))))
 
 (defun org-ipynb--format-code-cell (contents)
   "Format CONTENTS as a JSON block."
@@ -307,8 +311,17 @@ a communication channel."
          (no-cell-types '(quote-block item)))
     (if (member parent-type no-cell-types)
         contents
-      (let ((contents (org-md-paragraph paragraph contents info)))
-        (org-ipynb--format-markdown-cell contents)))))
+      (let* ((contents (org-md-paragraph paragraph contents info))
+             (next (org-export-get-next-element paragraph info))
+             (next-type (car next))
+             (staging org-ipynb--cells-staging))
+        (cond ((eq next-type 'paragraph)
+               (setq org-ipynb--cells-staging (concat staging contents))
+               nil)
+              (t
+               (let ((contents (concat staging contents)))
+                 (setq org-ipynb--cells-staging nil)
+                 (org-ipynb--format-markdown-cell contents))))))))
 
 ;;;; Plain List
 
@@ -487,7 +500,7 @@ Export is done in a buffer named \"*Org MD Export*\", which will
 be displayed when `org-export-show-temporary-export-buffer' is
 non-nil."
   (interactive)
-  (setq org-ipynb-cell-stack nil)
+  (setq org-ipynb--cells-staging nil)
   (org-export-to-buffer 'ipynb "*Org Jupyter Export*"
     async subtreep visible-only nil nil (lambda () (text-mode))))
 
