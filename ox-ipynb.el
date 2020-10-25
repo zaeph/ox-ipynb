@@ -314,8 +314,9 @@ a communication channel."
       (let* ((contents (org-md-paragraph paragraph contents info))
              (next (org-export-get-next-element paragraph info))
              (next-type (car next))
-             (staging org-ipynb--cells-staging))
-        (cond ((eq next-type 'paragraph)
+             (staging org-ipynb--cells-staging)
+             (concat-types '(paragraph plain-list)))
+        (cond ((member next-type concat-types)
                (setq org-ipynb--cells-staging (concat staging contents))
                nil)
               (t
