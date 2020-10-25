@@ -102,27 +102,38 @@
 (defvar org-ipynb--cells-staging nil
   "Variable to hold the stack of cells to export.")
 
-(defun org-ipynb--format-markdown-cell (contents)
+(defun org-ipynb--format-markdown-cell (contents &optional metadata)
   "Format CONTENTS as a JSON block."
   (let ((print-escape-newlines t)
-        (print-circle t))
+        (print-circle t)
+        (metadata (org-ipynb--plist-to-alist metadata)))
+    (message "%s" metadata)
     (prin1-to-string
      `((cell_type . markdown)
-       (metadata . ,(make-hash-table))
+       (metadata . ,(or metadata
+                        (make-hash-table)))
        (source . ,(vconcat (list contents)))))))
 
-(defun org-ipynb--format-code-cell (contents)
+(defun org-ipynb--format-code-cell (contents metadata)
   "Format CONTENTS as a JSON block."
   (let ((print-escape-newlines t)
-        (print-circle t))
+        (print-circle t)
+        (metadata (org-ipynb--plist-to-alist (read (format "%s" metadata)))))
     (prin1-to-string
      `((cell_type . code)
-       (metadata . ,(make-hash-table))
+       (metadata . ,(or metadata
+                        (make-hash-table)))
        (execution_count . 1)
        (source . ,(vconcat (list contents)))
        (outputs . ,(vconcat (list '((name . stdout)
                                     (output_type . stream)
                                     (text . "foo")))))))))
+
+(defun org-ipynb--read-attribute (object)
+  "Read the attribute of OBJECT as a plist."
+  (let ((attr (org-export-read-attribute :attr_ipynb object)))
+    ;; Convert the values of every keywords to lists
+    (read (format "%s" attr))))
 
 ;;;; Example Block, Src Block and Export Block
 
@@ -130,9 +141,11 @@
   "Transcode EXAMPLE-BLOCK element into Markdown format.
 CONTENTS is nil.  INFO is a plist used as a communication
 channel."
-  (org-ipynb--format-code-cell
-   (substring (org-export-format-code-default example-block info)
-              0 -1)))
+  (let ((metadata (org-ipynb--read-attribute example-block)))
+    (org-ipynb--format-code-cell
+     (substring (org-export-format-code-default example-block info)
+                0 -1)
+     metadata)))
 
 (defun org-ipynb-export-block (export-block contents info)
   "Transcode a EXPORT-BLOCK element from Org to Markdown.
@@ -165,7 +178,8 @@ a communication channel."
                    (and char (format "[#%c] " char)))))
            ;; Headline text without tags.
            (heading (concat todo priority title))
-           (style (plist-get info :md-headline-style)))
+           (style (plist-get info :md-headline-style))
+           (metadata (org-ipynb--read-attribute headline)))
       (cond
        ;; Cannot create a headline.  Fall-back to a list.
        ((or (org-export-low-level-p headline info)
@@ -301,7 +315,7 @@ information."
 
 ;;;; Paragraph
 
-(defun org-ipynb--combine-object (object contents info)
+(defun org-ipynb--combine-object (object contents info &optional metadata)
   "Merge OBJECT’s CONTENTS with INFO."
   (let* ((contents (org-md-paragraph object contents info))
          (next (org-export-get-next-element object info))
@@ -315,7 +329,7 @@ information."
           (t
            (let ((contents (concat staging contents)))
              (setq org-ipynb--cells-staging nil)
-             (org-ipynb--format-markdown-cell contents))))))
+             (org-ipynb--format-markdown-cell contents metadata))))))
 
 (defun org-ipynb-paragraph (paragraph contents info)
   "Transcode PARAGRAPH element into Markdown format.
@@ -323,10 +337,11 @@ CONTENTS is the paragraph contents.  INFO is a plist used as
 a communication channel."
   (let* ((parent (org-export-get-parent paragraph))
          (parent-type (car parent))
-         (no-cell-types '(quote-block item)))
+         (no-cell-types '(quote-block item))
+         (metadata (org-ipynb--read-attribute paragraph)))
     (if (member parent-type no-cell-types)
         contents
-      (org-ipynb--combine-object paragraph contents info))))
+      (org-ipynb--combine-object paragraph contents info metadata))))
 
 ;;;; Plain List
 
