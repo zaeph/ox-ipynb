@@ -312,14 +312,18 @@ information."
          (next-type (car next))
          (staging org-ipynb--cells-staging)
          (concat-types '(paragraph plain-list quote-block)))
-    (cond ((and (member next-type concat-types)
-                (< (org-element-property :post-blank object) 2))
-           (setq org-ipynb--cells-staging (concat staging contents))
-           nil)
-          (t
-           (let ((contents (concat staging contents)))
-             (setq org-ipynb--cells-staging nil)
-             (org-ipynb--format-markdown-cell contents))))))
+    (let ((post-blank (org-element-property :post-blank object)))
+      (cond ((and (member next-type concat-types)
+                  (< post-blank 2))
+             ;; Add as many blank-lines as needed after contents
+             (setq contents (concat contents
+                                    (apply #'concat (make-list post-blank "\n"))))
+             (setq org-ipynb--cells-staging (concat staging contents))
+             nil)
+            (t
+             (let ((contents (concat staging contents)))
+               (setq org-ipynb--cells-staging nil)
+               (org-ipynb--format-markdown-cell contents)))))))
 
 (defun org-ipynb-paragraph (paragraph contents info)
   "Transcode PARAGRAPH element into Markdown format.
@@ -355,7 +359,8 @@ holding contextual information."
   "Transcode QUOTE-BLOCK element into Markdown format.
 CONTENTS is the quote-block contents.  INFO is a plist used as
 a communication channel."
-  (let ((contents (replace-regexp-in-string "^" "> " contents)))
+  (let* ((contents (format "%s\n" contents))
+         (contents (replace-regexp-in-string "^" "> " contents)))
     (org-ipynb--combine-object quote-block contents info)))
 
 ;;;; Section
