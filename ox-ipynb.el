@@ -93,11 +93,6 @@
 
 ;;; Filters
 
-(defun org-ipynb-final-function (_contents _backend _info)
-  "Filter to indent the JSON."
-  (with-temp-buffer
-    (insert "nope")))
-
 
 ;;; Transcode Functions
 
