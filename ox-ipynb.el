@@ -179,12 +179,7 @@ a communication channel."
            ;; Headline text without tags.
            (heading (concat todo priority title))
            (style (plist-get info :md-headline-style))
-           (metadata (let* ((previous (org-export-get-previous-element headline info))
-                            (previous-type (car previous)))
-                       (when (and (eq previous-type 'keyword)
-                                  (eq (org-element-property :key previous)
-                                      "ATTR_IPYNB"))
-                         (read (format "(%s)" (org-element-contents previous)))))))
+           (metadata (org-ipynb--read-attribute headline)))
       (cond
        ;; Cannot create a headline.  Fall-back to a list.
        ((or (org-export-low-level-p headline info)
@@ -205,8 +200,7 @@ a communication channel."
                     (format "<a id=\"%s\"></a>"
                             (or (org-element-property :CUSTOM_ID headline)
                                 (org-export-get-reference headline info))))))
-          (concat (org-ipynb--format-markdown-cell (org-md--headline-title style level heading anchor tags)
-                                                   metadata)
+          (concat (org-ipynb--format-markdown-cell (org-md--headline-title style level heading anchor tags))
                   contents)))))))
 
 (defun org-ipynb--headline-referred-p (headline info)
