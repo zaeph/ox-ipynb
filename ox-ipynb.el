@@ -117,7 +117,7 @@
     (prin1-to-string
      `((cell_type . markdown)
        (metadata . ,(make-hash-table))
-       (source . ,(vconcat (list (org-ipynb--double-newlines contents))))))))
+       (source . ,(vconcat (list contents)))))))
 
 (defun org-ipynb--format-code-cell (contents)
   "Format CONTENTS as a JSON block."
@@ -315,7 +315,7 @@ information."
          (next (org-export-get-next-element object info))
          (next-type (car next))
          (staging org-ipynb--cells-staging)
-         (concat-types '(paragraph plain-list)))
+         (concat-types '(paragraph plain-list quote-block)))
     (cond ((and (member next-type concat-types)
                 (< (org-element-property :post-blank object) 2))
            (setq org-ipynb--cells-staging (concat staging contents))
@@ -342,7 +342,8 @@ a communication channel."
   "Transcode PLAIN-LIST element into Markdown format.
 CONTENTS is the plain-list contents.  INFO is a plist used as
 a communication channel."
-  (org-ipynb--combine-object plain-list contents info))
+  (let ((contents (org-ipynb--double-newlines contents)))
+    (org-ipynb--combine-object plain-list contents info)))
 
 ;;;; Property Drawer
 
@@ -355,12 +356,13 @@ holding contextual information."
 
 ;;;; Quote Block
 
-(defun org-ipynb-quote-block (_quote-block contents _info)
+(defun org-ipynb-quote-block (quote-block contents info)
   "Transcode QUOTE-BLOCK element into Markdown format.
 CONTENTS is the quote-block contents.  INFO is a plist used as
 a communication channel."
-  (org-ipynb--format-markdown-cell
-   (replace-regexp-in-string "^" "> " contents)))
+  (let ((contents (replace-regexp-in-string "^" "> "
+                                            (org-ipynb--double-newlines contents))))
+    (org-ipynb--combine-object quote-block contents info)))
 
 ;;;; Section
 
