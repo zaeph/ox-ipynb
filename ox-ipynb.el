@@ -311,7 +311,6 @@ information."
 
 (defun org-ipynb--combine-object (object contents info)
   "Merge OBJECT’s CONTENTS with INFO."
-  (message "%s" (org-element-property :post-blank object))
   (let* ((contents (org-md-paragraph object contents info))
          (next (org-export-get-next-element object info))
          (next-type (car next))
