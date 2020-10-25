@@ -302,36 +302,10 @@ information."
 
 ;;;; Paragraph
 
-(defun org-ipynb-paragraph (paragraph contents info)
-  "Transcode PARAGRAPH element into Markdown format.
-CONTENTS is the paragraph contents.  INFO is a plist used as
-a communication channel."
-  (let* ((parent (org-export-get-parent paragraph))
-         (parent-type (car parent))
-         (no-cell-types '(quote-block item)))
-    (if (member parent-type no-cell-types)
-        contents
-      (let* ((contents (org-md-paragraph paragraph contents info))
-             (next (org-export-get-next-element paragraph info))
-             (next-type (car next))
-             (staging org-ipynb--cells-staging)
-             (concat-types '(paragraph plain-list)))
-        (cond ((member next-type concat-types)
-               (setq org-ipynb--cells-staging (concat staging contents))
-               nil)
-              (t
-               (let ((contents (concat staging contents)))
-                 (setq org-ipynb--cells-staging nil)
-                 (org-ipynb--format-markdown-cell contents))))))))
-
-;;;; Plain List
-
-(defun org-ipynb-plain-list (plain-list contents info)
-  "Transcode PLAIN-LIST element into Markdown format.
-CONTENTS is the plain-list contents.  INFO is a plist used as
-a communication channel."
-  (let* ((contents (org-md-paragraph plain-list contents info))
-         (next (org-export-get-next-element plain-list info))
+(defun org-ipynb--combine-object (object contents info)
+  "Merge OBJECT’s CONTENTS with INFO."
+  (let* ((contents (org-md-paragraph object contents info))
+         (next (org-export-get-next-element object info))
          (next-type (car next))
          (staging org-ipynb--cells-staging)
          (concat-types '(paragraph plain-list)))
@@ -342,6 +316,25 @@ a communication channel."
            (let ((contents (concat staging contents)))
              (setq org-ipynb--cells-staging nil)
              (org-ipynb--format-markdown-cell contents))))))
+
+(defun org-ipynb-paragraph (paragraph contents info)
+  "Transcode PARAGRAPH element into Markdown format.
+CONTENTS is the paragraph contents.  INFO is a plist used as
+a communication channel."
+  (let* ((parent (org-export-get-parent paragraph))
+         (parent-type (car parent))
+         (no-cell-types '(quote-block item)))
+    (if (member parent-type no-cell-types)
+        contents
+      (org-ipynb--combine-object paragraph contents info))))
+
+;;;; Plain List
+
+(defun org-ipynb-plain-list (plain-list contents info)
+  "Transcode PLAIN-LIST element into Markdown format.
+CONTENTS is the plain-list contents.  INFO is a plist used as
+a communication channel."
+  (org-ipynb--combine-object plain-list contents info))
 
 ;;;; Property Drawer
 
