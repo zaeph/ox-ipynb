@@ -312,18 +312,14 @@ information."
          (next-type (car next))
          (staging org-ipynb--cells-staging)
          (concat-types '(paragraph plain-list quote-block)))
-    (let ((post-blank (org-element-property :post-blank object)))
-      (cond ((and (member next-type concat-types)
-                  (< post-blank 2))
-             ;; Add as many blank-lines as needed after contents
-             (setq contents (concat contents
-                                    (when (> post-blank 1) "\n")))
-             (setq org-ipynb--cells-staging (concat staging contents))
-             nil)
-            (t
-             (let ((contents (concat staging contents)))
-               (setq org-ipynb--cells-staging nil)
-               (org-ipynb--format-markdown-cell contents)))))))
+    (cond ((and (member next-type concat-types)
+                (< (org-element-property :post-blank object) 2))
+           (setq org-ipynb--cells-staging (concat staging contents "\n"))
+           nil)
+          (t
+           (let ((contents (concat staging contents)))
+             (setq org-ipynb--cells-staging nil)
+             (org-ipynb--format-markdown-cell contents))))))
 
 (defun org-ipynb-paragraph (paragraph contents info)
   "Transcode PARAGRAPH element into Markdown format.
