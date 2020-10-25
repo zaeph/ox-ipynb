@@ -51,9 +51,6 @@
 ;;; Define Back-End
 
 (org-export-define-derived-backend 'ipynb 'md
-  :filters-alist '((:filter-parse-tree . org-md-separate-elements)
-                   ;; (:filter-final-output . org-ipynb-final-function)
-                   )
   :menu-entry
   '(?j "Export to Jupyter"
        ((?J "To temporary buffer"
