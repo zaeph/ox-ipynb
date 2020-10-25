@@ -451,9 +451,10 @@ holding export options."
   ;; footnotes with at least a blank line.
   (concat
    ;; Table of contents.
-   (let* ((depth (plist-get info :with-toc))
-         (toc (org-html-toc depth info)))
-     (org-ipynb--format-markdown-cell toc))
+   (let* ((depth (plist-get info :with-toc)))
+     (when depth
+       (let ((toc (org-html-toc depth info)))
+         (org-ipynb--format-markdown-cell toc))))
    ;; Document contents.
    contents
    "\n"
