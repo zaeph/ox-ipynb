@@ -35,6 +35,8 @@
 
 (require 'cl-lib)
 (require 'ox-html)
+(require 'ox-md)
+(require 'json)
 (require 'ox-publish)
 
 
