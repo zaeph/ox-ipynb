@@ -510,22 +510,26 @@ holding export options."
    ;; Footnotes section.
    (org-ipynb--footnote-section info)))
 
+(defun org-ipynb--keyword-to-symbol (keyword)
+  "Convert KEYWORD to symbol."
+  (intern (substring (symbol-name keyword) 1)))
+
 (defun org-ipynb--plist-to-alist (plist)
   "Convert PLIST to an alist."
   (when plist
     (cons
-     (cons (keyword-to-symbol (car plist))
+     (cons (org-ipynb--keyword-to-symbol (car plist))
            (let ((cadr (cadr plist)))
              (if (json-plist-p cadr)
-                 (plist->alist cadr)
+                 (org-ipynb--plist-to-alist cadr)
                cadr)))
-     (plist->alist (cddr plist)))))
+     (org-ipynb--plist-to-alist (cddr plist)))))
 
 (defun org-ipynb--parse-options (info)
   "Parse the options provided with `#+ipynb_options'.
 INFO is a plist used as a communication channel"
   (let ((options (read (format "(%s)" (plist-get info :ipynb-options)))))
-    (plist->alist options)))
+    (org-ipynb--plist-to-alist options)))
 
 (defun org-ipynb-template (contents info)
   "Return complete document string after Markdown conversion.
